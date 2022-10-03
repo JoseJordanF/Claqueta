@@ -1,6 +1,6 @@
 # Trabajo de Fin de Grado: *Aplicación para compartir tus reseñas sobre cine y series a otros usuarios*
 
-### Autor: José Antonio Jordan Fernández
+### Autor: José Jordan Fernández
 ### Tutor: Juan Julián Merelo Guervós
 ___
 
