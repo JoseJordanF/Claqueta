@@ -1,9 +1,6 @@
 # Trabajo de Fin de Grado: *Aplicación para compartir tus reseñas sobre cine y series a otros usuarios*
 
-**Este sería el README de tu proyecto. Consulta las [instrucciones de
-instalación](INSTALL.md)
-
-### Autor: Jose Antonio Jordan Fernandez
+### Autor: José Antonio Jordan Fernández
 ### Tutor: Juan Julián Merelo Guervós
 ___
 
