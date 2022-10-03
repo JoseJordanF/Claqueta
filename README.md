@@ -1,10 +1,10 @@
-# Trabajo de Fin de Grado: *Título*
+# Trabajo de Fin de Grado: *Aplicación para compartir tus reseñas sobre cine y series a otros usuarios*
 
 **Este sería el README de tu proyecto. Consulta las [instrucciones de
 instalación](INSTALL.md)
 
-### Autor(a): Nombre
-### Tutor(a)(es): Nombre(s)
+### Autor: Jose Antonio Jordan Fernandez
+### Tutor: Juan Julián Merelo Guervós
 ___
 
 La documentación de este proyecto está realizada con `LaTeX`, por lo
