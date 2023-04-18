@@ -21,6 +21,11 @@
 \usepackage{graphicx}
 \usepackage{tabularx}
 \usepackage{booktabs}
+\usepackage{setspace}
+\usepackage{ragged2e}
+% Definir el estilo para tener líneas de 80 caracteres
+\newcommand{\lineasochenta}{\setstretch{1.2}\setlength{\parindent}{0pt}\RaggedRight\setlength{\emergencystretch}{1em}\setlength{\parskip}{1em}}
+
 
 \usepackage[table,xcdraw]{xcolor}
 \hypersetup{
@@ -40,7 +45,7 @@
 %\renewcommand{\headrulewidth}{0pt} % Remove header underlines
 \renewcommand{\footrulewidth}{0pt} % Remove footer underlines
 \setlength{\headheight}{13.6pt} % Customize the height of the header
-\setlength{\textwidth}{80ex} % longitud máxima de línea
+%\setlength{\linewidth}{80pt} % longitud máxima de línea
 
 \usepackage{titlesec, blindtext, color}
 \definecolor{gray75}{gray}{0.75}
