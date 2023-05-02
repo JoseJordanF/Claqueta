@@ -1,0 +1,21 @@
+name: Build LaTeX document
+on: 
+  push:
+    branches:
+      - 'master'
+jobs:
+  build_latex:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout a Git repository
+        uses: actions/checkout@v3.5.2
+      - name: Compile LaTeX document
+        uses: xu-cheng/latex-action@v2
+        with:
+          working_directory: doc/
+          root_file: proyecto.tex
+      - name: Upload PDF file
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          name: PDF
+          path: doc/proyecto.pdf
