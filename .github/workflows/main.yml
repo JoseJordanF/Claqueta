@@ -1,5 +1,8 @@
 name: Spelling and grammar check with Textoide
-on: push
+on: 
+  push:
+    paths:
+      - 'doc/secciones/*.tex'
 jobs:
   textidote_check:
     runs-on: ubuntu-latest
