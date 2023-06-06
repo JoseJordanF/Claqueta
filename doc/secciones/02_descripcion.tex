@@ -78,14 +78,22 @@ necesaria y relevante para la toma de decisiones de ese usuario. Hablando de las
 personalizables sería una opción avisar de los estrenos de cine o series a través de notificaciones, 
 siendo estas adaptables por el usuario.
 
-\begin{itemize}
-    \item \textbf{H1 - cinéfilo} Como apasionado del cine necesita un espacio en el que compartir su opinión y socializar con otros amantes del cine como lo es él. Siendo así un punto de encuentro. 
-    \item \textbf{H2 - usuario medio} Como usuario que le gusta disfrutar del cine y las series de vez en cuando, necesita un lugar gracias al cual pueda decidir si ver o no cierto contenido. Ya que no le gusta perder el tiempo, por eso necesita que las críticas sean los más reales y fiables posibles.  
-    \item \textbf{H3 - crítico} Al igual que en la historia anterior, este usuario necesita que las reseñas sean fiables y reales. Ya que perjudican su trabajo y su repercusión. Y existen usuarios que indiscriminadamente sin ningún fundamento pueden hacer de una buena crítica una crítica mediocre, dado que su nivel de relevancia ha decaído en gran medida.
-    \item \textbf{H4 - aficionado de las series} Un usuario amante del cine también lo suele ser de las series, al igual que este usuario estará cansado de que en las aplicaciones de reseñas se excluya a las series
-    \item \textbf{H5 - cinéfilo} Este usuario a la hora de ver sus reseñas se irrita porque no puede agrupar sus reseñas por sagas. De modo que las críticas referentes a las películas de la misma saga están aisladas, unas de otras. Cosa que irrita al usuario cuando quiere ver varias críticas de distintas películas pero de la misma saga.
-    \item \textbf{H6 - cinéfilo} Este otro usuario también tiene un problema con las críticas, en este caso con el orden. Le gustaría ordenar las críticas no solo en orden cronológico, sino también por las mejores valoradas o las peores valoradas. Siendo esta una manera más flexible para el de leer las reseñas a la hora de la toma de decisiones.
-\end{itemize}
+
+\section{Historias de usuarios}
+
+Estas historias de usuario reflejan algunos de los problemas y necesidades que podrían abordarse en aplicaciones de reseñas cinematográficas. Cada usuario tiene diferentes perspectivas y prioridades, y las historias de usuario reflejan eso.
+
+\subsection{Aficionado}
+
+Como aficionado al cine, quiero  poder buscar películas por género y recibir recomendaciones personalizadas para descubrir nuevas películas que se ajusten a mis gustos. También como aficionado al cine, quiero acceso a una lista de películas populares y en tendencia para mantenerme actualizado sobre las últimas novedades del cine. Por último, como aficionado, me gustaría poder guardar y organizar mis películas favoritas en una lista personalizada para tener un registro de las películas que he visto o que quiero ver en el futuro.
+
+\subsection{Cinéfilo}
+
+Como cinéfilo, quiero poder acceder a reseñas detalladas y fiables, también a críticas de películas escíticas por expertos y críticos de cine para obtener una perspectiva más profunda y objetiva de las películas. Como cinéfilo, quiero un espacio de encuentro en el que pueda participar en debates y discusiones sobre películas con otros cinéfilos para compartir perspectivas diferentes. Como apasionado del cine quiero tener acceso a información completa sobre películas y series, como el director, el reparto, la sinopsis y las puntuaciones de otros usuarios, para tomar decisiones informadas al elegir qué contenido ver. Resalto como las series son abandonadas en varias aplicaciones de reseñas.
+
+\subsection{Crítico}
+
+Como crítico de cine, quiero tener la posibilidad de publicar mis reseñas y opiniones sobre películas en una plataforma para llegar a un público más amplio y generar discusiones. Como crítico, también quiero tener acceso a estadísticas y datos sobre la popularidad y aceptación de mis reseñas por parte de los usuarios para evaluar el impacto de mi trabajo. Por último, como crítico de cine, quiero poder interactuar y responder a los comentarios y preguntas de los usuarios que leen mis reseñas para fomentar la participación y el compromiso con la comunidad del cine.
 
 A continuación se describirán los objetivos que se desean alcanzar para solucionar el problema que se 
 acaba de plantear en este capítulo. Haciendo uso de las historias de usuario descritas en este capítulo.
@@ -96,13 +104,15 @@ Tras haber comprendido mejor el problema y lo que supone, se expondrán los obje
 lograr a través de la solución a dicho problema.
 
 \begin{itemize}
-    \item \textbf{OBJ1} Diseñar y desarrollar un espacio software en el que un amante del cine pueda compartir sus reseñas y resguardarse socialmente. Convirtiéndose esta solución en un punto de encuentro en el que socializar con sus iguales, es decir, con otros amantes o aficionados del mundo del cine.
-    \item \textbf{OBJ2} Diseñar y desarrollar un sistema de reseñas equilibrado, objetivo y fiable. Ayudando a los usuarios en la toma de decisiones respecto al consumo de contenido. Dándole calidad y veracidad a la solución y su sistema de reseñas.
-    \item \textbf{OBJ3} Añadir a la solución no solo contenido cinematográfico, sino también series. Haciendo que los amantes de las series también encuentren su espacio donde socializar.
-    \item \textbf{OBJ4} Desarrollar un sistema por el cual puedas crear listas/grupos de reseñas sobre las películas que prefieras, agrupándose en sagas si es que seleccionas varias películas de la misma.
-    \item \textbf{OBJ5} Desarrollar un sistema para ordenar las críticas no solo las propias, sino las de usuarios comunes en las películas que consumas. Pudiendo ordenarlas en orden cronológico o según su valoración y a la inversa en ambos casos.
-    \item \textbf{OBJ6} La solución diseñada deberá ser accesible por todo usuario descrito en este capítulo, de modo que será de fácil acceso y de uso sencillo, teniendo en cuenta las capacidades de los usuarios. Adicionalmente, también debe ser una solución eficaz, y rápida, intentando consumir el menor número de recursos posibles.
+    \item \textbf{OBJ1} Proporcionar a los usuarios la capacidad de descubrir películas que se ajusten a sus gustos y preferencias mediante la búsqueda por género, recomendaciones personalizadas y acceso a listas populares y en tendencia.
+    \item \textbf{OBJ2} Permitir a los usuarios acceder a reseñas y críticas de películas y series escritas por expertos, críticos y otros usuarios, brindando una perspectiva objetiva y diversas opiniones.
+    \item \textbf{OBJ3} Facilitar la toma de decisiones informadas al ofrecer información completa sobre películas, como el reparto, el director, la sinopsis y las puntuaciones de los usuarios.
+    \item \textbf{OBJ4} Fomentar la participación y el intercambio de opiniones entre los usuarios, creando un espacio para debates, discusiones y comentarios sobre películas.
+    \item \textbf{OBJ5} Brindar a los usuarios la posibilidad de crear y gestionar listas personalizadas de películas favoritas, permitiendo registrar y organizar sus preferencias.
+    \item \textbf{OBJ6} Ofrecer una plataforma para que los críticos de cine y expertos en el campo puedan publicar sus reseñas y opiniones, llegando a un público más amplio y generando discusiones.
+    \item \textbf{OBJ7} Proporcionar a los críticos de cine estadístico y datos que les permitan evaluar el impacto de sus reseñas, como la popularidad y aceptación por parte de los usuarios.
+    \item \textbf{OBJ8} Facilitar la interacción y el compromiso de los usuarios con la comunidad cinematográfica, permitiendo la respuesta a comentarios, preguntas y la participación en debates.
 \end{itemize}
 
-Estos serán los objetivos que el proyecto pretende alcanzar, de esta manera en el último capítulo se 
+Estos objetivos reflejan las metas generales que se pretenden alcanzar, de esta manera en el último capítulo se 
 podrá analizar si realmente la solución dada ha podido lograr dichos objetivos.
