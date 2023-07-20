@@ -1,6 +1,6 @@
 \chapter{Planificación}
 
-Este capítulo tiene como objetivo proporcionar una visión detallada de la planificación llevada a cabo para la realización de este Trabajo de Fin de Grado (TFG). Aquí se presentarán las diferentes secciones que abarcan el enfoque utilizado, la temporización y el seguimiento del desarrollo del proyecto.
+Este capítulo tiene como objetivo proporcionar una visión detallada de la planificación llevada a cabo para la realización de este Trabajo de Fin de Grado (TFG). Aquí se presentarán las diferentes secciones que abarcan el enfoque utilizado, el seguimiento del desarrollo del proyecto y las buenas prácticas que garanticen la calidad del proyecto y sirvan de indicador para seguir de cerca el desarrollo de este.
 
 La planificación desempeña un papel fundamental en la consecución exitosa de cualquier proyecto académico, y el TFG no es una excepción. La adecuada organización de recursos, tiempos y tareas resulta esencial para alcanzar los objetivos propuestos y cumplir con los plazos establecidos.
 
@@ -102,7 +102,8 @@ El objetivo principal de este hito inicial es establecer la estructura del Traba
 
 En este hito se conseguirá el modelado de los objetos presentes en el problema, para ello se abstraerán los conceptos clave y se definirán los objetos de la aplicación. El objetivo es tener una estructura clara de los datos a utilizar. La abstracción nos permite identificar las características esenciales, eliminando detalles innecesarios. La definición de objetos nos ayudará a comprender sus relaciones, atributos y operaciones. Esto establecerá una base sólida para el desarrollo coherente de la aplicación.
 
-De esta manera se busca, priorizar el desarrollo real, la retroalimentación continua y prácticas como el desarrollo impulsado por pruebas (TDD) y la colaboración cercana. Esto permite una mayor agilidad y adaptabilidad en el proceso de desarrollo.
+De esta manera se busca, priorizar el desarrollo real, la retroalimentación continua y prácticas como el desarrollo impulsado por pruebas \begin{otherlanguage}{english}\textit{(Test
+Driven Development, TDD)}\end{otherlanguage} y la colaboración cercana. Esto permite una mayor agilidad y adaptabilidad en el proceso de desarrollo.
 
 Por ello, buscando un método para definir los objetos de la aplicación, se encuentra una técnica de desarrollo de software llamada, \begin{otherlanguage}
 {english}``\textit{\textbf{Domain Driven Design}}''\end{otherlanguage}(DDD) es un enfoque de diseño de software que se centra en comprender y modelar el dominio del problema de una aplicación. Busca desarrollar un diseño que refleje con precisión las reglas y conceptos del dominio, lo que resulta en un sistema más mantenible. Teniendo en cuenta que el DDD y el desarrollo ágil son compatibles, ya que su aplicación permite construir aplicaciones que se ajusten mejor a las necesidades del cliente y evolucionen de manera flexible a medida que se adquiere un mayor entendimiento del dominio. DDD proporciona la base conceptual y de diseño sólida para desarrollar modelos de dominio claros y significativos, mientras que el enfoque ágil permite una implementación iterativa, rápida y adaptativa.
@@ -124,3 +125,39 @@ Por tanto, siguiendo las historias del aficionado al cine, el cinéfilo y el cr�
 
 \subsection{M3. Lógica de Negocio - Otras Operaciones sobre los datos}
 
+Continuación se van a describir otras operaciones que se van a realizar sobre los datos, ya que es un punto demasiado extenso para un solo hito. De esta manera, las operaciones más generales se explicarán a continuación.
+
+\subsection{M4. Despliegue de la API}
+
+
+\section{Elección de herramientas para el desarrollo}
+
+Para el desarrollo de un proyecto de ingeniería del software, es indispensable el uso de herramientas que permitan llevar a cabo dicho proyecto, asegurando su calidad y buenas prácticas durante el uso de estas.
+
+Por ello se van a describir a continuación todas las herramientas que se van a utilizar para el desarrollo del software. Describiendo los lenguajes de programación que se usaran, lenguajes de consulta y manipulación de datos para API, el modelo de datos a usar, a su vez también se mostraran herramientas que velen por el buen desarrollo en el repositorio y llevar a cabo buenas prácticas. El uso de todas estas herramientas será justificado, explicándose así para qué se va a utilizar dicha herramienta y porque se ha elegido.
+
+\subsection{Lenguaje de programación}
+
+Una de las principales herramientas para el desarrollo de software es el lenguaje de programación, un lenguaje que sea afín a las necesidades del proyecto. Siendo así un necesario un lenguaje para modelar los objetos descritos en este capítulo, en el primer hito. Pero debemos tener en cuenta que se pretende que el desarrollo del modelado de los objetos pueda ser reutilizable, de fácil acceso e intentando ahorrar recursos. Por ello, para la aplicación se pretende crear una API propia, como las que se mencionaron en el capítulo del estado del arte. Dichas API poseen una gran cantidad de datos que no necesitamos, por ello se desarrolla una API propia. ¿Pero qué tipo de API idóneo para este proyecto?. Por lo que indagando por los tipos de API más usados, encontramos una gráfica \footnote{\url{https://acortar.link/mCfcHJ}}, en página \textbf{''Postman''} reconocida por ser una web destinada para que los desarrolladores diseñen, construyan e iterar sus API. En dicha gráfica se ve como las REST es la arquitectura más utilizada. Esta arquitectura se compone de una serie de verbos http, los cuales son: 
+\begin{itemize}
+\item \textbf{GET:} se utiliza para consultar recursos sin causar efectos secundarios en el servidor. No crea ni modifica registros existentes
+\item \textbf{POST:} se utilizan exclusivamente para crear nuevos recursos. Cada llamada con POST debe generar un recurso nuevo.
+\item \textbf{PUT/PATCH:} se utilizan para modificar un recurso existente. PUT se diferencia de PATCH en que PUT reemplaza completamente el recurso, mientras que PATCH actualiza solo algunos elementos sin reemplazarlo por completo.
+\item \textbf{DELETE:} es el verbo utilizado para eliminar registros, ya sea para eliminar un recurso individual o colecciones completas.
+\end{itemize}
+
+De esta manera podemos recuperar, insertar, modificar o eliminar información. Es importante destacar que REST está basado en múltiples \begin{otherlanguage}{english}\textit{\textbf{``endpoints''}}\end{otherlanguage}, estos no son más que URL o rutas específicas que se usan en la API REST para manipular los recursos que nos ofrece. De manera que para solicitar por ejemplo una lista de películas necesitaríamos un \begin{otherlanguage}{english}endpoint\end{otherlanguage} y para solicitar una lista de usuarios necesitaríamos otro \begin{otherlanguage}{english}endpoint\end{otherlanguage}. Así vemos como funciona una APÎ REST de manera sencilla, a través de estas operaciones y sus múltiples \begin{otherlanguage}{english}endpoints\end{otherlanguage}.
+
+Pero también existen nuevas arquitecturas, que cada vez están siendo más visibles y les están quitando terreno a REST. Se nos advierte en el mismo enlace de \textbf{``Postman''}, donde nos menciona que una arquitectura llamada \textbf{``GraphQL''} le está comiendo terreno a REST y se ha metido entre las tres arquitecturas más usadas. Al igual que REST, GraphQL posee operaciones para manipular la información:
+
+\begin{itemize}
+\item \textbf{Query:} estas son consultas que funcionan igual que GET.
+\item \textbf{Mutation:} las mutaciones funcionarian como POST, PATCH y DELETE. El nombre de la mutación determina qué modificación se ejecuta.
+\item \textbf{Suscription:} las suscripciones permiten enviar datos cuando ocurre un evento específico, fundamentales para agregar características reactivas o en tiempo real a tus aplicaciones. 
+\end{itemize}
+
+En este caso, GraphQL solo dispone de un \begin{otherlanguage}{english}endpoint\end{otherlanguage}, a diferencia de REST.
+
+
+Ahora bien, estas operaciones son definidas en el \begin{otherlanguage}
+{english}\textit{\textbf{``backend''}}\end{otherlanguage} 
