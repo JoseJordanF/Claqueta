@@ -1,66 +1,14 @@
 \chapter{Planificación}
 
-Este capítulo tiene como objetivo proporcionar una visión detallada de la planificación llevada a cabo para la realización de este Trabajo de Fin de Grado (TFG). Aquí se presentarán las diferentes secciones que abarcan el enfoque utilizado, el seguimiento del desarrollo del proyecto y las buenas prácticas que garanticen la calidad del proyecto y sirvan de indicador para seguir de cerca el desarrollo de este.
-
 La planificación desempeña un papel fundamental en la consecución exitosa de cualquier proyecto académico, y el TFG no es una excepción. La adecuada organización de recursos, tiempos y tareas resulta esencial para alcanzar los objetivos propuestos y cumplir con los plazos establecidos.
 
-En la primera sección, se describirá en detalle la mentalidad utilizada para abordar el desarrollo de este proyecto. Se explicarán las técnicas, herramientas y enfoques empleados, así como las razones detrás de su elección. Esta sección proporcionará una base sólida que sustenta todo el proceso de desarrollo del TFG.
+El problema es que como hemos mencionado en la metodología de desarrollo en el capítulo de introducción. Debido a la naturaleza del enfoque ágil, este no nos permite apenas planificar con anticipación. En lugar de depender de planes detallados que a menudo se vuelven obsoletos en entornos de desarrollo rápidamente cambiantes, el enfoque ágil abraza la flexibilidad y la adaptabilidad como principios fundamentales. Esto significa que los equipos de desarrollo pueden ajustar sus estrategias y prioridades a medida que surgen nuevos conocimientos y requisitos, lo que es especialmente valioso en proyectos de software donde la incertidumbre es común. Aunque puede parecer paradójico, esta falta de planificación rígida en realidad puede llevar a una mayor efectividad y calidad en la entrega de software, ya que se fomenta la colaboración constante, la retroalimentación continua y la capacidad de respuesta ágil a los cambios del mercado y del cliente, tal como mencionábamos en la metodología de desarrollo en el capítulo de introducción.
 
-La segunda sección abordará el seguimiento del desarrollo del proyecto. Se describirán las estrategias implementadas para monitorear el progreso, evaluar el cumplimiento de los objetivos y realizar ajustes en caso necesario. El seguimiento del desarrollo permitirá una supervisión constante, identificar posibles desviaciones y tomar medidas correctivas oportunas. También se abordará la temporización, donde gracias a los hitos clave del proyecto que reflejan la distribución del tiempo. Se permitirá una gestión eficiente del tiempo y una visualización clara de los avances y metas a alcanzar.
-
-En resumen, este capítulo de planificación proporcionará una guía detallada sobre cómo se estructura y organiza este TFG desde el punto de vista metodológico, temporal y de seguimiento. La planificación adecuada y el control eficiente del desarrollo son elementos clave para garantizar el éxito y la calidad de este trabajo académico.
-
-\section{Metodología de desarrollo}
-
-En esta sección, se presentarán los principios en los que se basa el manifiesto ágil \footnote{\url{https://www.agilealliance.org/agile101/the-agile-manifesto/}} y las metodologías que se acogen a esos principios, así como la razón detrás de su elección para este proyecto. A continuación, se proporcionará una conclusión sobre por qué el enfoque ágil es adecuado y beneficioso para este TFG.
-
-El desarrollo ágil \footnote{\url{https://www.agilealliance.org/agile101/}} es un enfoque metodológico utilizado en proyectos de desarrollo de software que se caracteriza por su flexibilidad, adaptabilidad y enfoque iterativo e incremental. A diferencia de los enfoques tradicionales, que se basan en planes detallados y rigidez en los procesos, el desarrollo ágil se centra en la colaboración, la comunicación constante y la capacidad de respuesta a los cambios. Su principal objetivo es entregar un producto de calidad que cumpla con las necesidades y expectativas del cliente.
-
-El desarrollo ágil se basa en los siguientes principios:
-
-\begin{itemize}
-\item \textbf{Orientación al cliente:} Se busca comprender las necesidades y expectativas del cliente y desarrollar soluciones que satisfagan sus requerimientos. La retroalimentación del cliente es fundamental para guiar el desarrollo y asegurarse de que el producto final cumpla con sus necesidades.
-Por ello se han presentado los usuarios y se han visto reflejadas sus necesidades en las historias de usuario, descritas en el segundo capítulo junto al problema. Además de la reflexión del primer capítulo.
-
-\item \textbf{Enfoque iterativo:} El proyecto se divide en iteraciones cortas y enfocadas, llamadas sprints, que tienen una duración definida (por ejemplo, 1 a 4 semanas). Cada sprint tiene objetivos claros y entrega un incremento funcional del producto. Al final de cada sprint, se revisa y se ajusta el plan en función de la retroalimentación y los resultados obtenidos.
-A través de hitos o milestones, usando las herramientas ofrecidas por GitHub descritas más adelante en este capítulo, para definir dichos sprints como milestones, obteniendo tras la finalización de cada uno un producto mínimamente viable (PMV). Analizando y testeando si se obtienen los resultados esperados.
-
-\item \textbf{Adaptabilidad y flexibilidad:} El desarrollo ágil reconoce que los requisitos y las prioridades pueden cambiar a lo largo del proyecto. En lugar de intentar prever y especificar todos los detalles desde el principio, se acepta que algunos requisitos pueden ser ambiguos o desconocidos al principio y se permite ajustar y adaptar el plan en función de las necesidades que surjan durante el desarrollo.
-Esto se ve reflejado en los objetivos principales del proyecto, durante el desarrollo del proyecto algunos requisitos han ido cambiando según las necesidades que han surgido. Añadiendo o desechando ideas desde que empezó el proyecto.
-
-\item \textbf{Entrega temprana y continua:} El enfoque ágil se enfoca en generar valor para el cliente de manera temprana y constante. Se priorizan las funcionalidades más importantes y se entregan en cada sprint, lo que permite obtener retroalimentación rápida y garantiza que el producto final cumpla con las expectativas del cliente.
-Para ello se hace uso de \begin{otherlanguage}
-{english}``\textit{\textbf{Pull Request}}''\end{otherlanguage} otra herramienta de GitHub descrita más abajo, por la que se tienen entregas continuas y su retroalimentación constante. Haciendo mucho más fácil y cómoda la resolución de cambios en él esas partes del proyecto.
-
-\end{itemize}
-
-El desarrollo ágil se basa en la premisa de que los requerimientos pueden cambiar, los problemas pueden surgir y las soluciones pueden evolucionar a lo largo del proyecto. En lugar de resistir a estos cambios, el enfoque ágil los abraza y busca manejarlos de manera efectiva a través de la colaboración, la iteración y la adaptabilidad.
-
-\subsection{Ventajas}
-
-Las ventajas, por lo general, que ofrece el desarrollo ágil sobre metodologías tradicionales:
-
-\begin{itemize}
-\item \textbf{Mayor satisfacción del cliente:} La entrega temprana y continua de incrementos funcionales permite obtener retroalimentación del cliente de forma constante, lo que garantiza que el producto final cumpla con sus expectativas y necesidades.
-\item \textbf{Mayor visibilidad y control del progreso del proyecto:} El enfoque ágil proporciona una mayor visibilidad del progreso del proyecto y permite un mayor control sobre el desarrollo \footnote{\url{https://link.springer.com/chapter/10.1007/978-3-642-20677-1_21}}, ya que se realizan seguimientos regulares y se realizan ajustes en función de la retroalimentación y los resultados obtenidos.
-\item \textbf{Mejora en la calidad del producto:} La iteración constante y las pruebas frecuentes permiten identificar y corregir rápidamente los problemas, lo que conduce a un producto final de mayor calidad.
-\end{itemize}
-
-las ventajas bajo mi experiencia más importantes y destacables, serían la facilidad de adaptarse a los cambios a medida que avanzas en el proyecto y la comodidad de los pequeños entregables al usuario de forma continua y temprana, facilitando la organización de tareas. Trabajando de manera más simple sobre las correcciones dada la continua retroalimentación, aumentando la calidad del trabajo constantemente. Además, teniendo en cuenta que estás enfocado en satisfacer al usuario, tienes mayor dominio y transparencia del progreso del proyecto. Resumiendo, el enfoque ágil me ha permitido desarrollar de manera más efectiva mi TFG, y logrando una gran calidad.
-
-
-\subsection{Conclusión}
-
-Basándonos en las características y ventajas expuestas, se ha elegido el enfoque ágil como el enfoque principal para el desarrollo de este TFG. La naturaleza iterativa, adaptable y colaborativa del desarrollo ágil se alinea de manera efectiva con los objetivos y requisitos del proyecto.
-
-El enfoque ágil permitirá una mayor flexibilidad para adaptarse a posibles cambios en los requerimientos, una entrega temprana de funcionalidades y una interacción continua con los usuarios finales. Además, facilitará la identificación temprana de problemas y la mejora constante de la calidad del producto.
-
-En resumen, el enfoque ágil se considera una elección sólida para este TFG, ya que proporciona una estructura flexible y eficiente que permitirá una gestión efectiva del proyecto, una entrega de valor continua y una alta probabilidad de alcanzar los objetivos propuestos.
-
+Debido a esto, en este capítulo se abordará el seguimiento del desarrollo del proyecto. Se describirán las estrategias implementadas para monitorear el progreso, evaluar el cumplimiento de los objetivos y realizar ajustes en caso necesario. El seguimiento del desarrollo permitirá una supervisión constante, identificar posibles desviaciones y tomar medidas correctivas oportunas. También se abordará la temporización, donde gracias a los hitos clave del proyecto que reflejan la distribución del tiempo. Se permitirá una gestión eficiente del tiempo y una visualización clara de los avances y metas a alcanzar.
 
 \section{Seguimiento del desarrollo}
 
-A continuación se van a describir el conjunto de herramientas utilizadas durante el desarrollo de este proyecto.
+A continuación se van a describir el conjunto de herramientas utilizadas para el seguimiento del desarrollo de este proyecto.
 
 \subsection{GitHub}
 
@@ -93,6 +41,10 @@ De esta manera, los hitos van a ser utilizados para marcar los logros clave que 
 El primer hito llevará a cabo la planificación inicial y su disposición para verificar la calidad del
 proyecto.
 El objetivo principal de este hito inicial es establecer la estructura del Trabajo de Fin de Grado (TFG) y preparar el proyecto. Después de completar este hito, se espera que los primeros puntos de la documentación estén redactados. Estos puntos incluirán la descripción del problema a abordar, el público objetivo afectado por dicho problema, la posible solución propuesta como producto final y el público al que va dirigido. Además, se abordará el estado actual del conocimiento en el área y el enfoque utilizado para desarrollar el producto. Asimismo, se configurará un repositorio que incluirá un verificador ortográfico para la documentación, los sistemas de CI y los problemas (issues), las historias de usuario y los hitos del proyecto.
+
+\subsection{M05. Capítulo de planificación}
+Debido a la extensión de los primeros capítulos, se ha visto necesario dividir en dos milestones estos cuatro capítulos de la documentación. Donde los tres primeros se encuentran en el M0 y el capítulo de planificación en este.
+El objetivo de este hito es aliviar la carga del milestone de configuración inicial.\vspace{0.5cm}
 
 Los siguientes hitos se mostrarán en el capítulo de implementación, ya que están relacionados con esta.
 
