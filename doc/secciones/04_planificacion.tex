@@ -1,8 +1,56 @@
 \chapter{Planificación}
 
-\section{Metodología utilizada}
+La planificación desempeña un papel fundamental en la consecución exitosa de cualquier proyecto académico, y el TFG no es una excepción. La adecuada organización de recursos, tiempos y tareas resulta esencial para alcanzar los objetivos propuestos y cumplir con los plazos establecidos.
 
+El problema es que como hemos mencionado en la metodología de desarrollo en el capítulo de introducción. Debido a la naturaleza del enfoque ágil, este no nos permite apenas planificar con anticipación. En lugar de depender de planes detallados que a menudo se vuelven obsoletos en entornos de desarrollo rápidamente cambiantes, el enfoque ágil abraza la flexibilidad y la adaptabilidad como principios fundamentales. Esto significa que los equipos de desarrollo pueden ajustar sus estrategias y prioridades a medida que surgen nuevos conocimientos y requisitos, lo que es especialmente valioso en proyectos de software donde la incertidumbre es común. Aunque puede parecer paradójico, esta falta de planificación rígida en realidad puede llevar a una mayor efectividad y calidad en la entrega de software, ya que se fomenta la colaboración constante, la retroalimentación continua y la capacidad de respuesta ágil a los cambios del mercado y del cliente, tal como mencionábamos en la metodología de desarrollo en el capítulo de introducción.
 
-\section{Temporización}
+Debido a esto, en este capítulo se abordará el seguimiento del desarrollo del proyecto. Se describirán las estrategias implementadas para monitorear el progreso, evaluar el cumplimiento de los objetivos y realizar ajustes en caso necesario. El seguimiento del desarrollo permitirá una supervisión constante, identificar posibles desviaciones y tomar medidas correctivas oportunas. También se abordará la temporización, donde gracias a los hitos clave del proyecto que reflejan la distribución del tiempo. Se permitirá una gestión eficiente del tiempo y una visualización clara de los avances y metas a alcanzar.
 
 \section{Seguimiento del desarrollo}
+
+A continuación se van a describir el conjunto de herramientas utilizadas para el seguimiento del desarrollo de este proyecto.
+
+\subsection{GitHub}
+
+Siendo Git y GitHub las primeras herramientas fundamentales de este proyecto de software libre. Ya que permiten un seguimiento exhaustivo de los avances tanto en el código como en la documentación, los cuales están alojados en un repositorio público \footnote{\url{https://github.com/JoseJordanF/Claqueta}}. Además, facilitan la recuperación de versiones anteriores del software en caso de fallos o cambios significativos, lo cual resulta esencial en el contexto de un enfoque ágil que implica modificaciones constantes.
+
+El repositorio de GitHub se convierte en la guía del proceso de desarrollo, proporcionando todas las herramientas necesarias para un seguimiento preciso del estado del trabajo en cualquier momento. A continuación, se detallan las principales funcionalidades utilizadas:
+
+\begin{itemize}
+\item \textbf{Issues} Se han creado issues \footnote{\url{https://github.com/JoseJordanF/Claqueta/issues}} en el repositorio de GitHub para realizar un seguimiento de las historias de usuario y las tareas asociadas a ellas. Estos issues describen el trabajo que debe realizarse y están orientados a satisfacer las necesidades de las historias de usuario. Cada vez que surja la necesidad de desarrollar algo o solucionar un problema, se documentará en un issue que indique los objetivos a lograr, y posteriormente se trabajará para cumplirlos.
+\item \textbf{Commits} Cada commit representa un avance en el código o en la documentación. En el mensaje del commit se proporciona una breve descripción de los cambios realizados para avanzar en el issue al que se hace referencia. Esto permite conocer las decisiones tomadas para resolver una tarea específica y proporciona un historial completo de los cambios efectuados.
+\item \textbf{Milestones} Los hitos se documentan en la sección de milestones, donde se resumen los objetivos que se espera alcanzar al tener un producto funcional. Estos hitos establecen fechas límite y enumeran los issues necesarios para completarlos en su totalidad. A medida que se vayan completando los issues, se podrá observar el progreso que falta por realizar.
+\item \textbf{Pull Requests} Todo el código y la documentación que se encuentran en la rama principal del repositorio se considera probado y completamente funcional. El desarrollo se lleva a cabo en ramas separadas que están vinculadas a cada hito que se pretende alcanzar. Una vez que se completa una tarea de desarrollo, se crea un pull request hacia la rama principal. Si el pull request pasa satisfactoriamente los flujos de CI configurados, se considera que la tarea está completada y se incorpora una nueva versión funcional en la rama principal.
+\end{itemize}
+
+En resumen, GitHub proporciona un entorno centralizado donde se encuentran todas las herramientas necesarias para el desarrollo, incluyendo el código, la documentación y el seguimiento del progreso. Esto permite avanzar de manera eficiente hacia los objetivos establecidos y cumplir con las necesidades del usuario de forma efectiva.
+
+\section{Hitos}
+
+En esta mentalidad, se prioriza la flexibilidad y la adaptabilidad a medida que se avanza en el desarrollo del proyecto.
+
+En lugar de una planificación exhaustiva y detallada desde el principio, se trabaja en iteraciones o sprints más cortos. Cada iteración tiene una duración definida y al final de cada una se entrega un incremento funcional del producto.
+
+La temporización en el desarrollo ágil se ajusta según el progreso real del proyecto. Durante el transcurso de cada iteración, se evalúa el avance y se realizan ajustes en la planificación si es necesario. Esto permite adaptarse a cambios y prioridades emergentes de manera eficiente.
+
+Por ello debemos tener claro que son los hitos, se pueden contemplar como objetivos claros y medibles que indican el avance del proyecto. La idea principal detrás de los hitos en el desarrollo ágil es tener puntos de control y evaluación frecuentes para asegurarse de que el proyecto está avanzando en la dirección correcta y cumpliendo con los objetivos establecidos. Además, los hitos proporcionan una oportunidad para realizar ajustes y adaptaciones en función de la retroalimentación y los resultados obtenidos en cada sprint. 
+
+De esta manera, los hitos van a ser utilizados para marcar los logros clave que se deben alcanzar en diferentes etapas del proyecto. Estos hitos van a estar relacionados con la investigación, el diseño, la implementación o cualquier otra fase importante del TFG. Más específicamente para este proyecto vamos a trabajar con PMV (productos mínimamente viables), cada hito corresponderá a un PMV. Así cada hito que se defina se conformara por varios issues, a raíz de resolver dichos problemas iremos avanzando en hito. Completando uno tras otro, en un orden concreto como ir desde el más sencillo hasta el más complejo, obteniendo así un PMV, avanzando así en el proyecto. Un ejemplo de esto sería el hito de configuración del proyecto.
+
+\subsection{M0. Configuración inicial del TFG - Estructura, objetivos y metodología usada}
+El primer hito llevará a cabo la planificación inicial y su disposición para verificar la calidad del
+proyecto.
+El objetivo principal de este hito inicial es establecer la estructura del Trabajo de Fin de Grado (TFG) y preparar el proyecto. Después de completar este hito, se espera que los primeros puntos de la documentación estén redactados. Estos puntos incluirán la descripción del problema a abordar, el público objetivo afectado por dicho problema, la posible solución propuesta como producto final y el público al que va dirigido. Además, se abordará el estado actual del conocimiento en el área y el enfoque utilizado para desarrollar el producto. Asimismo, se configurará un repositorio que incluirá un verificador ortográfico para la documentación, los sistemas de CI y los problemas (issues), las historias de usuario y los hitos del proyecto.
+
+\subsection{M05. Capítulo de planificación}
+Debido a la extensión de los primeros capítulos, se ha visto necesario dividir en dos milestones estos cuatro capítulos de la documentación. Donde los tres primeros se encuentran en el M0 y el capítulo de planificación en este.
+El objetivo de este hito es aliviar la carga del milestone de configuración inicial.\vspace{0.5cm}
+
+Los siguientes hitos se mostrarán en el capítulo de implementación, ya que están relacionados con esta.
+
+
+
+
+
+
+
