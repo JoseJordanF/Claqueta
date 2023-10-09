@@ -1,8 +1,9 @@
 name: Build LaTeX document
 on: 
   push:
-    branches:
-      - 'master'
+    paths:
+      - 'doc/**.tex'  
+      - 'doc/**.bib'  
 jobs:
   build_latex:
     runs-on: ubuntu-latest
