@@ -1,68 +1,16 @@
 \chapter{Planificación}
 
-Este capítulo tiene como objetivo proporcionar una visión detallada de la planificación llevada a cabo para la realización de este Trabajo de Fin de Grado (TFG). Aquí se presentarán las diferentes secciones que abarcan el enfoque utilizado, el seguimiento del desarrollo del proyecto y las buenas prácticas que garanticen la calidad del proyecto y sirvan de indicador para seguir de cerca el desarrollo de este.
 
 La planificación desempeña un papel fundamental en la consecución exitosa de cualquier proyecto académico, y el TFG no es una excepción. La adecuada organización de recursos, tiempos y tareas resulta esencial para alcanzar los objetivos propuestos y cumplir con los plazos establecidos.
 
-En la primera sección, se describirá en detalle la mentalidad utilizada para abordar el desarrollo de este proyecto. Se explicarán las técnicas, herramientas y enfoques empleados, así como las razones detrás de su elección. Esta sección proporcionará una base sólida que sustenta todo el proceso de desarrollo del TFG.
+El problema es que como hemos mencionado en la metodología de desarrollo en el capítulo de introducción. Debido a la naturaleza del enfoque ágil, este no nos permite apenas planificar con anticipación. En lugar de depender de planes detallados que a menudo se vuelven obsoletos en entornos de desarrollo rápidamente cambiantes, el enfoque ágil abraza la flexibilidad y la adaptabilidad como principios fundamentales. Esto significa que los equipos de desarrollo pueden ajustar sus estrategias y prioridades a medida que surgen nuevos conocimientos y requisitos, lo que es especialmente valioso en proyectos de software donde la incertidumbre es común. Aunque puede parecer paradójico, esta falta de planificación rígida en realidad puede llevar a una mayor efectividad y calidad en la entrega de software, ya que se fomenta la colaboración constante, la retroalimentación continua y la capacidad de respuesta ágil a los cambios del mercado y del cliente, tal como mencionábamos en la metodología de desarrollo en el capítulo de introducción.
 
-La segunda sección abordará el seguimiento del desarrollo del proyecto. Se describirán las estrategias implementadas para monitorear el progreso, evaluar el cumplimiento de los objetivos y realizar ajustes en caso necesario. El seguimiento del desarrollo permitirá una supervisión constante, identificar posibles desviaciones y tomar medidas correctivas oportunas. También se abordará la temporización, donde gracias a los hitos clave del proyecto que reflejan la distribución del tiempo. Se permitirá una gestión eficiente del tiempo y una visualización clara de los avances y metas a alcanzar.
-
-En resumen, este capítulo de planificación proporcionará una guía detallada sobre cómo se estructura y organiza este TFG desde el punto de vista metodológico, temporal y de seguimiento. La planificación adecuada y el control eficiente del desarrollo son elementos clave para garantizar el éxito y la calidad de este trabajo académico.
-
-\section{Enfoque utilizado}
-
-En esta sección, se presentará la mentalidad utilizada en el desarrollo de este TFG, centrada en el enfoque ágil. Se explicarán en detalle los conceptos, características y ventajas de este enfoque, así como la razón detrás de su elección para este proyecto. A continuación, se proporcionará una conclusión sobre por qué el enfoque ágil es adecuado y beneficioso para este TFG.
-
-\subsection{Concepto y Características}
-
-El desarrollo ágil es un enfoque metodológico utilizado en proyectos de desarrollo de software que se caracteriza por su flexibilidad, adaptabilidad y enfoque iterativo e incremental. A diferencia de los enfoques tradicionales, que se basan en planes detallados y rigidez en los procesos, el desarrollo ágil se centra en la colaboración, la comunicación constante y la capacidad de respuesta a los cambios. Su principal objetivo es entregar un producto de calidad que cumpla con las necesidades y expectativas del cliente.
-
-El desarrollo ágil se basa en los siguientes principios:
-
-\begin{itemize}
-\item \textbf{Orientación al cliente:} Se busca comprender las necesidades y expectativas del cliente y desarrollar soluciones que satisfagan sus requerimientos. La retroalimentación del cliente es fundamental para guiar el desarrollo y asegurarse de que el producto final cumpla con sus necesidades.
-Por ello se han presentado los usuarios y se han visto reflejadas sus necesidades en las historias de usuario, descritas en el segundo capítulo junto al problema. Además de la reflexión del primer capítulo.
-
-\item \textbf{Enfoque iterativo:} El proyecto se divide en iteraciones cortas y enfocadas, llamadas sprints, que tienen una duración definida (por ejemplo, 1 a 4 semanas). Cada sprint tiene objetivos claros y entrega un incremento funcional del producto. Al final de cada sprint, se revisa y se ajusta el plan en función de la retroalimentación y los resultados obtenidos.
-A través de hitos, usando las herramientas ofrecidas por GitHub descritas más adelante en este capítulo, para definir dichos sprints, obteniendo en cada uno un producto mínimamente viable (PMV). Analizando y testeando si se obtienen los resultados esperados.
-
-\item \textbf{Adaptabilidad y flexibilidad:} El desarrollo ágil reconoce que los requisitos y las prioridades pueden cambiar a lo largo del proyecto. En lugar de intentar prever y especificar todos los detalles desde el principio, se acepta que algunos requisitos pueden ser ambiguos o desconocidos al principio y se permite ajustar y adaptar el plan en función de las necesidades que surjan durante el desarrollo.
-Esto se ve reflejado en los objetivos principales del proyecto, durante el desarrollo del proyecto algunos requisitos han ido cambiando según las necesidades que han surgido. Añadiendo o desechando ideas desde que empezó el proyecto.
-
-\item \textbf{Entrega temprana y continua:} El enfoque ágil se enfoca en generar valor para el cliente de manera temprana y constante. Se priorizan las funcionalidades más importantes y se entregan en cada sprint, lo que permite obtener retroalimentación rápida y garantiza que el producto final cumpla con las expectativas del cliente.
-Para ello se hace uso de \begin{otherlanguage}
-{english}``\textit{\textbf{Pull Request}}''\end{otherlanguage} otra herramienta de GitHub descrita más abajo, por la que se tienen entregas continuas y su retroalimentación constante. Haciendo mucho más fácil y cómoda la resolución de cambios en él esas partes del proyecto.
-
-\end{itemize}
-
-El desarrollo ágil se basa en la premisa de que los requerimientos pueden cambiar, los problemas pueden surgir y las soluciones pueden evolucionar a lo largo del proyecto. En lugar de resistir a estos cambios, el enfoque ágil los abraza y busca manejarlos de manera efectiva a través de la colaboración, la iteración y la adaptabilidad.
-
-\subsection{Ventajas}
-
-Las ventajas, por lo general, que ofrece el desarrollo ágil sobre metodologías tradicionales:
-
-\begin{itemize}
-\item \textbf{Mayor satisfacción del cliente:} La entrega temprana y continua de incrementos funcionales permite obtener retroalimentación del cliente de forma constante, lo que garantiza que el producto final cumpla con sus expectativas y necesidades.
-\item \textbf{Mayor visibilidad y control:} El enfoque ágil proporciona una mayor visibilidad del progreso del proyecto y permite un mayor control sobre el desarrollo, ya que se realizan seguimientos regulares y se realizan ajustes en función de la retroalimentación y los resultados obtenidos.
-\item \textbf{Mejora en la calidad del producto:} La iteración constante y las pruebas frecuentes permiten identificar y corregir rápidamente los problemas, lo que conduce a un producto final de mayor calidad.
-\end{itemize}
-
-las ventajas bajo mi experiencia más importantes y destacables, serían la facilidad de adaptarse a los cambios a medida que avanzas en el proyecto y la comodidad de los pequeños entregables al usuario de forma continua y temprana, facilitando la organización de tareas. Trabajando de manera más simple sobre las correcciones dada la continua retroalimentación, aumentando la calidad del trabajo constantemente. Además, teniendo en cuenta que estás enfocado en satisfacer al usuario, tienes mayor dominio y transparencia del progreso del proyecto. Resumiendo, el enfoque ágil me ha permitido desarrollar de manera más efectiva mi TFG, y logrando una gran calidad.
-
-
-\subsection{Conclusión}
-
-Basándonos en las características y ventajas expuestas, se ha elegido el enfoque ágil como el enfoque principal para el desarrollo de este TFG. La naturaleza iterativa, adaptable y colaborativa del desarrollo ágil se alinea de manera efectiva con los objetivos y requisitos del proyecto.
-
-El enfoque ágil permitirá una mayor flexibilidad para adaptarse a posibles cambios en los requerimientos, una entrega temprana de funcionalidades y una interacción continua con los usuarios finales. Además, facilitará la identificación temprana de problemas y la mejora constante de la calidad del producto.
-
-En resumen, el enfoque ágil se considera una elección sólida para este TFG, ya que proporciona una estructura flexible y eficiente que permitirá una gestión efectiva del proyecto, una entrega de valor continua y una alta probabilidad de alcanzar los objetivos propuestos.
-
+Debido a esto, en este capítulo se abordará el seguimiento del desarrollo del proyecto. Se describirán las estrategias implementadas para monitorear el progreso, evaluar el cumplimiento de los objetivos y realizar ajustes en caso necesario. El seguimiento del desarrollo permitirá una supervisión constante, identificar posibles desviaciones y tomar medidas correctivas oportunas. También se abordará la temporización, donde gracias a los hitos clave del proyecto que reflejan la distribución del tiempo. Se permitirá una gestión eficiente del tiempo y una visualización clara de los avances y metas a alcanzar.
 
 \section{Seguimiento del desarrollo}
 
-A continuación se van a describir el conjunto de herramientas utilizadas durante el desarrollo de este proyecto.
+A continuación se van a describir el conjunto de herramientas utilizadas para el seguimiento del desarrollo de este proyecto.
+
 
 \subsection{GitHub}
 
@@ -87,77 +35,27 @@ En lugar de una planificación exhaustiva y detallada desde el principio, se tra
 
 La temporización en el desarrollo ágil se ajusta según el progreso real del proyecto. Durante el transcurso de cada iteración, se evalúa el avance y se realizan ajustes en la planificación si es necesario. Esto permite adaptarse a cambios y prioridades emergentes de manera eficiente.
 
-En esta sección, se proporcionarán los detalles específicos de cada hito, incluyendo las fechas de inicio y fin correspondientes. Esto permitirá tener una visión clara del cronograma del proyecto y facilitará el seguimiento del progreso a lo largo del tiempo.
 
 Por ello debemos tener claro que son los hitos, se pueden contemplar como objetivos claros y medibles que indican el avance del proyecto. La idea principal detrás de los hitos en el desarrollo ágil es tener puntos de control y evaluación frecuentes para asegurarse de que el proyecto está avanzando en la dirección correcta y cumpliendo con los objetivos establecidos. Además, los hitos proporcionan una oportunidad para realizar ajustes y adaptaciones en función de la retroalimentación y los resultados obtenidos en cada sprint. 
 
-De esta manera, los hitos van a ser utilizados para marcar los logros clave que se deben alcanzar en diferentes etapas del proyecto. Estos hitos van a estar relacionados con la investigación, el diseño, la implementación o cualquier otra fase importante del TFG.
+De esta manera, los hitos van a ser utilizados para marcar los logros clave que se deben alcanzar en diferentes etapas del proyecto. Estos hitos van a estar relacionados con la investigación, el diseño, la implementación o cualquier otra fase importante del TFG. Más específicamente para este proyecto vamos a trabajar con PMV (productos mínimamente viables), cada hito corresponderá a un PMV. Así cada hito que se defina se conformara por varios issues, a raíz de resolver dichos problemas iremos avanzando en hito. Completando uno tras otro, en un orden concreto como ir desde el más sencillo hasta el más complejo, obteniendo así un PMV, avanzando así en el proyecto. Un ejemplo de esto sería el hito de configuración del proyecto.
 
-\subsection{M0. Configuración Inicial del TFG - Estructura, objetivos y metodología usada}
+\subsection{M0. Configuración inicial del TFG - Estructura, objetivos y metodología usada}
+
 El primer hito llevará a cabo la planificación inicial y su disposición para verificar la calidad del
 proyecto.
 El objetivo principal de este hito inicial es establecer la estructura del Trabajo de Fin de Grado (TFG) y preparar el proyecto. Después de completar este hito, se espera que los primeros puntos de la documentación estén redactados. Estos puntos incluirán la descripción del problema a abordar, el público objetivo afectado por dicho problema, la posible solución propuesta como producto final y el público al que va dirigido. Además, se abordará el estado actual del conocimiento en el área y el enfoque utilizado para desarrollar el producto. Asimismo, se configurará un repositorio que incluirá un verificador ortográfico para la documentación, los sistemas de CI y los problemas (issues), las historias de usuario y los hitos del proyecto.
 
-\subsection{M1. Definición de Objetos - Abstracción del proyecto}
+\subsection{M05. Capítulo de planificación}
+Debido a la extensión de los primeros capítulos, se ha visto necesario dividir en dos milestones estos cuatro capítulos de la documentación. Donde los tres primeros se encuentran en el M0 y el capítulo de planificación en este.
+El objetivo de este hito es aliviar la carga del milestone de configuración inicial.\vspace{0.5cm}
 
-En este hito se conseguirá el modelado de los objetos presentes en el problema, para ello se abstraerán los conceptos clave y se definirán los objetos de la aplicación. El objetivo es tener una estructura clara de los datos a utilizar. La abstracción nos permite identificar las características esenciales, eliminando detalles innecesarios. La definición de objetos nos ayudará a comprender sus relaciones, atributos y operaciones. Esto establecerá una base sólida para el desarrollo coherente de la aplicación.
-
-De esta manera se busca, priorizar el desarrollo real, la retroalimentación continua y prácticas como el desarrollo impulsado por pruebas \begin{otherlanguage}{english}\textit{(Test
-Driven Development, TDD)}\end{otherlanguage} y la colaboración cercana. Esto permite una mayor agilidad y adaptabilidad en el proceso de desarrollo.
-
-Por ello, buscando un método para definir los objetos de la aplicación, se encuentra una técnica de desarrollo de software llamada, \begin{otherlanguage}
-{english}``\textit{\textbf{Domain Driven Design}}''\end{otherlanguage}(DDD) es un enfoque de diseño de software que se centra en comprender y modelar el dominio del problema de una aplicación. Busca desarrollar un diseño que refleje con precisión las reglas y conceptos del dominio, lo que resulta en un sistema más mantenible. Teniendo en cuenta que el DDD y el desarrollo ágil son compatibles, ya que su aplicación permite construir aplicaciones que se ajusten mejor a las necesidades del cliente y evolucionen de manera flexible a medida que se adquiere un mayor entendimiento del dominio. DDD proporciona la base conceptual y de diseño sólida para desarrollar modelos de dominio claros y significativos, mientras que el enfoque ágil permite una implementación iterativa, rápida y adaptativa.
-
-De esta manera se recurre al uso del \textit{\textbf{Modelo de Dominio}} representación conceptual de las entidades, los conceptos, las reglas y las interacciones dentro del dominio del problema. Es una abstracción del mundo real que captura las principales entidades y sus relaciones. Esto ofrece una gran ventaja del DDD, ya que esto ayuda a alinear el entendimiento y facilita la comunicación efectiva sobre el problema y su solución. Siendo los modelos de dominio una parte central y fundamental del DDD, representando el conocimiento y la comprensión profunda del problema que se está abordando. Teniendo esto en cuenta se crea un modelo de dominio que se puede visualizar en este enlace \footnote{\url{https://acortar.link/iohTNI}}.
-
-\subsection{M2. Lógica de Negocio - Operaciones sobre los datos}
-
-La lógica de negocio, también conocida como reglas de negocio, se refiere a las operaciones y procesos fundamentales que definen cómo funciona la aplicación. Determinando como se procesan los datos, se realizan cálculos, se toman decisiones y se llevan a cabo las operaciones clave para lograr los objetivos de la aplicación. Siempre dependientes de las necesidades y los propósitos de la aplicación. Como estas vienen definidos por las \textbf{Historias de Usuario}, vamos a recurrir a ellas para determinar las operaciones que se llevaran a cabo con los datos de la aplicación. 
-
-Por tanto, siguiendo las historias del aficionado al cine, el cinéfilo y el crítico, podemos definir estas operaciones:
-
-\begin{itemize}
-\item \textbf{Publicación y gestión de reseñas:} La lógica de negocio permitiría a los usuarios publicar reseñas de películas, incluyendo la calificación y por supuesto el contenido de la reseña en sí, como la opinión del usuario. También podría incluir la capacidad de editar o eliminar reseñas propias, así como la opción de comentar y responder a las reseñas de otros usuarios.
-\item \textbf{Búsqueda y filtrado de películas:} En este caso se permitiría a los usuarios buscar películas por título, director, año de estreno, e incluso duración. Esto implicaría implementar algoritmos de búsqueda y criterios de filtrado para presentar los resultados más relevantes. 
-\item \textbf{Recomendaciones personalizadas:} Utilizar técnicas de recomendación para ofrecer a los usuarios sugerencias personalizadas de películas basadas en su historial de reseñas o sus preferencias. En un futuro se podrían llegar a usar algoritmos de aprendizaje automático (algoritmos desarrollados para aprender de los datos y tomar decisiones sin ser programados explícitamente), que analicen los patrones de comportamiento del usuario y sugieran películas afines a sus gustos.
-\item \textbf{Asegurar la fiabilidad:} Asegurar que la interacción social entre los usuarios, a través de las reseñas de estos, sea lo más fiable posible. Mediante un algoritmo que penalice o recompense individualmente a los usuarios por sus interacciones. Evaluando así la fiabilidad de dichas interacciones, siempre dependiendo del algoritmo que se use.
-\end{itemize}
-
-\subsection{M3. Lógica de Negocio - Otras Operaciones sobre los datos}
-
-Continuación se van a describir otras operaciones que se van a realizar sobre los datos, ya que es un punto demasiado extenso para un solo hito. De esta manera, las operaciones más generales se explicarán a continuación.
-
-\subsection{M4. Despliegue de la API}
+Los siguientes hitos se mostrarán en el capítulo de implementación, ya que están relacionados con esta.
 
 
-\section{Elección de herramientas para el desarrollo}
-
-Para el desarrollo de un proyecto de ingeniería del software, es indispensable el uso de herramientas que permitan llevar a cabo dicho proyecto, asegurando su calidad y buenas prácticas durante el uso de estas.
-
-Por ello se van a describir a continuación todas las herramientas que se van a utilizar para el desarrollo del software. Describiendo los lenguajes de programación que se usaran, lenguajes de consulta y manipulación de datos para API, el modelo de datos a usar, a su vez también se mostraran herramientas que velen por el buen desarrollo en el repositorio y llevar a cabo buenas prácticas. El uso de todas estas herramientas será justificado, explicándose así para qué se va a utilizar dicha herramienta y porque se ha elegido.
-
-\subsection{Lenguaje de programación}
-
-Una de las principales herramientas para el desarrollo de software es el lenguaje de programación, un lenguaje que sea afín a las necesidades del proyecto. Siendo así un necesario un lenguaje para modelar los objetos descritos en este capítulo, en el primer hito. Pero debemos tener en cuenta que se pretende que el desarrollo del modelado de los objetos pueda ser reutilizable, de fácil acceso e intentando ahorrar recursos. Por ello, para la aplicación se pretende crear una API propia, como las que se mencionaron en el capítulo del estado del arte. Dichas API poseen una gran cantidad de datos que no necesitamos, por ello se desarrolla una API propia. ¿Pero qué tipo de API idóneo para este proyecto?. Por lo que indagando por los tipos de API más usados, encontramos una gráfica \footnote{\url{https://acortar.link/mCfcHJ}}, en página \textbf{''Postman''} reconocida por ser una web destinada para que los desarrolladores diseñen, construyan e iterar sus API. En dicha gráfica se ve como las REST es la arquitectura más utilizada. Esta arquitectura se compone de una serie de verbos http, los cuales son: 
-\begin{itemize}
-\item \textbf{GET:} se utiliza para consultar recursos sin causar efectos secundarios en el servidor. No crea ni modifica registros existentes
-\item \textbf{POST:} se utilizan exclusivamente para crear nuevos recursos. Cada llamada con POST debe generar un recurso nuevo.
-\item \textbf{PUT/PATCH:} se utilizan para modificar un recurso existente. PUT se diferencia de PATCH en que PUT reemplaza completamente el recurso, mientras que PATCH actualiza solo algunos elementos sin reemplazarlo por completo.
-\item \textbf{DELETE:} es el verbo utilizado para eliminar registros, ya sea para eliminar un recurso individual o colecciones completas.
-\end{itemize}
-
-De esta manera podemos recuperar, insertar, modificar o eliminar información. Es importante destacar que REST está basado en múltiples \begin{otherlanguage}{english}\textit{\textbf{``endpoints''}}\end{otherlanguage}, estos no son más que URL o rutas específicas que se usan en la API REST para manipular los recursos que nos ofrece. De manera que para solicitar por ejemplo una lista de películas necesitaríamos un \begin{otherlanguage}{english}endpoint\end{otherlanguage} y para solicitar una lista de usuarios necesitaríamos otro \begin{otherlanguage}{english}endpoint\end{otherlanguage}. Así vemos como funciona una APÎ REST de manera sencilla, a través de estas operaciones y sus múltiples \begin{otherlanguage}{english}endpoints\end{otherlanguage}.
-
-Pero también existen nuevas arquitecturas, que cada vez están siendo más visibles y les están quitando terreno a REST. Se nos advierte en el mismo enlace de \textbf{``Postman''}, donde nos menciona que una arquitectura llamada \textbf{``GraphQL''} le está comiendo terreno a REST y se ha metido entre las tres arquitecturas más usadas. Al igual que REST, GraphQL posee operaciones para manipular la información:
-
-\begin{itemize}
-\item \textbf{Query:} estas son consultas que funcionan igual que GET.
-\item \textbf{Mutation:} las mutaciones funcionarian como POST, PATCH y DELETE. El nombre de la mutación determina qué modificación se ejecuta.
-\item \textbf{Suscription:} las suscripciones permiten enviar datos cuando ocurre un evento específico, fundamentales para agregar características reactivas o en tiempo real a tus aplicaciones. 
-\end{itemize}
-
-En este caso, GraphQL solo dispone de un \begin{otherlanguage}{english}endpoint\end{otherlanguage}, a diferencia de REST.
 
 
-Ahora bien, estas operaciones son definidas en el \begin{otherlanguage}
-{english}\textit{\textbf{``backend''}}\end{otherlanguage} 
+
+
+
+
