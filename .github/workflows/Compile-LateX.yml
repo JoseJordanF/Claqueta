@@ -2,8 +2,8 @@ name: Build LaTeX document
 on: 
   push:
     paths:
-      - 'doc/**.tex'  
-      - 'doc/**.bib'  
+      - '**/*.tex'  
+      - '**/*.bib'  
 jobs:
   build_latex:
     runs-on: ubuntu-latest
