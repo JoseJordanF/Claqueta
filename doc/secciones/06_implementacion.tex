@@ -1,16 +1,17 @@
 \chapter{Implementación}
 
-En este capítulo se va a proceder a desarrollar cada uno de los hitos de implementación, obteniendo en un PMV. Además, habrá que discutir que herramientas van a usarse para desarrollar o llevar a cabo estos hitos y el porqué de su elección. 
+En este capítulo se va a proceder a desarrollar cada uno de los PMV de cara a cada hito relacionado con 
+la implementación, ya que los hitos previos \footnote{\url{https://github.com/JoseJordanF/Claqueta/milestone/1}} \footnote{\url{https://github.com/JoseJordanF/Claqueta/milestone/7}} se encuentran en el capítulo de 
+planificación, ya que definen la infraestructura y organización del proyecto. Además, habrá que 
+discutir que herramientas van a usarse para desarrollar o llevar a cabo estos hitos y el porqué de su 
+elección. 
 
 Dividiéndose la implementación del software en hitos. Estos han sido definidos en Github
 y cada uno de ellos contiene un grupo de \textit{issues} que se corresponden con las distintas
-mejoras que se han ido incorporando al software a lo largo de su desarrollo.\\
+mejoras que se han ido incorporando al software a lo largo de su desarrollo.
 
-\section{Elección de herramientas para el desarrollo}
-
-Para el desarrollo de un proyecto de ingeniería del software, es indispensable el uso de herramientas 
-que permitan llevar a cabo dicho proyecto, asegurando su calidad y buenas prácticas durante el uso de 
-estas.
+El uso de herramientas permiten llevar a cabo el proyecto asegurando su calidad y buenas prácticas 
+durante el uso de estas.
 
 Por ello se van a describir las herramientas principales que se van a utilizar para el desarrollo del 
 software, en cada uno de los hitos. Describiendo los lenguajes de programación que se usaran, lenguajes 
@@ -19,246 +20,11 @@ herramientas que velen por el buen desarrollo en el repositorio y llevar a cabo 
 uso de todas estas herramientas será justificado, explicándose así para qué se va a utilizar dicha 
 herramienta y porque se ha elegido.
 
-\section{M1. Definición de objetos - Abstracción del proyecto}
+\section{M1: Definición de objetos - Abstracción del proyecto}
 
-En este hito se conseguirá el modelado de los objetos presentes en el problema, para ello se abstraerán 
+En este hito \footnote{\url{https://github.com/JoseJordanF/Claqueta/milestone/8}} se conseguirá el modelado de los objetos presentes en el problema, para ello se abstraerán 
 los conceptos clave y se definirán los objetos de la aplicación. El objetivo es tener una estructura 
 clara de los datos a utilizar. La abstracción nos permite identificar las características esenciales, 
 eliminando detalles innecesarios. La definición de objetos nos ayudará a comprender sus relaciones, 
 atributos y operaciones. Esto establecerá una base sólida para el desarrollo coherente de la aplicación.
 
-De esta manera se busca, priorizar el desarrollo real, la retroalimentación continua y prácticas como 
-el desarrollo impulsado por pruebas \begin{otherlanguage}{english}\textit{(Test Driven Development, TDD)}\end{otherlanguage}  ,y la colaboración cercana. Esto permite una mayor 
-agilidad y adaptabilidad en el proceso de desarrollo.
-
-Por ello, buscando un método para definir los objetos de la aplicación, se encuentra una técnica de 
-desarrollo de software llamada, \begin{otherlanguage}
-{english}``\textit{\textbf{Domain Driven Design}}''\end{otherlanguage}(DDD) es un enfoque de diseño de 
-software que se centra en comprender y modelar el dominio del problema de una aplicación. Busca 
-desarrollar un diseño que refleje con precisión las reglas y conceptos del dominio, lo que resulta en 
-un sistema más mantenible. Teniendo en cuenta que el DDD y el desarrollo ágil son compatibles, ya que 
-su aplicación permite construir aplicaciones que se ajusten mejor a las necesidades del cliente y 
-evolucionen de manera flexible a medida que se adquiere un mayor entendimiento del dominio. DDD 
-proporciona la base conceptual y de diseño sólida para desarrollar modelos de dominio claros y 
-significativos, mientras que el enfoque ágil permite una implementación iterativa, rápida y adaptativa.
-
-De esta manera se recurre al uso del \textit{\textbf{Modelo de Dominio}} representación conceptual de 
-las entidades, los conceptos, las reglas, objetos inmutables, como los objetos valor y las 
-interacciones dentro del dominio del problema. Es una abstracción del mundo real que captura las 
-principales entidades y sus relaciones. Esto ofrece una gran ventaja del DDD, ya que esto ayuda a 
-alinear el entendimiento y facilita la comunicación efectiva sobre el problema y su solución. Siendo 
-los modelos de dominio una parte central y fundamental del DDD, representando el conocimiento y la 
-comprensión profunda del problema que se está abordando. Teniendo esto en cuenta se crea un modelo de 
-dominio que se puede visualizar en este enlace \footnote{\url{https://acortar.link/iohTNI}}. Si este 
-modelo sufre cualquier cambio, siempre se reflejará, ya que se modifica y guarda en la nube. Asegurando 
-así la concordancia del modelo con el proyecto, aunque sufra cambios.
-
-Como base y resumen del primer modelo de dominio, tendríamos una entidad \begin{otherlanguage}
-{english}\textit{\textbf{review}}\end{otherlanguage} haciendo referencia a la reseña, la entidad 
-esencial, ya que perseguimos asegurar la calidad de esta. Una reseña de calidad va a ser definida 
-comúnmente como una reseña fiable que cumpla las reglas que vimos en el estado del arte. Por lo tanto, 
-tendremos atributos generales como el autor de la reseña, la fecha de realización de esta, indicar si 
-la reseña contiene espóiler o la valoración otorgada a la reseña debido a las interacciones de estos, 
-que expresará lo útil que le ha sido a la mayoría de usuarios para la toma de decisiones. También el 
-contenido de la reseña se dividiría para que el usuario hable tanto de la trama general, la 
-interpretación y la dirección. Asegurando las reglas vistas y la fiabilidad, en parte, de esta reseña.
-
-De esta manera, esta entidad es la estrella alrededor de la cual orbitaran las otras dos, dando 
-solución al un problema planteado por el cinéfilo y el crítico. Permitiendo exponer de manera más 
-profesional y fiable la opinión del usuario, gracias a los atributos de esta entidad, como las 
-internaciones o la división de la reseña en tres partes. El usuario y la fecha son atributos de control 
-e información.
-
-Otra gran entidad sería el usuario, sus atributos serían los necesarios para identificarse, como el 
-nombre de usuario, email, contraseña. Además, para seguir con el objetivo principal de este proyecto, 
-asegurar la fiabilidad y calidad de las reseñas, debemos conseguir de alguna forma señalar que un 
-usuario es fiable, de manera que sus reseñas son confiables. Una manera de conseguirlo es a través de 
-un sistema de reputación o karma individual, de manera que las interacciones del usuario siempre tengan 
-consecuencias \footnote{\url{https://es.stackoverflow.com/help/whats-reputation}} igual que como 
-reaccione la gente a lo que publique. De esta manera tendremos otro atributo que hará referencia a esta 
-reputación.
-
-Esta entidad sería uno de los planetas que orbita alrededor de la reseña con atributos de descripción 
-del usuario, siendo uno de ellos la reputación, solucionando o más bien siendo parte de la solución 
-para el cinéfilo, brindando una fiabilidad o respeto a cada usuario dando más credibilidad dependiendo 
-de tu reputación.
-
-La siguiente entidad, sería la película. Un objeto que describa y represente la película. Además de 
-datos relevantes sobre la película, deberá expresar la nota asignada por la audiencia. Esta nota para 
-que se calcule de manera justa se va a recurrir a un análisis de sentimientos dada la subjetividad en 
-este ámbito \cite{SubjTV}. Lo más justo sería dar una perspectiva acerca de la trama, la interpretación 
-y la dirección, de esta manera esta visión vendría dada por todos y cada uno de los usuarios que 
-escribe su reseña, indirectamente al opinar cada una de las partes en su reseña, está expresando lo que 
-le ha parecido la película. Pudiendo ser su opinión positiva acerca de la interpretación, pero negativa 
-acerca de la dirección, de esta manera el abanico sería más amplio, no solo dejando a si una película 
-es buena o es mala. Si no si merece la pena verla por la dirección, la interpretación o la trama. Así, 
-gracias a un clasificador \textbf{\textit{Naive Bayes}} \cite{TwNavieB} podemos determinar si cada una 
-de las partes de una reseña de un usuario es positiva o negativa. Haciendo una media con los resultados 
-de todas las reseñas, obteniendo una perspectiva positiva o negativa de cada una de las tres partes 
-importantes de las que se opinan de una película. Siendo una valoración más cercana a las reseñas, ya 
-que se basa en ellas y recogiendo en buena parte la opinión de cada uno, con lo que conlleva la 
-complejidad de la subjetividad de esta.
-El análisis de sentimientos, consiguiendo una valoración más cercana a las reseñas de los usuarios, 
-dotando a la película de una nota más subjetiva y compleja respecto a los tipos de valoración vistos 
-por parte de IMDb, Letterboxd o Rotten Tomatoes. Junto con la reputación del usuario y las buenas 
-prácticas para escribir reseñas, brindan la calidad y la fiabilidad a las reseñas que buscamos.
-
-Siendo esta el otro planeta, meramente posee toda la información relevante para poder dar solución al 
-problema del aficionado, pudiéndole recomendar películas a través de los distintos atributos que esta 
-entidad posee, como el director, la fecha de estreno o la duración. Por otro lado, ayudamos al crítico 
-a que a través de esa nota otorgada a la película dada a través de las reseñas de los usuarios, se 
-anime a los usuarios a escribir reseñas y ayude a otros a tomar decisiones informadas.
-
-\subsection{Lenguaje de programación}
-
-Una de las principales herramientas para el desarrollo de software es el lenguaje de programación, un 
-lenguaje que sea afín a las necesidades del proyecto. Siendo así un necesario un lenguaje para modelar 
-los objetos descritos en este capítulo, en el primer hito. Pero debemos tener en cuenta que se pretende 
-que el desarrollo del modelado de los objetos pueda ser reutilizable, de fácil acceso e intentando 
-ahorrar recursos. Por ello, para la aplicación es posible crear una API propia, como las que se 
-mencionaron en el capítulo del estado del arte. Ya que es muy atractivo que los algoritmos y el modelo 
-de datos pueda ser consumido por otros a través de una API
-
-Por otra parte, también se pretende crear una aplicación. Con lo mencionado en el capítulo dos 
-podríamos crear una aplicación Android o una aplicación web, destinada a los 
-dispositivos móviles. Según nos menciona \textbf{\textit{Cloud Levante}} en este artículo 
-\cite{WebVSApp} lo más usado en móvil son las aplicaciones móviles. Por 
-tanto, necesitamos un lenguaje de programación para aplicaciones móviles, más concretamente para 
-Android, como mencionamos en el segundo capítulo. Tenemos varias opciones, consultando varios 
-blogs\footnote{\url{https://blog.mgpanel.org/post/lenguajes-de-programacion-mas-usados-para-app-moviles}} todos ellos coinciden con qué Java es el primer lenguaje en el que piensas a la hora de crear 
-una aplicación para Android. Sin embargo, no es Java el más utilizado, sino una variante de este, 
-Kotlin. Debido a su sencillez y facilidad de uso, gracias a la simplicidad de su código será más simple 
-crear tus funciones, incluyendo las corrutinas que facilitan la ejecución de tareas asíncronas. Destaca 
-su extenso conjunto de librerías y bibliotecas, ya que puede usar las bibliotecas de java debido a la 
-interoperabilidad de ambos lenguajes. Mencionar que \textit{Google} ha marcado a Kotlin como lenguaje 
-recomendado para aplicaciones Android.
-
-Algo muy importante es que Kotlin es un lenguaje de propósito general, lo cual nos permite crear 
-diversos proyectos, entre los que se encuentra el \begin{otherlanguage}
-{english}\textit{\textbf{Backend}}\end{otherlanguage} de una aplicación. Pudiendo crear una API 
- con Kotlin, gracias a diferentes \begin{otherlanguage}
-{english}\textit{\textbf{Frameworks}}\end{otherlanguage} \cite{FrameWrk}. Varios de estos módulos de 
-\begin{otherlanguage} {english}\textit{software}\end{otherlanguage} nos permiten crear una API 
-. Entre ellos, el más utilizado era \begin{otherlanguage}
-{english}\textbf{\textit{Spring Boot}}\end{otherlanguage}, que está siendo remplazado por otro módulo 
-llamado \textbf{\textit{Ktor}} \footnote{\url{https://medium.com/@chaewonkong/ktor-the-next-generation-framework-that-might-replace-spring-boot-868e8d21fc0f}}. Este será el \begin{otherlanguage}
-{english}\textit{Framework}\end{otherlanguage} más usado en Kotlin debido a su curva de aprendizaje, su 
-alto rendimiento, ser ligero y modular, permitiendo incluir solo los componentes que el desarrollador 
-necesita. Y algo relevante, es un \begin{otherlanguage}
-{english}\textit{framework}\end{otherlanguage} que se centra en Kotlin, ya que \begin{otherlanguage}
-{english}\textit{spring boot}\end{otherlanguage} lo hace en Java y esto lo hace menos idiomático que 
-Ktor.
-
-Por lo tanto, al ser un lenguaje de propósito general, que nos permite tanto crear nuestra aplicación 
-Android como un \begin{otherlanguage}{english}\textit{backend}\end{otherlanguage}, sea sé una API, y 
-debido a su popularidad, facilidad de uso y la gran cantidad de recursos que nos ofrece. Kotlin 
-es el lenguaje más indicado para el proyecto.
-
-Los objetos o entidades son una gran parte de la abstracción del proyecto, pero la arquitectura del 
-proyecto es otra gran parte. La forma en la que organizamos el código de nuestra aplicación es muy 
-importante \cite{ArqSoft} a la hora de crear software de manera profesional. En este caso usaremos el 
-patrón de arquitectura software oficial para aplicaciones Android, \textbf{\textit{MVVM}}  
-\footnote{\url{https://acortar.link/AuHvpO}} modelo-vista-modelo de vista, este patrón designado por 
-Google como el patrón oficial intenta separar lo máximo posible la interfaz de usuario de la lógica de 
-negocio. Y se añade una capa adicional para simplificar y volver a usar las interacciones entre la IU y 
-las capas de datos. Con el uso de este patrón de diseño aseguramos la calidad y organización de nuestro 
-proyecto.
-
-\subsection{Persistencia de datos}
-
-La persistencia de datos es primordial para realizar cualquier lógica de negocio. Necesitamos tanto 
-datos del usuario como las entidades que representan los objetos con los que interactúan estos 
-usuarios. Para ello necesitamos una base de datos, en Kotlin poseemos una gran variedad de opciones. 
-MySQL es ampliamente utilizado y conocido por su rendimiento y confiabilidad. PostgreSQL es otra base 
-de datos relacional de código abierto que es altamente capaz y compatible con estándares. SQLite, por 
-otro lado, es una base de datos relacional en memoria, ideal para aplicaciones móviles y proyectos más 
-pequeños. H2 es una base de datos en memoria que se integra perfectamente con aplicaciones Java y es 
-especialmente útil para pruebas y desarrollo local. Por otra parte, es indispensable el uso de una 
-herramienta ORM \begin{otherlanguage}
-{english}\textit{(Object-Relational Mapping)}\end{otherlanguage} para superar el desfase objeto-
-relacional \footnote{\url{https://acortar.link/iDW4Kj}}, ya que pretendemos usar una base de datos 
-relacional debido a las relaciones que existen entre las distintas entidades. Por lo que hay varias 
-opciones disponibles. Hibernate es un ORM muy popular en el mundo Java, pero su curva de aprendizaje 
-puede ser empinada. JPA (Java Persistence API) es una especificación de Java que ofrece múltiples 
-implementaciones, como Hibernate y EclipseLink. Ebean es otro ORM conocido por su rendimiento. Sin 
-embargo, si estás desarrollando tu aplicación en Kotlin, Exposed 
-\footnote{\url{https://github.com/JetBrains/Exposed}}es una excelente elección, ya que está diseñado 
-específicamente para Kotlin, aprovechando las características del lenguaje y ofreciendo una sintaxis 
-clara y legible. Por lo que sería una buena elección, y teniendo en cuenta que cuando se combina con  
-H2 es una excelente opción. Ya que la naturaleza en memoria de este lo hace ideal para pruebas 
-unitarias y desarrollo local. La facilidad de configuración y velocidad de ejecución son invaluables en 
-entornos de desarrollo ágil. Ya que en el enfoque ágil como sabemos, la adaptabilidad y la capacidad de 
-respuesta a los cambios son fundamentales. Por lo tanto, herramientas que se pueden configurar de 
-manera eficiente, es decir, ajustar y personalizar según las necesidades cambiantes del proyecto, son 
-de gran valor.
-
-\subsection{Inyección de dependencias}
-
-
-La inyección de dependencias es esencial en proyectos de software \cite{DIart}\cite{BenDI} para 
-promover la modularidad y la reutilización del código. Permite desacoplar componentes, lo que facilita 
-las pruebas unitarias y el mantenimiento. Al separar la creación de objetos de su uso, se logra una 
-mayor flexibilidad y extensibilidad del sistema, lo que facilita la incorporación de nuevas 
-funcionalidades sin afectar el código existente. En resumen, la inyección de dependencias promueve un 
-diseño limpio y eficiente en el desarrollo de software.
-
-En el mundo de Kotlin, existen varias opciones para facilitar la inyección de dependencias en tus 
-proyectos. Koin destaca por su simplicidad y se integra de manera natural con aplicaciones Android. 
-Dagger 2, una biblioteca de Google, se basa en anotaciones y brinda una inyección de dependencias 
-eficiente y segura, ideal para proyectos extensos. Hilt, una extensión de Dagger 2, simplifica la 
-inyección de dependencias en aplicaciones Android, lo que la hace atractiva para desarrolladores 
-móviles. Ya que no es un proyecto muy extenso, la opción estaría entre Koin y Hilt. Ambas son buenas 
-opciones, sin embargo, Koin es conocido por su enfoque sencillo y sintaxis intuitiva, lo que lo hace 
-ideal para proyectos pequeños o si buscas una curva de aprendizaje suave. Por estos dos motivos, Koin 
-será la opción seleccionada para llevar a cabo la inyección de dependencias.
-
-\subsection{Testing}
-
-Un proyecto con un enfoque ágil está sujeto a pruebas constantemente, algo que estamos apegando en este 
-proyecto a los PMVs resultantes de los milestones. Como ya sabemos de esta manera, aseguramos la 
-calidad del producto y nos cerciora de que todo funciona como debería. Consiguiendo así productos de 
-calidad más robustos minimizando errores.
-
-Como hemos mencionado, Kotlin goza de acceso a un extenso conjunto de librerías y \textit{frameworks}. 
-En este conjunto existen varios \textit{frameworks} que nos permiten testear nuestro código.
-
-Para test unitarios del código encontramos varios \textit{frameworks}, por un lado, tenemos 
-\textit{Spek}\footnote{\url{https://github.com/spekframework/spek}}. Una herramienta escrita para 
-Kotlin diseñado para facilitar la escritura y ejecución de pruebas en proyectos escritos en este 
-lenguaje. Permite definir pruebas en un estilo legible similar al lenguaje natural, lo que facilita 
-su comprensión tanto para desarrolladores como para no desarrolladores. Por ello, algunos 
-desarrolladores lo relacionan con \begin{otherlanguage}
-{english}\textit{Behavior-Driven Development}\end{otherlanguage} (BDD), desarrollo guiado por 
-comportamiento. Aunque sus creadores ya han mencionado 
-\footnote{\url{https://spekframework.github.io/spek/docs/latest/}} que creen que hay una falsa 
-distinción en torno al desarrollo guiado por comportamiento (BDD) y desarrollo guiado por pruebas 
-(TDD). Por lo que recomiendan que pensemos en Spek como un simple \textit{framework} de 
-especificación.
-
-También disponemos de la herramienta por defecto que incorpora cualquier tipo de proyecto Kotlin, 
-\textit{JUnit5}. Este es la última versión del \textit{framework} de pruebas unitarias para Java. Posee 
-una arquitectura modular que se compone de tres módulos principales: JUnit Platform, JUnit Jupiter y 
-JUnit Vintage, el primero es el núcleo de la herramienta, el segundo introduce las anotaciones y 
-permite configurar los test, y la última permite la compatibilidad con versiones anteriores de este 
-\textit{framework}. Este es el más usado actualmente por los desarrolladores Android 
-\footnote{\url{https://www.jetbrains.com/es-es/lp/devecosystem-2022/testing/}} como nos indica 
-\textbf{\textit{Jetbrains}}, compañía que ha diseñado Kotlin.
-
-Ambos son buenas herramientas de pruebas. Además, permiten la integración con otras bibliotecas o 
-\textit{framework} de pruebas. Pero ambas herramientas necesitan de otras bibliotecas imprescindibles 
-en las pruebas, estas permiten simular objetos de una clase para trucar el resultado de ciertas 
-funciones que queremos testear. Estos objetos se denominan \textbf{\textit{Mock}}, en Kotlin 
-encontramos la librería nativa \textit{mockk}. Con el par de uno de los \textit{frameworks} mencionados 
-y esta librería podríamos realizar los test unitarios que necesitemos. Pero principalmente si no en su 
-totalidad usaremos Junit5 debido a la cantidad de información y ejemplos de uso, además de ser la usada 
-por la mayoría de desarrolladores Android.
-
-Para la parte de testeo de UI tenemos acceso a varias herramientas, pero nos limitaremos a usar el 
-\textit{framework} 
-\textbf{\textit{Espresso}}\footnote{\url{https://developer.android.com/training/testing/espresso?hl=es-419}}, una herramienta creada por Google y la más recomendada \cite{UITest}.
-
-Por último, necesitamos una herramienta para testear las operaciones de una API, si es que decidimos 
-crearla, para  recuperar, insertar, modificar o eliminar información. Como hemos visto entre las 
-herramientas más usadas para las pruebas\footnote{\url{https://www.jetbrains.com/es-es/lp/devecosystem-2022/testing/}} se encuentra \textit{\textbf{Postman}} una página para ayudar a los desarrolladores de 
-API. Por ello es la herramienta que usaremos en tal caso para realizar dichas pruebas, además es 
-sencilla y cómoda de usar.
