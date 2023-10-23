@@ -8,5 +8,6 @@ data class Review(
     val contentDirection: String,
     val containSpoiler: Boolean,
     val userAuthor : String,
-    val creationDate : Date
+    val creationDate : Date,
+    val howUseful : Double
     ){}
