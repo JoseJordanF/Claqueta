@@ -2,9 +2,11 @@
 
 data class Film(
     val title : String,
-    val releaseDate: Date,
     val movieDirectors : List<String> = listOf(),
-    val duration : Int = 0,
+    val screenwriters : List<String> = listOf(),
+    val releaseDate: Date,
+    val producers: List<String> = listOf(),
+    val consPlataforms : List<String> = listOf()
 ){
 
 
