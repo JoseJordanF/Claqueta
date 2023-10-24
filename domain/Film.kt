@@ -1,6 +1,7 @@
 
 
 data class Film(
+    val id : Long,
     val title : String,
     val movieDirectors : List<String> = listOf(),
     val screenwriters : List<String> = listOf(),
