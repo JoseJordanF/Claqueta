@@ -17,6 +17,4 @@ data class Manager(
 
         return TODO("Provide the return value")
     }
-
-
 }

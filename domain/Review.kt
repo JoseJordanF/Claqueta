@@ -10,4 +10,4 @@ data class Review(
     val userAuthor: String,
     val filmId: Long,
     val creationDate: Date,
-) {}
+)
