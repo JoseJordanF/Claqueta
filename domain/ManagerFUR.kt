@@ -1,6 +1,6 @@
 package domain
 
-data class Manager(
+data class ManagerFUR(
     val users: List<String> = listOf(),
     val reviews: List<Review> = listOf(),
     val films: MutableMap<Long, Film> = mutableMapOf()
