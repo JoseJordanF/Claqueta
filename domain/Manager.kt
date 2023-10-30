@@ -1,8 +1,7 @@
 
-
 data class Manager(
-    val users: List<String> = listOf()
-    val reviews: List<Review> = listOf()
+    val users: List<String> = listOf(),
+    val reviews: List<Review> = listOf(),
     val films:  MutableMap<Long, Film> = mutableMapOf()
 ): UniqueIdGenerator {
 

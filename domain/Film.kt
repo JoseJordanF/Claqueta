@@ -9,7 +9,4 @@ data class Film(
     val releaseDate: Date,
     val producers: List<String> = listOf(),
     val consPlataforms : List<String> = listOf()
-){
-
-
-}
+){}
