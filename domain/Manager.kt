@@ -3,7 +3,7 @@ package domain
 data class Manager(
     val users: List<String> = listOf(),
     val reviews: List<Review> = listOf(),
-    val films: MutableMap<Long, Film> = mutableMapOf()
+    val films: MutableMap<Long, Film> = mutableMapOf(),
 ) : UniqueIdGenerator {
 
     override fun generateUniqueId(obj: Any): Long {
