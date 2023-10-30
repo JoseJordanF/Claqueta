@@ -9,5 +9,5 @@ data class Review(
     val contentDirection: String,
     val userAuthor: String,
     val filmId: Long,
-    val creationDate: Date,
+    val creationDate: Date
 )
