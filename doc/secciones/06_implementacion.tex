@@ -22,9 +22,110 @@ herramienta y porque se ha elegido.
 
 \section{M1: Definición de objetos - Abstracción del proyecto}
 
-En este hito \footnote{\url{https://github.com/JoseJordanF/Claqueta/milestone/8}} se conseguirá el modelado de los objetos presentes en el problema, para ello se abstraerán 
-los conceptos clave y se definirán los objetos de la aplicación. El objetivo es tener una estructura 
-clara de los datos a utilizar. La abstracción nos permite identificar las características esenciales, 
-eliminando detalles innecesarios. La definición de objetos nos ayudará a comprender sus relaciones, 
-atributos y operaciones. Esto establecerá una base sólida para el desarrollo coherente de la aplicación.
+En este hito \footnote{\url{https://github.com/JoseJordanF/Claqueta/milestone/8}} se conseguirá el modelado 
+de los objetos presentes en el problema, para ello se abstraerán los conceptos clave y se definirán los objetos 
+de la aplicación. El objetivo es tener una estructura clara de los datos a utilizar. La abstracción nos permite 
+identificar las características esenciales, eliminando detalles innecesarios. La definición de objetos nos 
+ayudará a comprender sus relaciones, atributos y operaciones. Esto establecerá una base sólida para el desarrollo
+coherente de la aplicación.
 
+De esta manera se busca priorizar el desarrollo real, la retroalimentación continua y prácticas como 
+el desarrollo impulsado por pruebas \begin{otherlanguage}{english}\textit{(Test Driven Development, TDD)}\end{otherlanguage}  
+,y la colaboración cercana. Esto permite una mayor agilidad y adaptabilidad en el proceso de desarrollo.
+
+Por ello, buscando un método para definir los objetos de la aplicación, se encuentra una técnica de 
+desarrollo de software llamada, \begin{otherlanguage}
+{english}``\textit{\textbf{Domain Driven Design}}''\end{otherlanguage}(DDD) es un enfoque de diseño de 
+software que se centra en comprender y modelar el dominio del problema de una aplicación. Busca 
+desarrollar un diseño que refleje con precisión las reglas y conceptos del dominio, lo que resulta en 
+un sistema más mantenible. Teniendo en cuenta que el DDD y el desarrollo ágil son compatibles, ya que 
+su aplicación permite construir aplicaciones que se ajusten mejor a las necesidades del cliente y 
+evolucionen de manera flexible a medida que se adquiere un mayor entendimiento del dominio. DDD 
+proporciona la base conceptual y un diseño sólido para desarrollar modelos de dominio claros y 
+significativos, mientras que el enfoque ágil permite una implementación iterativa, rápida y adaptativa.
+
+De esta manera se recurre al uso del \textit{\textbf{Modelo de Dominio}} representación conceptual de 
+las entidades, los conceptos, las reglas, objetos inmutables, como los objetos valor y las 
+interacciones dentro del dominio del problema. Es una abstracción del mundo real que captura las 
+principales entidades y sus relaciones. Esto ofrece una gran ventaja del DDD, ya que esto ayuda a 
+alinear el entendimiento y facilita la comunicación efectiva sobre el problema y su solución. Siendo 
+los modelos de dominio una parte central y fundamental del DDD, representando el conocimiento y la 
+comprensión profunda del problema que se está abordando. Teniendo esto en cuenta se crea un modelo de 
+dominio que se puede visualizar en este enlace \footnote{\url{https://acortar.link/iohTNI}}. Si este 
+modelo sufre cualquier cambio, siempre se reflejará, ya que se modifica y guarda en la nube. Asegurando 
+así la concordancia del modelo con el proyecto, aunque sufra cambios.
+
+Como base y resumen del primer modelo de dominio, tendríamos una entidad \begin{otherlanguage}
+{english}\textit{\textbf{review}}\end{otherlanguage} haciendo referencia a la reseña, la entidad 
+esencial, ya que perseguimos asegurar la calidad de esta. Una reseña de calidad va a ser definida 
+comúnmente como una reseña fiable que cumpla las reglas que vimos en el estado del arte. Por lo tanto, 
+tendremos atributos generales como el autor de la reseña, un identificador que la relacione con la 
+película a la cual está criticando, la fecha de realización de esta crítica y también el 
+contenido de la reseña se dividiría para que el usuario hable tanto de la trama general, la 
+interpretación y la dirección. Asegurando las reglas vistas en el estado del arte.
+
+Otra entidad importante es la \begin{otherlanguage}{english}\textit{\textbf{film}}\end{otherlanguage}
+siendo su propuesta mínima un conjunto de atributos que definen el contenido de dicha película como los directores, 
+los guionistas, la fecha de estreno, las productoras y las plataformas en las que se puede consumir dicha película.
+Este conjunto de atributos es indispensable para la recomendación de dicho contenido, siendo cada uno puntos en común 
+que buscar en otras películas para sus recomendaciones personalizadas según su contenido. Evidentemente, también necesitamos 
+el título de la película y un identificador, ya que el resto de atributos puede coincidir y no identificar de manera única a la película.
+
+Por último, tenemos una entidad que se encarga de gestionar tanto películas, como reseñas, como usuarios.
+Además, implementa la interfaz que nos permitirá generar el identificador único para cada película.
+
+\subsection{Lenguaje de programación}
+
+Una de las principales herramientas para el desarrollo de software es el lenguaje de programación, un 
+lenguaje que sea afín a las necesidades del proyecto. Siendo así un necesario un lenguaje para modelar 
+los objetos descritos en este capítulo, en el primer hito. Pero debemos tener en cuenta que se pretende 
+que el desarrollo del modelado de los objetos pueda ser reutilizable, de fácil acceso e intentando 
+ahorrar recursos. Por ello, para la aplicación es posible crear una API propia, como las que se 
+mencionaron en el capítulo del estado del arte. Ya que es muy atractivo que los algoritmos y el modelo 
+de datos pueda ser consumido por otros a través de una API
+
+Por otra parte, también se pretende crear una aplicación. Con lo mencionado en el capítulo dos 
+podríamos crear una aplicación Android o una aplicación web, destinada a los 
+dispositivos móviles. Según nos menciona \textbf{\textit{Cloud Levante}} en este artículo 
+\cite{WebVSApp} lo más usado en móvil son las aplicaciones móviles. Por 
+tanto, necesitamos un lenguaje de programación para aplicaciones móviles, más concretamente para 
+Android, como mencionamos en el segundo capítulo. Tenemos varias opciones, consultando varios 
+blogs\footnote{\url{https://blog.mgpanel.org/post/lenguajes-de-programacion-mas-usados-para-app-moviles}}
+todos ellos coinciden con qué Java es el primer lenguaje en el que piensas a la hora de crear 
+una aplicación para Android. Sin embargo, no es Java el más utilizado, sino una variante de este, 
+Kotlin. Debido a su sencillez y facilidad de uso, gracias a la simplicidad de su código será más simple 
+crear tus funciones, incluyendo las corrutinas que facilitan la ejecución de tareas asíncronas. Destaca 
+su extenso conjunto de librerías y bibliotecas, ya que puede usar las bibliotecas de java debido a la 
+interoperabilidad de ambos lenguajes. Mencionar que \textit{Google} ha marcado a Kotlin como lenguaje 
+recomendado para aplicaciones Android.
+
+Algo muy importante es que Kotlin es un lenguaje de propósito general, lo cual nos permite crear 
+diversos proyectos, entre los que se encuentra el \begin{otherlanguage}
+{english}\textit{\textbf{Backend}}\end{otherlanguage} de una aplicación. Pudiendo crear una API 
+ con Kotlin si fuera necesario, gracias a diferentes \begin{otherlanguage}
+{english}\textit{\textbf{Frameworks}}\end{otherlanguage} \cite{FrameWrk}. Varios de estos módulos de 
+\begin{otherlanguage} {english}\textit{software}\end{otherlanguage} nos permiten crear una API 
+. Entre ellos, el más utilizado era \begin{otherlanguage}
+{english}\textbf{\textit{Spring Boot}}\end{otherlanguage}, que está siendo remplazado por otro módulo 
+llamado \textbf{\textit{Ktor}} \footnote{\url{https://medium.com/@chaewonkong/ktor-the-next-generation-framework-that-might-replace-spring-boot-868e8d21fc0f}}. 
+Este será el \begin{otherlanguage}{english}\textit{Framework}\end{otherlanguage} más usado en Kotlin 
+debido a su curva de aprendizaje, su alto rendimiento, ser ligero y modular, permitiendo incluir solo 
+los componentes que el desarrollador necesita. Y algo relevante, es un \begin{otherlanguage}
+{english}\textit{framework}\end{otherlanguage} que se centra en Kotlin, ya que \begin{otherlanguage}
+{english}\textit{spring boot}\end{otherlanguage} lo hace en Java y esto lo hace menos idiomático que 
+Ktor.
+
+Por lo tanto, al ser un lenguaje de propósito general, que nos permite tanto crear nuestra aplicación 
+Android como otros proyectos si fuera necesario como un \begin{otherlanguage}{english}\textit{backend}\end{otherlanguage}, 
+sea sé una API, y debido a su popularidad, facilidad de uso y la gran cantidad de recursos que nos ofrece. 
+Kotlin es el lenguaje más indicado para el proyecto.
+
+Los objetos o entidades son una gran parte de la abstracción del proyecto, pero la arquitectura del 
+proyecto es otra gran parte. La forma en la que organizamos el código de nuestra aplicación es muy 
+importante \cite{ArqSoft} a la hora de crear software de manera profesional. En este caso usaremos el 
+patrón de arquitectura software oficial para aplicaciones Android, \textbf{\textit{MVVM}}  
+\footnote{\url{https://acortar.link/AuHvpO}} modelo-vista-modelo de vista, este patrón designado por 
+Google como el patrón oficial intenta separar lo máximo posible la interfaz de usuario de la lógica de 
+negocio. Y se añade una capa adicional para simplificar y volver a usar las interacciones entre la IU y 
+las capas de datos. Con el uso de este patrón de diseño aseguramos la calidad y organización de nuestro 
+proyecto.
