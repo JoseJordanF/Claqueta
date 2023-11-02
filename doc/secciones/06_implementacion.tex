@@ -111,3 +111,96 @@ interoperabilidad con Java, presentando una combinación equilibrada de simplici
 avanzadas. Siendo bastante atractivo la posibilidad de hacer aplicaciones móviles nativas, punto a 
 tratar cuando concluyamos que tipo de aplicación vamos a desarrollar.
 
+\subsection{Persistencia de datos}
+
+La persistencia de datos es primordial para realizar cualquier lógica de negocio. Necesitamos tanto 
+datos del usuario como las entidades que representan los objetos con los que interactúan estos 
+usuarios. Para ello necesitamos una base de datos, en Kotlin poseemos una gran variedad de opciones. Por 
+ejemplo, opciones sencillas de usar y generalmente rápidas como las bases de datos clave-valor, como Firebase 
+Database, Redis, Cassandra y LevelDB, ofrecen soluciones para una amplia gama de aplicaciones. Firebase 
+Database es ideal para aplicaciones web y móviles que necesitan sincronización en tiempo real. Redis 
+sobresale en almacenamiento en memoria y caché, permitiendo la manipulación de varios tipos de datos y 
+brindando una rápida recuperación. Cassandra se destaca en la escalabilidad horizontal y la alta 
+disponibilidad, adecuada para grandes volúmenes de datos. LevelDB ofrece un almacenamiento eficiente en 
+disco. Sin embargo, la elección se inclina hacia Redis, gracias a su capacidad para almacenar datos flexibles 
+y variables, y a su facilidad para manejar diversos tipos de estructuras de datos como las vistas en modelo 
+de dominó. La curva de aprendizaje es baja para Firebase Database, Redis y LevelDB, mientras que Cassandra 
+puede requerir una mayor comprensión de conceptos distribuidos y esquemas de datos más complejos.
+
+También nos podemos apoyar en como se nos indica \cite{NosqlDist}, como podríamos elegir una base de datos 
+NoSQL, mencionando como las bases de datos clave-valor son excelentes para datos simples y estructuras 
+básicas, adaptándose bastante bien estos modelos de datos. Siendo idóneas para almacenar información de 
+sesión o datos en caché, convirtiéndose en una opción sólida si buscamos alta disponibilidad, dado su rápido 
+acceso a través de claves, y una escalabilidad horizontal.
+
+
+\subsection{Inyección de dependencias}
+
+
+La inyección de dependencias es esencial en proyectos de software \cite{DIart}\cite{BenDI} para 
+promover la modularidad y la reutilización del código. Permite desacoplar componentes, lo que facilita 
+las pruebas unitarias y el mantenimiento. Al separar la creación de objetos de su uso, se logra una 
+mayor flexibilidad y extensibilidad del sistema, lo que facilita la incorporación de nuevas 
+funcionalidades sin afectar el código existente. En resumen, la inyección de dependencias promueve un 
+diseño limpio y eficiente en el desarrollo de software.
+
+En el mundo de Kotlin, existen varias opciones para facilitar la inyección de dependencias en tus 
+proyectos. Koin destaca por su simplicidad y se integra de manera natural con aplicaciones Android. 
+Dagger 2, una biblioteca de Google, se basa en anotaciones y brinda una inyección de dependencias 
+eficiente y segura, ideal para proyectos extensos. Hilt, una extensión de Dagger 2, simplifica la 
+inyección de dependencias en aplicaciones Android, lo que la hace atractiva para desarrolladores 
+móviles. Ya que no es un proyecto muy extenso, la opción estaría entre Koin y Hilt. Ambas son buenas 
+opciones, sin embargo, Koin es conocido por su enfoque sencillo y sintaxis intuitiva, lo que lo hace 
+ideal para proyectos pequeños o si buscas una curva de aprendizaje suave. Por estos dos motivos, Koin 
+será la opción seleccionada para llevar a cabo la inyección de dependencias.
+
+\subsection{Testing}
+
+Un proyecto con un enfoque ágil está sujeto a pruebas constantemente, algo que estamos apegando en este 
+proyecto a los PMVs resultantes de los milestones. Como ya sabemos de esta manera, aseguramos la 
+calidad del producto y nos cerciora de que todo funciona como debería. Consiguiendo así productos de 
+calidad más robustos minimizando errores.
+
+Como hemos mencionado, Kotlin goza de acceso a un extenso conjunto de librerías y \textit{frameworks}. 
+En este conjunto existen varios \textit{frameworks} que nos permiten testear nuestro código.
+
+Para test unitarios del código encontramos varios \textit{frameworks}, por un lado, tenemos 
+\textit{Spek}\footnote{\url{https://github.com/spekframework/spek}}. Una herramienta escrita para 
+Kotlin diseñado para facilitar la escritura y ejecución de pruebas en proyectos escritos en este 
+lenguaje. Permite definir pruebas en un estilo legible similar al lenguaje natural, lo que facilita 
+su comprensión tanto para desarrolladores como para no desarrolladores. Por ello, algunos 
+desarrolladores lo relacionan con \begin{otherlanguage}
+{english}\textit{Behavior-Driven Development}\end{otherlanguage} (BDD), desarrollo guiado por 
+comportamiento. Aunque sus creadores ya han mencionado 
+\footnote{\url{https://spekframework.github.io/spek/docs/latest/}} que creen que hay una falsa 
+distinción en torno al desarrollo guiado por comportamiento (BDD) y desarrollo guiado por pruebas 
+(TDD). Por lo que recomiendan que pensemos en Spek como un simple \textit{framework} de 
+especificación.
+
+También disponemos de la herramienta por defecto que incorpora cualquier tipo de proyecto Kotlin, 
+\textit{JUnit5}. Este es la última versión del \textit{framework} de pruebas unitarias para Java. Posee 
+una arquitectura modular que se compone de tres módulos principales: JUnit Platform, JUnit Jupiter y 
+JUnit Vintage, el primero es el núcleo de la herramienta, el segundo introduce las anotaciones y 
+permite configurar los test, y la última permite la compatibilidad con versiones anteriores de este 
+\textit{framework}. Este es el más usado actualmente por los desarrolladores Android 
+\footnote{\url{https://www.jetbrains.com/es-es/lp/devecosystem-2022/testing/}} como nos indica 
+\textbf{\textit{Jetbrains}}, compañía que ha diseñado Kotlin.
+
+Ambos son buenas herramientas de pruebas. Además, permiten la integración con otras bibliotecas o 
+\textit{framework} de pruebas. Pero ambas herramientas necesitan de otras bibliotecas imprescindibles 
+en las pruebas, estas permiten simular objetos de una clase para trucar el resultado de ciertas 
+funciones que queremos testear. Estos objetos se denominan \textbf{\textit{Mock}}, en Kotlin 
+encontramos la librería nativa \textit{mockk}. Con el par de uno de los \textit{frameworks} mencionados 
+y esta librería podríamos realizar los test unitarios que necesitemos. Pero principalmente si no en su 
+totalidad usaremos Junit5 debido a la cantidad de información y ejemplos de uso, además de ser la usada 
+por la mayoría de desarrolladores Android.
+
+Para la parte de testeo de UI tenemos acceso a varias herramientas, pero nos limitaremos a usar el 
+\textit{framework} 
+\textbf{\textit{Espresso}}\footnote{\url{https://developer.android.com/training/testing/espresso?hl=es-419}}, una herramienta creada por Google y la más recomendada \cite{UITest}.
+
+Por último, si fuera necesaria una herramienta para testear las operaciones de una API, si es que decidimos 
+crearla, para  recuperar, insertar, modificar o eliminar información. Como hemos visto entre las 
+herramientas más usadas para las pruebas\footnote{\url{https://www.jetbrains.com/es-es/lp/devecosystem-2022/testing/}} se encuentra \textit{\textbf{Postman}} una página para ayudar a los desarrolladores de 
+API. Por ello es la herramienta que usaremos en tal caso para realizar dichas pruebas, además es 
+sencilla y cómoda de usar.
