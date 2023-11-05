@@ -1,5 +1,7 @@
 package domain
 
+import com.app.claquetatfg_2.domain.SnowFlakeForFilm
+
 data class UserFilmReviewManager(
     val users: List<String> = listOf(),
     val reviews: List<Review> = listOf(),
@@ -14,8 +16,8 @@ data class UserFilmReviewManager(
     }
 
     private fun generateFilmUniqueId(film: Film): Long {
-
-        return TODO("Provide the return value")
+        val snowFlake = SnowFlakeForFilm()
+        return snowFlake.generateUniqueId(film.title, film.movieDirectors[0])
     }
 
 }
