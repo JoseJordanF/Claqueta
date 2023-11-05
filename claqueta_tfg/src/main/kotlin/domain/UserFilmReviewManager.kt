@@ -6,7 +6,7 @@ import java.util.*
 
 data class UserFilmReviewManager(
     var users: List<String> = listOf(),
-    val reviews: List<Review> = listOf(),
+    var reviews: List<Review> = listOf(),
     val films: MutableMap<Long, Film> = mutableMapOf()
 ) : UniqueIdGenerator {
 
@@ -43,6 +43,33 @@ data class UserFilmReviewManager(
             users += username.lowercase(Locale.getDefault())
         } else {
             throw RuntimeException("Ese usuario ya existe")
+        }
+    }
+
+    fun newReview(
+        contentPlot: String,
+        contentPerformance: String,
+        contentDirection: String,
+        userAuthor: String,
+        filmId: Long,
+        creationDate: Date
+    ) {
+        if (users.contains(userAuthor)) {
+            if (films.containsKey(filmId)) {
+                val newR = Review(
+                    contentPlot,
+                    contentPerformance,
+                    contentDirection,
+                    userAuthor,
+                    filmId,
+                    creationDate
+                )
+                reviews += newR
+            } else {
+                throw RuntimeException("Esa pelicula no existe")
+            }
+        } else {
+            throw RuntimeException("Ese usuario no existe")
         }
     }
 }

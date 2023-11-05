@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import java.lang.RuntimeException
 import java.util.Date
+import java.util.Calendar
+import java.util.Locale
 
 class UserFilmReviewManagerTest {
 
@@ -115,5 +117,72 @@ class UserFilmReviewManagerTest {
         assertThrows<RuntimeException> {
             getManager.newUser("JoseJordan")
         }
+    }
+
+    @Test
+    fun `When a review is created and the film does not exist`() {
+        //When
+        getManager.newUser("JoseJordan")
+        var fech = Calendar.getInstance()
+
+        //Then
+        assertThrows<RuntimeException> {
+            getManager.newReview(
+                "En general una pelicula muy entretenida y con una buena trama",
+                "Las actuaciones han sido buenas pero sobre todo el prota ha sobresalido",
+                "La direccion podria ser mejor pero no esta mal",
+                "JoseJordan",
+                0,
+                fech.time
+            )
+        }
+    }
+
+    @Test
+    fun `When a review is created and the user does not exist`() {
+        //When
+        getManager.newUser("JoseJordan")
+        var fech = Calendar.getInstance()
+
+        //Then
+        assertThrows<RuntimeException> {
+            getManager.newReview(
+                "En general una pelicula muy entretenida y con una buena trama",
+                "Las actuaciones han sido buenas pero sobre todo el prota ha sobresalido",
+                "La direccion podria ser mejor pero no esta mal",
+                "JoseJ".lowercase(Locale.getDefault()),
+                0,
+                fech.time
+            )
+        }
+    }
+
+    @Test
+    fun `When a review is created`() {
+
+        var idFilm = getManager.newFilm(
+            "Toy Story", listOf("John Lasseter"), listOf(
+                "Andrew Stanton", "Joss Whedon", "Joel Cohen",
+                "Alec Sokolow"
+            ), Date(96, 3, 14), listOf(
+                "Pixar Animation Studios",
+                "Walt Disney Pictures"
+            ), listOf("Diney+", "YouTube", "Apple TV", "Google Play Peliculas", "Amazon Prime Video", "Moviestar Plus+")
+        )
+        var fech = Calendar.getInstance()
+        getManager.newUser("JoseJordan")
+        //When
+        getManager.newReview(
+            "En general una pelicula muy entretenida y con una buena trama",
+            "Las actuaciones han sido buenas pero sobre todo el prota ha sobresalido",
+            "La direccion podria ser mejor pero no esta mal",
+            "JoseJordan".lowercase(Locale.getDefault()),
+            getManager.films[idFilm]!!.id,
+            fech.time
+        )
+        var sizeReviews = getManager.reviews.size
+        println("sizeReviews: $sizeReviews")
+        //Then
+        assert(getManager.reviews.isNotEmpty())
     }
 }
