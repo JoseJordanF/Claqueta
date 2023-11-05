@@ -2,6 +2,8 @@ package domain
 
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
+import java.lang.RuntimeException
 import java.util.Date
 
 class UserFilmReviewManagerTest {
@@ -85,6 +87,33 @@ class UserFilmReviewManagerTest {
         println("id_1: $id_1")
         println("id_2: $id_2")
         //Then
-        assert(id_1!=id_2)
+        assert(id_1 != id_2)
+    }
+
+    @Test
+    fun `When we create a new user`() {
+
+        //When
+        getManager.newUser("JoseJordan")
+        var sizeUser = getManager.users.size
+        println("sizeUser: $sizeUser")
+        //logger.debug { "id: $res" }
+        //Then
+        assert(getManager.users.isNotEmpty())
+
+    }
+
+    @Test
+    fun `When we create a new user but one already exists with that name`() {
+
+        //When
+        getManager.newUser("josejordan")
+        var sizeUser = getManager.users.size
+        println("sizeUser: $sizeUser")
+
+        //Then
+        assertThrows<RuntimeException> {
+            getManager.newUser("JoseJordan")
+        }
     }
 }

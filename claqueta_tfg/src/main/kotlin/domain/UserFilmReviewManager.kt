@@ -1,10 +1,11 @@
 package domain
 
 import com.app.claquetatfg_2.domain.SnowFlakeForFilm
-import java.util.Date
+import java.lang.RuntimeException
+import java.util.*
 
 data class UserFilmReviewManager(
-    val users: List<String> = listOf(),
+    var users: List<String> = listOf(),
     val reviews: List<Review> = listOf(),
     val films: MutableMap<Long, Film> = mutableMapOf()
 ) : UniqueIdGenerator {
@@ -35,5 +36,13 @@ data class UserFilmReviewManager(
         val trueFilm = Film(newID, title, movieDirectors, screenwriters, releaseDate, producers, consPlataforms)
         films[newID] = trueFilm
         return newID
+    }
+
+    fun newUser(username: String) {
+        if (!users.contains(username.lowercase(Locale.getDefault()))) {
+            users += username.lowercase(Locale.getDefault())
+        } else {
+            throw RuntimeException("Ese usuario ya existe")
+        }
     }
 }
