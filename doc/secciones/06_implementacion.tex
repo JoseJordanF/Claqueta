@@ -217,3 +217,43 @@ implementación de la lógica de negocio, asegurando la coherencia y validez en 
 de los test unitarios. Dada la importancia de las buenas prácticas y garantía de la calidad del 
 proyecto, teniendo en cuenta que la lógica de negocio es el núcleo esencial que da vida a una 
 aplicación y hace posible su funcionalidad y utilidad.
+
+Cabe destacar que lo primero que se hará es crear un proyecto Kotlin creado por gradle, un sistema de 
+automatización de construcción de código de software por defecto, en este caso en IntelliJ IDEA. Esto 
+es imprescindible, ya que para una mayor comodidad en la configuración y el uso de las distintas 
+herramientas que nos ofrece Kotlin es necesario la creación de un proyecto. 
+
+Una vez creado el proyecto con nuestros modelos de dominio, estamos listos para comenzar con las 
+distintas operaciones sobre los datos. Para empezar nos deberíamos preguntar qué contenido van a 
+consumir los usuarios, claramente películas y en sí las reseñas de estas. Por lo tanto, primeramente 
+deberíamos diferenciar de manera única cada película. Para ello tenemos el identificador de cada 
+película, pero aún no hemos definido como se creara dicho identificador. Es algo complicado, ya que no 
+puedes identificar una película de forma única solo por su título, ya que se pueden repetir dichos 
+nombres en varias películas que no sean la misma. Por lo tanto, se ha decidido usar snowflake 
+\cite{snowF} un método creado por Twitter. Básicamente, se basa en crear un identificador único 
+representando en decimal un número binario creado por bloques, el primero de 41 bits que define los 
+milisegundos pasados desde una marca de tiempo determinada, el segundo bloque de 10 bits representa un 
+identificador propio del objeto, en este caso se ha decidido fusionar el título de la película y el 
+nombre del primer director para crear un número de 10 bits para este bloque. Por último, el bloque 
+final de 12 bits que simplemente represente un número de secuencia por si se da la casualidad que se 
+crean varios objetos en el mismo milisegundo y con el mismo título y primer director. Dándonos un 
+identificador que cumple con nuestras necesidades de sobra.
+
+Tras resolver este problema para identificar el contenido, podemos pasar a definir como crear ese 
+definido por parte de la entidad que administra todo. Para ello, cada vez que se crea una película, 
+además de introducir todos los datos requeridos, se crea su identificador y se añade a la lista de 
+películas del proyecto. Ahora bien, para que este contenido pueda ser consumido por los usuarios dichos 
+usuarios deben estar creados en el sistema, por tanto, definimos como se crea un usuario y se introduce 
+en la lista de usuarios. Esto nos lleva a responder como definimos el consumo y como designamos que un 
+usuario ha consumido, en este caso una película. Lo que nos lleva a una interacción por parte del 
+usuario para responder a esas preguntas, a primera vista definimos el consumo, la interacción del 
+usuario como la creación de reseñas por parte de este. Siendo las películas en las que reseña o en las 
+que interactúa con las reseñas de alguna manera, las películas que consume el usuario. Esto es algo que 
+se definirá más adelante en la lógica de negocio. 
+
+Una vez creadas las películas y los usuarios, necesitamos definir como se crean las reseñas a través de 
+los datos necesarios, la relación con la película y el usuario que la ha escrito.
+Por cada una de estas operaciones se pueden dar varios casos de uso que se han estudiado a través de 
+los test unitarios. Comprobando que cada caso de uso se lleva a cabo como se espera y el conjunto de 
+ellos también. 
+
