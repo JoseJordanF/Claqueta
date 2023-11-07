@@ -190,30 +190,96 @@ Ambos son buenas herramientas de pruebas. Además, permiten la integración con 
 \textit{framework} de pruebas. Pero ambas herramientas necesitan de otras bibliotecas imprescindibles 
 en las pruebas, estas permiten simular objetos de una clase para trucar el resultado de ciertas 
 funciones que queremos testear. Estos objetos se denominan \textbf{\textit{Mock}}, en Kotlin 
-encontramos la librería nativa \textit{mockk}. Con el par de uno de los \textit{frameworks} mencionados 
-y esta librería podríamos realizar los test unitarios que necesitemos. Pero principalmente si no en su 
-totalidad usaremos Junit5 debido a la cantidad de información y ejemplos de uso, además de ser la usada 
-por la mayoría de desarrolladores Android.
+encontramos la librería nativa \textit{mockk}. Con el par de uno de los \textit{frameworks} 
+mencionados y esta librería podríamos realizar los test unitarios que necesitemos. Pero principalmente 
+si no en su totalidad usaremos Junit5 debido a la cantidad de información y ejemplos de uso, además de 
+ser la usada por la mayoría de desarrolladores Android.
 
 Para la parte de testeo de UI tenemos acceso a varias herramientas, pero nos limitaremos a usar el 
-\textit{framework} 
-\textbf{\textit{Espresso}}\footnote{\url{https://developer.android.com/training/testing/espresso?hl=es-419}}, una herramienta creada por Google y la más recomendada \cite{UITest}.
+\textit{framework} \textbf{\textit{Espresso}}\footnote{\url{https://developer.android.com/training/testing/espresso?hl=es-419}}, una herramienta creada por Google y la más recomendada \cite{UITest}.
 
-Por último, si fuera necesaria una herramienta para testear las operaciones de una API, si es que decidimos 
-crearla, para  recuperar, insertar, modificar o eliminar información. Como hemos visto entre las 
-herramientas más usadas para las pruebas\footnote{\url{https://www.jetbrains.com/es-es/lp/devecosystem-2022/testing/}} se encuentra \textit{\textbf{Postman}} una página para ayudar a los desarrolladores de 
-API. Por ello es la herramienta que usaremos en tal caso para realizar dichas pruebas, además es 
-sencilla y cómoda de usar.
+Por último, si fuera necesaria una herramienta para testear las operaciones de una API, si es que 
+decidimos crearla, para  recuperar, insertar, modificar o eliminar información. Como hemos visto entre 
+las herramientas más usadas para las pruebas\footnote{\url{https://www.jetbrains.com/es-es/lp/devecosystem-2022/testing/}} se encuentra \textit{\textbf{Postman}} una página para ayudar a los 
+desarrolladores de API. Por ello es la herramienta que usaremos en tal caso para realizar dichas 
+pruebas, además es sencilla y cómoda de usar.
 
 \subsection{M2: Lógica de negocio - Operaciones sobre los datos}
 
-La lógica de negocio, también conocida como reglas de negocio, se refiere a las operaciones y procesos 
+En este hito \footnote{\url{https://github.com/JoseJordanF/Claqueta/milestone/3}} se hablará de la 
+lógica de negocio, también conocida como reglas de negocio, se refiere a las operaciones y procesos 
 fundamentales que definen cómo funciona la aplicación. Determinando como se procesan los datos, se 
 realizan cálculos, se toman decisiones y se llevan a cabo las operaciones clave para lograr los 
 objetivos de la aplicación. Siempre dependientes de las necesidades y los propósitos de la aplicación. 
 Como estas vienen definidos por las \textbf{Historias de Usuario}, vamos a recurrir a ellas para 
 determinar las operaciones que se llevaran a cabo con los datos. Aseguraremos la correcta 
 implementación de la lógica de negocio, asegurando la coherencia y validez en las operaciones a través 
-de los test unitarios. Dada la importancia de las buenas prácticas y garantía de la calidad del 
-proyecto, teniendo en cuenta que la lógica de negocio es el núcleo esencial que da vida a una 
-aplicación y hace posible su funcionalidad y utilidad.
+de los test unitarios. siguiendo como siempre la esencia del desarrollo ágil, debemos asegurar las
+buenas prácticas y garantizar la calidad del proyecto, teniendo en cuenta que la lógica de negocio es 
+el núcleo esencial que da vida a una aplicación y hace posible su funcionalidad y utilidad. 
+
+Cabe destacar que lo primero que se hará es crear un proyecto Kotlin creado por gradle, un sistema de 
+automatización de construcción de código de software por defecto, en este caso en IntelliJ IDEA. Esto 
+es imprescindible, ya que para una mayor comodidad en la configuración y el uso de las distintas 
+herramientas que nos ofrece Kotlin es necesario la creación de un proyecto.
+Cada una de las siguientes secciones representa un conjunto de issues que se han resuelto para obtener 
+un pmv.
+
+\subsubsection{Identificación y creación de las películas}
+
+Una vez creado el proyecto con nuestros modelos de dominio, estamos listos para comenzar con las 
+distintas operaciones sobre los datos. Para empezar nos deberíamos preguntar qué contenido van a 
+consumir los usuarios, claramente películas y en sí las reseñas de estas. Por lo tanto, primeramente 
+deberíamos diferenciar de manera única cada película. Para ello tenemos el identificador de cada 
+película, pero aún no hemos definido como se creara dicho identificador. Para generar este 
+identificador podemos optar por múltiples opciones, se podría pensar que usar el título de la película 
+o el nombre de alguno de los directores sería buena idea. Pero esto nos lleva a un problema debido a 
+que nos encontramos películas que poseen el mismo título y son diferentes, al igual que los directores. 
+Incluso por eso se puede llegar a dar la casualidad de que existan dos películas con el mismo título y 
+un director en común, siendo estas diferentes. Por lo tanto, no podríamos usar el título y algún 
+director, o al menos si solo usamos estos datos. Por lo tanto, esta deja de ser una posibilidad, aun 
+así tenemos muchas más opciones, podríamos recurrir a la base de datos para generar un identificador 
+único, ya que muchas bases de datos modernas poseen esta función incorporada. Pero no se quiere 
+depender de la base de datos para generar estos identificadores, ya que en este punto del proyecto no 
+es necesaria la base de datos. De manera que existen otras opciones como GUID una implementación de 
+Windows para generar identificadores siguiendo un algoritmo específico, o alguna otra opción como los 
+métodos que usan una marca en el tiempo y un identificador para cada nodo en el sistema. La comparación 
+entre ambas opciones \cite{compSnowUUID} nos deja que las opciones estilo UUID son valores de 128 bits 
+y no tienen un criterio determinado para generar dicho identificador, mientras que los métodos estilo 
+snowflake son valores enteros de 64 bits y tienen una forma determinada de generar dicho identificador. 
+debido a la facilidad de seguir un algoritmo determinado y que no necesitamos representar demasiados 
+datos como para usar 128 bits, se ha decidido usar snowflake \cite{snowF} método creado por Twitter. 
+Básicamente, se basa en crear un identificador único representando en decimal un número binario creado 
+por bloques, el primero de 41 bits que define los milisegundos pasados desde una marca de tiempo 
+determinada, el segundo bloque de 10 bits representa un identificador propio del objeto, en este caso 
+se ha decidido fusionar el título de la película y el nombre del primer director para crear un número 
+de 10 bits para este bloque. Por último, el bloque final de 12 bits que simplemente represente un 
+número de secuencia por si se da la casualidad que se crean varios objetos en el mismo milisegundo y 
+con el mismo título y primer director. Dándonos un identificador que cumple con nuestras necesidades de 
+sobra.
+
+\subsubsection{Que es el consumo, quién lo consume y como lo lleva a cabo}
+
+Tras resolver este problema para identificar el contenido, podemos pasar a definir como crear ese 
+contenido por parte de la entidad que administra todo. Para ello, cada vez que se crea una película, 
+además de introducir todos los datos requeridos, se crea su identificador y se añade a la lista de 
+películas del proyecto. Ahora bien, para que este contenido pueda ser consumido por los usuarios dichos 
+usuarios deben estar creados en el sistema, por tanto, definimos como se crea un usuario y se introduce 
+en la lista de usuarios. Esto nos lleva a responder como definimos el consumo y como designamos que un 
+usuario ha consumido, en este caso una película. Lo que nos lleva a una interacción por parte del 
+usuario para responder a esas preguntas, a primera vista definimos el consumo, la interacción del 
+usuario como la creación de reseñas por parte de este. Siendo las películas en las que reseña o en las 
+que interactúa con las reseñas de alguna manera, las películas que consume el usuario. Esto es algo que 
+se definirá más adelante en la lógica de negocio. 
+
+\subsubsection{Creación de reseñas}
+
+Una vez creadas las películas y los usuarios, necesitamos definir como se crean las reseñas a través de 
+los datos necesarios, la relación con la película y el usuario que la ha escrito. Ya que tenemos todo lo necesario 
+para la creación de esta reseña. Dando lugar a la reseña en sí misma y a la marca del consumo por parte del 
+usuario, tema mencionado justo en la sección anterior.
+
+
+Por cada una de estas operaciones se pueden dar varios casos de uso que se han estudiado a través de 
+los test unitarios. Comprobando que cada caso de uso se lleva a cabo como se espera y el conjunto de 
+ellos también. 
