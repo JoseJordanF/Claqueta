@@ -68,7 +68,7 @@ class UserFilmReviewManagerTest {
     fun `When we create two movies with the same data`() {
 
         //When
-        var id_1 = getManager.newFilm(
+        var id1 = getManager.newFilm(
             "Toy Story", listOf("John Lasseter"), listOf(
                 "Andrew Stanton", "Joss Whedon", "Joel Cohen",
                 "Alec Sokolow"
@@ -77,7 +77,7 @@ class UserFilmReviewManagerTest {
                 "Walt Disney Pictures"
             ), listOf("Diney+", "YouTube", "Apple TV", "Google Play Peliculas", "Amazon Prime Video", "Moviestar Plus+")
         )
-        var id_2 = getManager.newFilm(
+        var id2 = getManager.newFilm(
             "Toy Story", listOf("John Lasseter"), listOf(
                 "Andrew Stanton", "Joss Whedon", "Joel Cohen",
                 "Alec Sokolow"
@@ -86,12 +86,12 @@ class UserFilmReviewManagerTest {
                 "Walt Disney Pictures"
             ), listOf("Diney+", "YouTube", "Apple TV", "Google Play Peliculas", "Amazon Prime Video", "Moviestar Plus+")
         )
-        println("id_1: $id_1")
-        println("id_2: $id_2")
+        println("id1: $id1")
+        println("id2: $id2")
         var sizeFilms = getManager.films.size
         println("sizeFilms: $sizeFilms")
         //Then
-        assert(id_1 != id_2)
+        assert(id1 != id2)
     }
 
     @Test
@@ -272,7 +272,7 @@ class UserFilmReviewManagerTest {
     @Test
     fun `When we create a review and there are movies with related data, for the recommendations`() {
 
-        var idFilm_1 = getManager.newFilm(
+        var idFilm1 = getManager.newFilm(
             "Toy Story",
             listOf("John Lasseter"),
             listOf(
@@ -294,7 +294,7 @@ class UserFilmReviewManagerTest {
             )
         )
 
-        var idFilm_2 = getManager.newFilm(
+        var idFilm2 = getManager.newFilm(
             "Toy Story 2",
             listOf("John Lasseter"),
             listOf(
@@ -344,7 +344,7 @@ class UserFilmReviewManagerTest {
                 "HBO",
             )
         )
-        println(idFilm_2)
+        println(idFilm2)
         var fech = Calendar.getInstance()
         getManager.newUser("JoseJordan")
         //When
@@ -353,7 +353,7 @@ class UserFilmReviewManagerTest {
             "Las actuaciones han sido buenas pero sobre todo el prota ha sobresalido",
             "La direccion podria ser mejor pero no esta mal",
             "JoseJordan".lowercase(Locale.getDefault()),
-            getManager.films[idFilm_1]!!.id,
+            getManager.films[idFilm1]!!.id,
             fech.time
         )
         var sizeReviews = getManager.reviews.size

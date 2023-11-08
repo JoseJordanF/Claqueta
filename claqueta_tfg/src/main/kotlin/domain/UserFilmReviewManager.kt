@@ -1,6 +1,6 @@
 package domain
 
-import com.app.claquetatfg_2.domain.SnowFlakeForFilm
+import generatorId.SnowFlakeForFilm
 import java.lang.RuntimeException
 import java.util.Date
 import java.util.Locale
