@@ -2,13 +2,17 @@ package domain
 
 import com.app.claquetatfg_2.domain.SnowFlakeForFilm
 import java.lang.RuntimeException
-import java.util.*
+import java.util.Date
+import java.util.Locale
 
 data class UserFilmReviewManager(
     var users: List<String> = listOf(),
     var reviews: List<Review> = listOf(),
-    val films: MutableMap<Long, Film> = mutableMapOf()
+    val films: MutableMap<Long, Film> = mutableMapOf(),
+    var recommendations: MutableMap<String, List<Long>> = mutableMapOf(),
 ) : UniqueIdGenerator {
+
+    private val snowFlake = SnowFlakeForFilm()
 
     override fun generateUniqueId(obj: Any): Long {
         return when (obj) {
@@ -18,7 +22,6 @@ data class UserFilmReviewManager(
     }
 
     private fun generateFilmUniqueId(film: Film): Long {
-        val snowFlake = SnowFlakeForFilm()
         return snowFlake.generateUniqueId(film.title, film.movieDirectors[0])
     }
 
@@ -54,22 +57,59 @@ data class UserFilmReviewManager(
         filmId: Long,
         creationDate: Date
     ) {
-        if (users.contains(userAuthor)) {
-            if (films.containsKey(filmId)) {
-                val newR = Review(
-                    contentPlot,
-                    contentPerformance,
-                    contentDirection,
-                    userAuthor,
-                    filmId,
-                    creationDate
-                )
-                reviews += newR
+        val oldReview = reviews.find { (it.filmId == filmId) and (it.userAuthor == userAuthor) }
+        if (oldReview == null) {
+            if (users.contains(userAuthor)) {
+                if (films.containsKey(filmId)) {
+                    val newR = Review(
+                        contentPlot,
+                        contentPerformance,
+                        contentDirection,
+                        userAuthor,
+                        filmId,
+                        creationDate
+                    )
+                    reviews += newR
+                    recomendFilmToUser(userAuthor)
+                } else {
+                    throw RuntimeException("Esa pelicula no existe")
+                }
             } else {
-                throw RuntimeException("Esa pelicula no existe")
+                throw RuntimeException("Ese usuario no existe")
             }
         } else {
-            throw RuntimeException("Ese usuario no existe")
+            throw RuntimeException("Ya escribiste una reseña de esta pelicula")
         }
+    }
+
+    fun recomendFilmToUser(username: String) {
+        var filtro: List<Review> = reviews.filter { it.userAuthor == username }
+        var filtroIds: MutableList<Long> = mutableListOf()
+
+        for (i in filtro){
+            filtroIds.add(i.filmId)
+        }
+
+        var directorsUser: Set<String> = filtro.flatMap { films[it.filmId]?.movieDirectors.orEmpty() }.toSet()
+        var productorsUser: Set<String> = filtro.flatMap { films[it.filmId]?.producers.orEmpty() }.toSet()
+        var plataformsUser: Set<String> = filtro.flatMap { films[it.filmId]?.consPlataforms.orEmpty() }.toSet()
+        var screenwritersUser: Set<String> = filtro.flatMap { films[it.filmId]?.screenwriters.orEmpty() }.toSet()
+        val filmsToUser: MutableSet<Long> = mutableSetOf()
+
+        var recomends: List<Set<Any>> = listOf(directorsUser, productorsUser, plataformsUser, screenwritersUser)
+
+        for ((key, film) in films) {
+            for (i in recomends.indices) {
+                if (recomends[i].any {
+                        film.movieDirectors.contains(it) || film.producers.contains(it)
+                                || film.consPlataforms.contains(it)
+                                || film.screenwriters.contains(it)
+                    }) {
+                    filmsToUser.add(key)
+                }
+            }
+        }
+        var recommendRes : List<Long> = filmsToUser.filterNot {  it in filtroIds }
+        recommendations[username] = recommendRes
     }
 }
