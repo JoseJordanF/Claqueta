@@ -275,11 +275,25 @@ se definirá más adelante en la lógica de negocio.
 \subsubsection{Creación de reseñas}
 
 Una vez creadas las películas y los usuarios, necesitamos definir como se crean las reseñas a través de 
-los datos necesarios, la relación con la película y el usuario que la ha escrito. Ya que tenemos todo lo necesario 
-para la creación de esta reseña. Dando lugar a la reseña en sí misma y a la marca del consumo por parte del 
-usuario, tema mencionado justo en la sección anterior.
+los datos necesarios, la relación con la película y el usuario que la ha escrito. Ya que tenemos todo 
+lo necesario para la creación de esta reseña. Dando lugar a la reseña en sí misma y a la marca del 
+consumo por parte del usuario, tema mencionado justo en la sección anterior. Además de comprobar que no 
+exista una reseña de esa película ya escrita por este usuario, ya que cada usuario solo puede escribir 
+una reseña por película.
 
+\subsubsection{Recomendación de contenido al usuario}
+
+Definido el consumo como la realización de reseñas es las distintas películas, tomamos esto como marca 
+de consumo como se mencionaba en la creación de reseñas. De esta manera conseguimos el consumo del 
+usuario, siendo este todas las películas en las que ha reseñado el usuario. Y siendo las películas 
+elegidas para recomendar consumo a este. Las recomendaciones se harán a través de los datos comunes de 
+estas películas, los directores, las productoras, los guionistas o las plataformas donde se pueden ver 
+estas películas. Cualquiera de estos datos se utilizará para recomendar cualquier película que no se 
+haya consumido y tenga algún dato en común con el consumo del usuario. De esta manera tendríamos una 
+lista de películas recomendadas para el usuario sin repetidos, ya que es posible que varios datos 
+coincidan en las mismas películas. Esta lista se refrescará cada vez que el usuario escriba una reseña 
+en una nueva película.
 
 Por cada una de estas operaciones se pueden dar varios casos de uso que se han estudiado a través de 
 los test unitarios. Comprobando que cada caso de uso se lleva a cabo como se espera y el conjunto de 
-ellos también. 
+ellos también.
