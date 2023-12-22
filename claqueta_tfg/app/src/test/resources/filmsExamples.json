@@ -1,0 +1,54 @@
+[
+  {
+    "id": "0",
+    "title": "Toy Story",
+    "movieDirectors": ["John Lasseter"],
+    "screenwriters": ["Andrew Stanton", "Joss Whedon", "Joel Cohen",
+      "Alec Sokolow"],
+    "releaseDate": "1996",
+    "producers": ["Pixar Animation Studios",
+      "Walt Disney Pictures"],
+    "consPlatforms": ["Diney+",
+      "YouTube",
+      "Apple TV",
+      "Google Play Peliculas",
+      "Amazon Prime Video",
+      "Moviestar Plus+"]
+  },
+  {
+    "id": "0",
+    "title": "Toy Story 2",
+    "movieDirectors": ["John Lasseter"],
+    "screenwriters": ["Andrew Stanton", "Joss Whedon", "Joel Cohen",
+      "Alec Sokolow"],
+    "releaseDate": "1998",
+    "producers": ["Pixar Animation Studios",
+      "Walt Disney Pictures"],
+    "consPlatforms": ["Diney+",
+      "YouTube",
+      "Apple TV",
+      "Google Play Peliculas",
+      "Amazon Prime Video",
+      "Moviestar Plus+"]
+  },
+  {
+    "id": "0",
+    "title": "Toy Story 3",
+    "movieDirectors": ["John Lasse"],
+    "screenwriters": ["Andrew Stanton"],
+    "releaseDate": "1998",
+    "producers": [ "Pixar",
+      "Walt"],
+    "consPlatforms": ["Diney+"]
+  },
+  {
+    "id": "0",
+    "title": "Toy Story 3",
+    "movieDirectors": ["Tarantino"],
+    "screenwriters": ["Tarantino"],
+    "releaseDate": "2000",
+    "producers": ["Fox"],
+    "consPlatforms": ["HBO"]
+  }
+]
+

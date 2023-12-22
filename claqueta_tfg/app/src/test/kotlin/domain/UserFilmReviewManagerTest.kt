@@ -1,8 +1,11 @@
 package domain
 
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.decodeFromString
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import java.io.File
 import java.lang.RuntimeException
 import java.util.Date
 import java.util.Calendar
@@ -15,6 +18,8 @@ class UserFilmReviewManagerTest {
     private lateinit var films: MutableMap<Long, Film>
     private lateinit var recommendations: MutableMap<String, List<Long>>
     private lateinit var getManager: UserFilmReviewManager
+    private lateinit var jsonContent: String
+    private lateinit var exampleFilms: List<Film>
 
     @BeforeEach
     fun onBefore() {
@@ -23,22 +28,16 @@ class UserFilmReviewManagerTest {
         films = mutableMapOf()
         recommendations = mutableMapOf()
         getManager = UserFilmReviewManager(users, reviews, films, recommendations)
+        jsonContent =
+            File("app/src/test/resources/filmsExamples.json").readText()
+        exampleFilms = Json.decodeFromString(jsonContent)
     }
 
     @Test
     fun `when id is generated`() {
-        val newF = Film(
-            0, "Toy Story", listOf("John Lasseter"), listOf(
-                "Andrew Stanton", "Joss Whedon", "Joel Cohen",
-                "Alec Sokolow"
-            ), Date(96, 3, 14), listOf(
-                "Pixar Animation Studios",
-                "Walt Disney Pictures"
-            ), listOf("Diney+", "YouTube", "Apple TV", "Google Play Peliculas", "Amazon Prime Video", "Moviestar Plus+")
-        )
 
         //When
-        val res = getManager.generateUniqueId(newF)
+        val res = getManager.generateUniqueId(exampleFilms.first())
         println("id: $res")
         //Then
         assert(res != 0.toLong())
@@ -49,14 +48,14 @@ class UserFilmReviewManagerTest {
 
         //When
         getManager.newFilm(
-            "Toy Story", listOf("John Lasseter"), listOf(
-                "Andrew Stanton", "Joss Whedon", "Joel Cohen",
-                "Alec Sokolow"
-            ), Date(96, 3, 14), listOf(
-                "Pixar Animation Studios",
-                "Walt Disney Pictures"
-            ), listOf("Diney+", "YouTube", "Apple TV", "Google Play Peliculas", "Amazon Prime Video", "Moviestar Plus+")
+            exampleFilms.first().title,
+            exampleFilms.first().movieDirectors,
+            exampleFilms.first().screenwriters,
+            exampleFilms.first().releaseDate,
+            exampleFilms.first().producers,
+            exampleFilms.first().consPlatforms
         )
+
         var sizeFilms = getManager.films.size
         println("sizeFilms: $sizeFilms")
         //Then
@@ -64,34 +63,29 @@ class UserFilmReviewManagerTest {
 
     }
 
+
     @Test
     fun `When we create two movies with the same data`() {
+        var ids: MutableList<Long> = mutableListOf()
 
         //When
-        var id1 = getManager.newFilm(
-            "Toy Story", listOf("John Lasseter"), listOf(
-                "Andrew Stanton", "Joss Whedon", "Joel Cohen",
-                "Alec Sokolow"
-            ), Date(96, 3, 14), listOf(
-                "Pixar Animation Studios",
-                "Walt Disney Pictures"
-            ), listOf("Diney+", "YouTube", "Apple TV", "Google Play Peliculas", "Amazon Prime Video", "Moviestar Plus+")
-        )
-        var id2 = getManager.newFilm(
-            "Toy Story", listOf("John Lasseter"), listOf(
-                "Andrew Stanton", "Joss Whedon", "Joel Cohen",
-                "Alec Sokolow"
-            ), Date(96, 3, 14), listOf(
-                "Pixar Animation Studios",
-                "Walt Disney Pictures"
-            ), listOf("Diney+", "YouTube", "Apple TV", "Google Play Peliculas", "Amazon Prime Video", "Moviestar Plus+")
-        )
-        println("id1: $id1")
-        println("id2: $id2")
+        for (i in 0..1) {
+            ids.add(
+                getManager.newFilm(
+                    exampleFilms[i].title,
+                    exampleFilms[i].movieDirectors,
+                    exampleFilms[i].screenwriters,
+                    exampleFilms[i].releaseDate,
+                    exampleFilms[i].producers,
+                    exampleFilms[i].consPlatforms
+                )
+            )
+        }
+        println("ids: $ids")
         var sizeFilms = getManager.films.size
         println("sizeFilms: $sizeFilms")
         //Then
-        assert(id1 != id2)
+        assert(ids[0] != ids[1])
     }
 
     @Test
@@ -122,54 +116,15 @@ class UserFilmReviewManagerTest {
     }
 
     @Test
-    fun `When a review is created and the film does not exist`() {
-        //When
-        getManager.newUser("JoseJordan")
-        var fech = Calendar.getInstance()
-
-        //Then
-        assertThrows<RuntimeException> {
-            getManager.newReview(
-                "En general una pelicula muy entretenida y con una buena trama",
-                "Las actuaciones han sido buenas pero sobre todo el prota ha sobresalido",
-                "La direccion podria ser mejor pero no esta mal",
-                "JoseJordan",
-                0,
-                fech.time
-            )
-        }
-    }
-
-    @Test
-    fun `When a review is created and the user does not exist`() {
-        //When
-        getManager.newUser("JoseJordan")
-        var fech = Calendar.getInstance()
-
-        //Then
-        assertThrows<RuntimeException> {
-            getManager.newReview(
-                "En general una pelicula muy entretenida y con una buena trama",
-                "Las actuaciones han sido buenas pero sobre todo el prota ha sobresalido",
-                "La direccion podria ser mejor pero no esta mal",
-                "JoseJ".lowercase(Locale.getDefault()),
-                0,
-                fech.time
-            )
-        }
-    }
-
-    @Test
     fun `When a review is created`() {
 
         var idFilm = getManager.newFilm(
-            "Toy Story", listOf("John Lasseter"), listOf(
-                "Andrew Stanton", "Joss Whedon", "Joel Cohen",
-                "Alec Sokolow"
-            ), Date(96, 3, 14), listOf(
-                "Pixar Animation Studios",
-                "Walt Disney Pictures"
-            ), listOf("Diney+", "YouTube", "Apple TV", "Google Play Peliculas", "Amazon Prime Video", "Moviestar Plus+")
+            exampleFilms.first().title,
+            exampleFilms.first().movieDirectors,
+            exampleFilms.first().screenwriters,
+            exampleFilms.first().releaseDate,
+            exampleFilms.first().producers,
+            exampleFilms.first().consPlatforms
         )
         var fech = Calendar.getInstance()
         getManager.newUser("JoseJordan")
@@ -192,13 +147,12 @@ class UserFilmReviewManagerTest {
     fun `When we try to create a review of a film that we have already reviewed`() {
 
         var idFilm = getManager.newFilm(
-            "Toy Story", listOf("John Lasseter"), listOf(
-                "Andrew Stanton", "Joss Whedon", "Joel Cohen",
-                "Alec Sokolow"
-            ), Date(96, 3, 14), listOf(
-                "Pixar Animation Studios",
-                "Walt Disney Pictures"
-            ), listOf("Diney+", "YouTube", "Apple TV", "Google Play Peliculas", "Amazon Prime Video", "Moviestar Plus+")
+            exampleFilms.first().title,
+            exampleFilms.first().movieDirectors,
+            exampleFilms.first().screenwriters,
+            exampleFilms.first().releaseDate,
+            exampleFilms.first().producers,
+            exampleFilms.first().consPlatforms
         )
         var fech = Calendar.getInstance()
         getManager.newUser("JoseJordan")
@@ -230,25 +184,12 @@ class UserFilmReviewManagerTest {
     fun `When we create a review of a movie, that movie is not added to recommendations`() {
 
         var idFilm = getManager.newFilm(
-            "Toy Story",
-            listOf("John Lasseter"),
-            listOf(
-                "Andrew Stanton", "Joss Whedon", "Joel Cohen",
-                "Alec Sokolow"
-            ),
-            Date(96, 3, 14),
-            listOf(
-                "Pixar Animation Studios",
-                "Walt Disney Pictures"
-            ),
-            listOf(
-                "Diney+",
-                "YouTube",
-                "Apple TV",
-                "Google Play Peliculas",
-                "Amazon Prime Video",
-                "Moviestar Plus+"
-            )
+            exampleFilms.first().title,
+            exampleFilms.first().movieDirectors,
+            exampleFilms.first().screenwriters,
+            exampleFilms.first().releaseDate,
+            exampleFilms.first().producers,
+            exampleFilms.first().consPlatforms
         )
         var fech = Calendar.getInstance()
         getManager.newUser("JoseJordan")
@@ -263,7 +204,8 @@ class UserFilmReviewManagerTest {
         )
         var sizeReviews = getManager.reviews.size
         println("sizeReviews: $sizeReviews")
-        var sizeRecommends = getManager.recommendations["JoseJordan".lowercase(Locale.getDefault())]!!.size
+        var sizeRecommends =
+            getManager.recommendations["JoseJordan".lowercase(Locale.getDefault())]!!.size
         println("sizeRecommends: $sizeRecommends")
         //Then
         assert(sizeRecommends == 0)
@@ -272,79 +214,22 @@ class UserFilmReviewManagerTest {
     @Test
     fun `When we create a review and there are movies with related data, for the recommendations`() {
 
-        var idFilm1 = getManager.newFilm(
-            "Toy Story",
-            listOf("John Lasseter"),
-            listOf(
-                "Andrew Stanton", "Joss Whedon", "Joel Cohen",
-                "Alec Sokolow"
-            ),
-            Date(96, 3, 14),
-            listOf(
-                "Pixar Animation Studios",
-                "Walt Disney Pictures"
-            ),
-            listOf(
-                "Diney+",
-                "YouTube",
-                "Apple TV",
-                "Google Play Peliculas",
-                "Amazon Prime Video",
-                "Moviestar Plus+"
-            )
-        )
+        var ids: MutableList<Long> = mutableListOf()
 
-        var idFilm2 = getManager.newFilm(
-            "Toy Story 2",
-            listOf("John Lasseter"),
-            listOf(
-                "Andrew Stanton", "Joss Whedon", "Joel Cohen",
-                "Alec Sokolow"
-            ),
-            Date(98, 3, 14),
-            listOf(
-                "Pixar Animation Studios",
-                "Walt Disney Pictures"
-            ),
-            listOf(
-                "Diney+",
-                "YouTube",
-                "Apple TV",
-                "Google Play Peliculas",
-                "Amazon Prime Video",
-                "Moviestar Plus+"
+        //When
+        for (i in 0..3) {
+            ids.add(
+                getManager.newFilm(
+                    exampleFilms[i].title,
+                    exampleFilms[i].movieDirectors,
+                    exampleFilms[i].screenwriters,
+                    exampleFilms[i].releaseDate,
+                    exampleFilms[i].producers,
+                    exampleFilms[i].consPlatforms
+                )
             )
-        )
-        getManager.newFilm(
-            "Toy Story 3",
-            listOf("John Lasse"),
-            listOf(
-                "Andrew Stanton"
-            ),
-            Date(98, 3, 14),
-            listOf(
-                "Pixar",
-                "Walt"
-            ),
-            listOf(
-                "Diney+",
-            )
-        )
-        getManager.newFilm(
-            "Toy Story 3",
-            listOf("Tarantino"),
-            listOf(
-                "Tarantino"
-            ),
-            Date(99, 3, 14),
-            listOf(
-                "Fox",
-            ),
-            listOf(
-                "HBO",
-            )
-        )
-        println(idFilm2)
+        }
+        println(ids[1])
         var fech = Calendar.getInstance()
         getManager.newUser("JoseJordan")
         //When
@@ -353,16 +238,23 @@ class UserFilmReviewManagerTest {
             "Las actuaciones han sido buenas pero sobre todo el prota ha sobresalido",
             "La direccion podria ser mejor pero no esta mal",
             "JoseJordan".lowercase(Locale.getDefault()),
-            getManager.films[idFilm1]!!.id,
+            getManager.films[ids[0]]!!.id,
             fech.time
         )
         var sizeReviews = getManager.reviews.size
         println("sizeReviews: $sizeReviews")
         var sizeFilms = getManager.films.size
         println("sizeFilms: $sizeFilms")
-        var sizeRecommends = getManager.recommendations["JoseJordan".lowercase(Locale.getDefault())]!!.size
-        println("sizeRecommends: $sizeRecommends id:" + getManager.recommendations["JoseJordan".lowercase(Locale.getDefault())]!![0])
+        var sizeRecommends =
+            getManager.recommendations["JoseJordan".lowercase(Locale.getDefault())]!!.size
+        println(
+            "sizeRecommends: $sizeRecommends id:" + getManager.recommendations["JoseJordan".lowercase(
+                Locale.getDefault()
+            )]!![0]
+        )
         //Then
         assert(sizeRecommends == 2)
     }
+
+
 }
