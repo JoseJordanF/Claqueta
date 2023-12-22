@@ -29,7 +29,7 @@ class UserFilmReviewManagerTest {
         recommendations = mutableMapOf()
         getManager = UserFilmReviewManager(users, reviews, films, recommendations)
         jsonContent =
-            File("app/src/test/resources/filmsExamples.json").readText()
+            File("src/test/resources/filmsExamples.json").readText()
         exampleFilms = Json.decodeFromString(jsonContent)
     }
 
