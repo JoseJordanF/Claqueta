@@ -31,10 +31,10 @@ class UserFilmReviewManagerTest {
         recommendations = mutableMapOf()
         getManager = UserFilmReviewManager(users, reviews, films, recommendations)
         jsonContentFilms =
-            File("C:\\Users\\34625\\Desktop\\JOB\\TFG\\DEFINITIVO\\claqueta_tfg\\src\\test\\resources\\filmsExamples.json").readText()
+            File("src/test/resources/filmsExamples.json").readText()
         exampleFilms = Json.decodeFromString(jsonContentFilms)
         jsonContentReviews =
-            File("C:\\Users\\34625\\Desktop\\JOB\\TFG\\DEFINITIVO\\claqueta_tfg\\src\\test\\resources\\reviewsExamples.json").readText()
+            File("src/test/resources/reviewsExamples.json").readText()
         exampleReviews = Json.decodeFromString(jsonContentReviews)
     }
 
