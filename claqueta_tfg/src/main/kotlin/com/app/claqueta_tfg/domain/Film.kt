@@ -1,4 +1,4 @@
-package domain
+package com.app.claqueta_tfg.domain
 
 import kotlinx.serialization.Serializable
 import java.util.Date

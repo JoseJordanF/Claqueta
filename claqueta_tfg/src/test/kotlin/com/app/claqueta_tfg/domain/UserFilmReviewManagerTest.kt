@@ -1,5 +1,8 @@
-package domain
+package com.app.claqueta_tfg.domain
 
+import com.app.claqueta_tfg.domain.Film
+import com.app.claqueta_tfg.domain.Review
+import com.app.claqueta_tfg.domain.UserFilmReviewManager
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.decodeFromString
 import org.junit.jupiter.api.BeforeEach
@@ -7,10 +10,10 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import java.io.File
 import java.lang.RuntimeException
-import java.util.Date
 import java.util.Calendar
 import java.util.Locale
 
+//@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class UserFilmReviewManagerTest {
 
     private lateinit var users: List<String>
@@ -18,8 +21,10 @@ class UserFilmReviewManagerTest {
     private lateinit var films: MutableMap<Long, Film>
     private lateinit var recommendations: MutableMap<String, List<Long>>
     private lateinit var getManager: UserFilmReviewManager
-    private lateinit var jsonContent: String
+    private lateinit var jsonContentFilms: String
     private lateinit var exampleFilms: List<Film>
+    private lateinit var jsonContentReviews: String
+    private lateinit var exampleReviews: List<Review>
 
     @BeforeEach
     fun onBefore() {
@@ -28,9 +33,12 @@ class UserFilmReviewManagerTest {
         films = mutableMapOf()
         recommendations = mutableMapOf()
         getManager = UserFilmReviewManager(users, reviews, films, recommendations)
-        jsonContent =
+        jsonContentFilms =
             File("src/test/resources/filmsExamples.json").readText()
-        exampleFilms = Json.decodeFromString(jsonContent)
+        exampleFilms = Json.decodeFromString(jsonContentFilms)
+        jsonContentReviews =
+            File("src/test/resources/reviewsExamples.json").readText()
+        exampleReviews = Json.decodeFromString(jsonContentReviews)
     }
 
     @Test
@@ -130,9 +138,9 @@ class UserFilmReviewManagerTest {
         getManager.newUser("JoseJordan")
         //When
         getManager.newReview(
-            "En general una pelicula muy entretenida y con una buena trama",
-            "Las actuaciones han sido buenas pero sobre todo el prota ha sobresalido",
-            "La direccion podria ser mejor pero no esta mal",
+            exampleReviews.first().contentPlot,
+            exampleReviews.first().contentPerformance,
+            exampleReviews.first().contentDirection,
             "JoseJordan".lowercase(Locale.getDefault()),
             getManager.films[idFilm]!!.id,
             fech.time
@@ -158,9 +166,9 @@ class UserFilmReviewManagerTest {
         getManager.newUser("JoseJordan")
         //When
         getManager.newReview(
-            "En general una pelicula muy entretenida y con una buena trama",
-            "Las actuaciones han sido buenas pero sobre todo el prota ha sobresalido",
-            "La direccion podria ser mejor pero no esta mal",
+            exampleReviews.first().contentPlot,
+            exampleReviews.first().contentPerformance,
+            exampleReviews.first().contentDirection,
             "JoseJordan".lowercase(Locale.getDefault()),
             getManager.films[idFilm]!!.id,
             fech.time
@@ -170,9 +178,9 @@ class UserFilmReviewManagerTest {
         //Then
         assertThrows<RuntimeException> {
             getManager.newReview(
-                "En general una pelicula muy entretenida y con una buena trama",
-                "Las actuaciones han sido buenas pero sobre todo el prota ha sobresalido",
-                "La direccion podria ser mejor pero no esta mal",
+                exampleReviews.first().contentPlot,
+                exampleReviews.first().contentPerformance,
+                exampleReviews.first().contentDirection,
                 "JoseJordan".lowercase(Locale.getDefault()),
                 getManager.films[idFilm]!!.id,
                 fech.time
@@ -195,9 +203,9 @@ class UserFilmReviewManagerTest {
         getManager.newUser("JoseJordan")
         //When
         getManager.newReview(
-            "En general una pelicula muy entretenida y con una buena trama",
-            "Las actuaciones han sido buenas pero sobre todo el prota ha sobresalido",
-            "La direccion podria ser mejor pero no esta mal",
+            exampleReviews.first().contentPlot,
+            exampleReviews.first().contentPerformance,
+            exampleReviews.first().contentDirection,
             "JoseJordan".lowercase(Locale.getDefault()),
             getManager.films[idFilm]!!.id,
             fech.time
@@ -234,9 +242,9 @@ class UserFilmReviewManagerTest {
         getManager.newUser("JoseJordan")
         //When
         getManager.newReview(
-            "En general una pelicula muy entretenida y con una buena trama",
-            "Las actuaciones han sido buenas pero sobre todo el prota ha sobresalido",
-            "La direccion podria ser mejor pero no esta mal",
+            exampleReviews.first().contentPlot,
+            exampleReviews.first().contentPerformance,
+            exampleReviews.first().contentDirection,
             "JoseJordan".lowercase(Locale.getDefault()),
             getManager.films[ids[0]]!!.id,
             fech.time

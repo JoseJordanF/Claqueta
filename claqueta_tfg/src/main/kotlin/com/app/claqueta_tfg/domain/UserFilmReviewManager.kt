@@ -1,6 +1,6 @@
-package domain
+package com.app.claqueta_tfg.domain
 
-import generatorId.generateUniqueId
+import com.app.claqueta_tfg.domain.generatorId.generateUniqueId
 import java.lang.RuntimeException
 import java.util.Date
 import java.util.Locale
