@@ -1,7 +1,6 @@
-package com.app.claqueta_tfg.domain
+package com.app.claquetaTfg.domain
 
 import kotlinx.serialization.Serializable
-import java.util.Date
 
 @Serializable
 data class Film(

@@ -1,4 +1,4 @@
-package com.app.claqueta_tfg.util
+package com.app.claquetaTfg.util
 
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer

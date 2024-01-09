@@ -1,4 +1,4 @@
-package com.app.claqueta_tfg.domain.generatorId
+package com.app.claquetaTfg.domain.generatorId
 
 
 import java.util.concurrent.atomic.AtomicInteger

@@ -1,6 +1,6 @@
-package com.app.claqueta_tfg.domain
+package com.app.claquetaTfg.domain
 
-import com.app.claqueta_tfg.util.DateSerializer
+import com.app.claquetaTfg.util.DateSerializer
 import kotlinx.serialization.Serializable
 import java.util.Date
 

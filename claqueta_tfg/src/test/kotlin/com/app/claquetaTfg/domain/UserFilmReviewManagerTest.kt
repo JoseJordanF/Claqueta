@@ -1,8 +1,5 @@
-package com.app.claqueta_tfg.domain
+package com.app.claquetaTfg.domain
 
-import com.app.claqueta_tfg.domain.Film
-import com.app.claqueta_tfg.domain.Review
-import com.app.claqueta_tfg.domain.UserFilmReviewManager
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.decodeFromString
 import org.junit.jupiter.api.BeforeEach
@@ -34,10 +31,10 @@ class UserFilmReviewManagerTest {
         recommendations = mutableMapOf()
         getManager = UserFilmReviewManager(users, reviews, films, recommendations)
         jsonContentFilms =
-            File("src/test/resources/filmsExamples.json").readText()
+            File("C:\\Users\\34625\\Desktop\\JOB\\TFG\\DEFINITIVO\\claqueta_tfg\\src\\test\\resources\\filmsExamples.json").readText()
         exampleFilms = Json.decodeFromString(jsonContentFilms)
         jsonContentReviews =
-            File("src/test/resources/reviewsExamples.json").readText()
+            File("C:\\Users\\34625\\Desktop\\JOB\\TFG\\DEFINITIVO\\claqueta_tfg\\src\\test\\resources\\reviewsExamples.json").readText()
         exampleReviews = Json.decodeFromString(jsonContentReviews)
     }
 
