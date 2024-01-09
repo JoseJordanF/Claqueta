@@ -1,0 +1,29 @@
+name: build-and-test
+
+on:
+   push:
+    paths:
+     - '**/*.kt'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java: ['8', '17', '21' ]
+    name: Java ${{ matrix.Java }} sample
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      
+      - name: Set up JDK 
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ matrix.java }}
+          distribution: 'corretto'
+          
+      - name: Run tests
+        working-directory: claqueta_tfg/  
+        run: |
+          chmod +x gradlew
+          ./gradlew test
