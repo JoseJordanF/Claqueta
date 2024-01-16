@@ -1,13 +1,14 @@
-package domain
+package com.app.claquetaTfg.domain
 
-import java.util.Date
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class Film(
     val id: Long,
     val title: String,
     val movieDirectors: List<String> = listOf(),
     val screenwriters: List<String> = listOf(),
-    val releaseDate: Date,
+    val releaseDate: Int,
     val producers: List<String> = listOf(),
-    val consPlataforms: List<String> = listOf()
+    val consPlatforms: List<String> = listOf()
 )
