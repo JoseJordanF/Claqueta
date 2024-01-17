@@ -26,16 +26,35 @@ El repositorio de GitHub se convierte en la guía del proceso de desarrollo, pro
 Por otra parte, se debe abordar la implementación de la integración continua (CI) \cite{CI_supp} como una pieza 
 clave de nuestro proceso de desarrollo. Para ello debemos seleccionar un sistema y plataforma para la integración 
 continua, y configurar de manera efectiva dicho sistema. Este caso pensamos directamente en GitHub Actions aunque 
-habría otras opciones como Circle CI o Semaphore CI, pero la elección de GitHub Actions como sistema de integración 
-continua se fundamenta en su sinergia directa con nuestro repositorio, ya que GitHub Actions se integra 
-perfectamente con la plataforma GitHub. Simplemente, debemos incluir las acciones correspondientes en el directorio 
-del proyecto. Esta elección se justifica por su naturaleza estándar, flexibilidad y su capacidad para activarse 
-automáticamente con cada push al repositorio GitHub, simplificando así la administración de las pruebas. 
+habría otras opciones como Circle CI o Semaphore CI, son dos plataformas de integración continua  que ofrecen 
+soluciones eficientes para automatizar procesos de desarrollo. Ambas destacan por su enfoque en la simplicidad y la 
+velocidad de ejecución de trabajos. Circle CI se caracteriza por su configuración simple y su integración fácil con 
+repositorios de GitHub. Ofrece la capacidad de ejecutar trabajos en paralelo, mejorando los tiempos de ejecución, pero 
+algunos usuarios encuentran que la configuración puede volverse compleja para flujos de trabajo avanzados. Por otro 
+lado, Semaphore CI se centra en la facilidad de uso y la velocidad de ejecución de trabajos. Proporciona una interfaz 
+visual clara y un conjunto de orbes o módulos para simplificar la configuración. Aunque es eficiente, puede tener 
+limitaciones en términos de personalización y flexibilidad.
 
-En la fase de configuración, GitHub Actions se ajustará para ejecutar automáticamente los tests, aprovechando la 
-funcionalidad de checks API para una detección precisa. Esta implementación de la integración continua asegura la 
-calidad y estabilidad del código y nos proporciona una solución integral en línea con la filosofía del enfoque ágil 
-y optimizando la entrega de software confiable y de alta calidad.
+En comparación, GitHub Actions, integrado directamente en GitHub, ofrece una experiencia de CI completa y altamente 
+personalizable. Su estrecha integración con los repositorios de GitHub facilita la configuración y gestión. Es 
+conocido por su flexibilidad, variedad de acciones y eventos, y la capacidad de ejecutar acciones en entornos 
+diversos. Sin embargo, crear máquinas virtuales para flujos de trabajo en algunos entornos puede ser un desafío debido 
+a las restricciones del entorno y las configuraciones necesarias para la emulación. Por ejemplo, GitHub Actions no 
+proporciona un entorno preconfigurado para ejecutar emuladores Android, lo que complica la configuración de flujos de 
+trabajo específicos para proyectos Android. Otros sistemas a menudo proporcionan imágenes de máquinas virtuales 
+preconfiguradas con las dependencias necesarias para Android, lo que simplifica la configuración.
+
+No obstante, a pesar de las dificultades en GitHub Actions, su integración nativa con GitHub y su capacidad para 
+ejecutar flujos de trabajo en entornos variados siguen siendo valiosas. Aunque puede ser más costoso configurar 
+ciertos emuladores en GitHub Actions, la integración directa con el ecosistema de GitHub y su flexibilidad 
+generalmente hacen que sea una opción efectiva para muchos proyectos. En última instancia, la elección entre 
+diferentes sistemas de CI dependerá de los requisitos específicos del proyecto, además de tener en cuenta que es 
+posible usar más de un sistema de integración continua.
+
+Durante la fase de configuración de cualquier flujo del sistema de CI, se ajustará para ejecutar automáticamente los 
+tests, aprovechando la funcionalidad de checks API para una detección precisa. Esta implementación de la integración 
+continua asegura la calidad y estabilidad del código y nos proporciona una solución integral en línea con la filosofía 
+del enfoque ágil y optimizando la entrega de software confiable y de alta calidad.
 
 En resumen, GitHub proporciona un entorno centralizado donde se encuentran todas las herramientas necesarias para el desarrollo, incluyendo el código, la documentación y el seguimiento del progreso. Esto permite avanzar de manera eficiente hacia los objetivos establecidos y cumplir con las necesidades del usuario de forma efectiva.
 
