@@ -23,40 +23,30 @@ El repositorio de GitHub se convierte en la guía del proceso de desarrollo, pro
 \item \textbf{Pull Requests} Todo el código y la documentación que se encuentran en la rama principal del repositorio se considera probado y completamente funcional. El desarrollo se lleva a cabo en ramas separadas que están vinculadas a cada hito que se pretende alcanzar. Una vez que se completa una tarea de desarrollo, se crea un pull request hacia la rama principal. Si el pull request pasa satisfactoriamente los flujos de CI configurados, se considera que la tarea está completada y se incorpora una nueva versión funcional en la rama principal.
 \end{itemize}
 
+En resumen, GitHub proporciona un entorno centralizado donde se encuentran todas las herramientas necesarias para el desarrollo, incluyendo el código, la documentación y el seguimiento del progreso. Esto permite avanzar de manera eficiente hacia los objetivos establecidos y cumplir con las necesidades del usuario de forma efectiva.
+
 Por otra parte, se debe abordar la implementación de la integración continua (CI) \cite{CI_supp} como una pieza 
 clave de nuestro proceso de desarrollo. Para ello debemos seleccionar un sistema y plataforma para la integración 
-continua, y configurar de manera efectiva dicho sistema. Este caso pensamos directamente en GitHub Actions aunque 
-habría otras opciones como Circle CI o Semaphore CI, son dos plataformas de integración continua  que ofrecen 
-soluciones eficientes para automatizar procesos de desarrollo. Ambas destacan por su enfoque en la simplicidad y la 
-velocidad de ejecución de trabajos. Circle CI se caracteriza por su configuración simple y su integración fácil con 
-repositorios de GitHub. Ofrece la capacidad de ejecutar trabajos en paralelo, mejorando los tiempos de ejecución, pero 
-algunos usuarios encuentran que la configuración puede volverse compleja para flujos de trabajo avanzados. Por otro 
-lado, Semaphore CI se centra en la facilidad de uso y la velocidad de ejecución de trabajos. Proporciona una interfaz 
-visual clara y un conjunto de orbes o módulos para simplificar la configuración. Aunque es eficiente, puede tener 
-limitaciones en términos de personalización y flexibilidad.
+continua, y configurar de manera efectiva dicho sistema. Generalmente, un sistema de integración continua (CI) se busca 
+lograr la detección temprana de errores en el código, permitiendo identificar y corregir problemas de manera rápida 
+durante el ciclo de desarrollo. Esta práctica evita que los problemas lleguen a etapas avanzadas, donde corregirlos podría 
+ser más difícil y costoso. Un componente esencial de la integración continua es la automatización de pruebas. Al 
+automatizar la ejecución de pruebas unitarias, de integración y otras pruebas pertinentes, se garantiza que el código 
+integrado no introduzca regresiones ni cause problemas en el sistema. Esta automatización contribuye significativamente a 
+mantener la calidad del software. Otro objetivo clave es lograr el despliegue continuo, automatizando el proceso de 
+entrega y despliegue de nuevas versiones del software. Esto posibilita que las actualizaciones sean entregadas rápidamente 
+y con mayor frecuencia al entorno de producción. Además, la integración continua se centra en proporcionar 
+retroalimentación rápida sobre la calidad del código, los resultados de las pruebas y el estado de la compilación. Esta 
+retroalimentación inmediata es fundamental para mantener un ciclo de enfoque ágil y eficiente. La mejora continua también 
+es un principio fundamental de CI. Facilita la identificación de oportunidades de mejora en el proceso de desarrollo, 
+pruebas y despliegue mediante el análisis de métricas y rendimiento. Otro aspecto importante es la seguridad, integrando 
+buenas prácticas y herramientas que ayudan a identificar y mitigar posibles vulnerabilidades en el código. En resumen, la 
+integración continua busca optimizar el desarrollo de software al automatizar tareas, mejorar la calidad del código y 
+proporcionar una base sólida para prácticas como la implementación continua y la mejora continua.
 
-En comparación, GitHub Actions, integrado directamente en GitHub, ofrece una experiencia de CI completa y altamente 
-personalizable. Su estrecha integración con los repositorios de GitHub facilita la configuración y gestión. Es 
-conocido por su flexibilidad, variedad de acciones y eventos, y la capacidad de ejecutar acciones en entornos 
-diversos. Sin embargo, crear máquinas virtuales para flujos de trabajo en algunos entornos puede ser un desafío debido 
-a las restricciones del entorno y las configuraciones necesarias para la emulación. Por ejemplo, GitHub Actions no 
-proporciona un entorno preconfigurado para ejecutar emuladores Android, lo que complica la configuración de flujos de 
-trabajo específicos para proyectos Android. Otros sistemas a menudo proporcionan imágenes de máquinas virtuales 
-preconfiguradas con las dependencias necesarias para Android, lo que simplifica la configuración.
-
-No obstante, a pesar de las dificultades en GitHub Actions, su integración nativa con GitHub y su capacidad para 
-ejecutar flujos de trabajo en entornos variados siguen siendo valiosas. Aunque puede ser más costoso configurar 
-ciertos emuladores en GitHub Actions, la integración directa con el ecosistema de GitHub y su flexibilidad 
-generalmente hacen que sea una opción efectiva para muchos proyectos. En última instancia, la elección entre 
-diferentes sistemas de CI dependerá de los requisitos específicos del proyecto, además de tener en cuenta que es 
-posible usar más de un sistema de integración continua.
-
-Durante la fase de configuración de cualquier flujo del sistema de CI, se ajustará para ejecutar automáticamente los 
-tests, aprovechando la funcionalidad de checks API para una detección precisa. Esta implementación de la integración 
-continua asegura la calidad y estabilidad del código y nos proporciona una solución integral en línea con la filosofía 
-del enfoque ágil y optimizando la entrega de software confiable y de alta calidad.
-
-En resumen, GitHub proporciona un entorno centralizado donde se encuentran todas las herramientas necesarias para el desarrollo, incluyendo el código, la documentación y el seguimiento del progreso. Esto permite avanzar de manera eficiente hacia los objetivos establecidos y cumplir con las necesidades del usuario de forma efectiva.
+De esta manera, la elección entre diferentes sistemas de CI dependerá de los requisitos específicos del proyecto, además 
+de tener en cuenta que es posible usar más de un sistema de integración continua para atender las distintas necesidades 
+del proyecto, atentando siempre a la opción que se apegue más a los requisitos de búsqueda.
 
 \section{Hitos}
 
@@ -73,7 +63,7 @@ De esta manera, los hitos van a ser utilizados para marcar los logros clave que 
 \subsection{M0. Configuración inicial del TFG - Estructura, objetivos y metodología usada}
 El primer hito llevará a cabo la planificación inicial y su disposición para verificar la calidad del
 proyecto.
-El objetivo principal de este hito inicial es establecer la estructura del Trabajo de Fin de Grado (TFG) y preparar el proyecto. Después de completar este hito, se espera que los primeros puntos de la documentación estén redactados. Estos puntos incluirán la descripción del problema a abordar, el público objetivo afectado por dicho problema, la posible solución propuesta como producto final y el público al que va dirigido. Además, se abordará el estado actual del conocimiento en el área y el enfoque utilizado para desarrollar el producto. Asimismo, se configurará un repositorio que incluirá un verificador ortográfico para la documentación, los sistemas de CI y los problemas (issues), las historias de usuario y los hitos del proyecto.
+El objetivo principal de este hito inicial es establecer la estructura del Trabajo de Fin de Grado (TFG) y preparar el proyecto. Después de completar este hito, se espera que los primeros puntos de la documentación estén redactados. Estos puntos incluirán la descripción del problema a abordar, el público objetivo afectado por dicho problema, la posible solución propuesta como producto final y el público al que va dirigido. Además, se abordará el estado actual del conocimiento en el área y el enfoque utilizado para desarrollar el producto. Asimismo, se configurará un repositorio que incluirá un verificador ortográfico para la documentación, para ello se han adoptado las mejores prácticas haciendo uso de GitHub Actions creando flujos de trabajo que compilen y comprueben la ortografía y la gramática, los sistemas de CI para tareas más exigentes y los problemas (issues), las historias de usuario y los hitos del proyecto.
 
 \subsection{M05. Capítulo de planificación}
 Debido a la extensión de los primeros capítulos, se ha visto necesario dividir en dos milestones estos cuatro capítulos de la documentación. Donde los tres primeros se encuentran en el M0 y el capítulo de planificación en este.
