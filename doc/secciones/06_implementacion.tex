@@ -1,62 +1,64 @@
 \chapter{Implementación}
 
 En este capítulo se va a proceder a desarrollar cada uno de los PMV de cara a cada hito relacionado con 
-la implementación, en los primeros hitos se dedicarán a definir la infraestructura y organización del proyecto. Además, 
-habrá que discutir que herramientas van a usarse para desarrollar o llevar a cabo estos hitos y el porqué de su 
-elección. 
+la implementación, en los primeros hitos se dedicarán a definir la infraestructura y organización del 
+proyecto. Además, habrá que discutir qué herramientas van a usarse para desarrollar o llevar a cabo estos 
+hitos y el porqué de su elección. 
 
-Por lo tanto, ya que el desarrollo se va a basar en los productos mínimamente viables de los hitos. Lo primero que 
-debemos hacer es definir un repositorio en el que definir estos hitos. Por ello es la primera herramienta que vamos a 
-elegir. Teniendo en cuenta el uso de git como sistema de control de versiones debido a su naturaleza distribuida frente a 
-sistemas como subversion con un modelo centralizado, o su popularidad frente a sistemas como mercurial. Porque aunque 
-ambos sistemas poseen características similares, git posee una base masiva y activa de usuarios, obteniendo un mejor 
-soporte y una comunidad más robusta, a diferencia de mercurial. 
+Primeramente, se decidirá en este caso que herramienta se usara para albergar el proyecto y poder definir los hitos, 
+además de permitir un seguimiento del desarrollo mucho más controlado. Siguiendo así con el enfoque ágil visto en el 
+primer capítulo. Tras ello se irán desarrollando cada PMV siguiendo las mejores prácticas posibles y obteniendo un 
+producto de calidad, principios afines de nuevo al enfoque ágil.
 
-Teniendo esto presente, tenemos varias opciones para escoger un repositorio basado en git que albergue nuestro proyecto. 
-Como por ejemplo GitHub, GitLab y Bitbucket, plataformas de desarrollo colaborativo que comparten muchas características,
-pero presentan algunas diferencias clave. GitHub destaca por su gran comunidad y su amplia adopción en la industria, con 
-una interfaz intuitiva y una integración fluida con herramientas de terceros. La plataforma incorpora una red social que 
-facilita la colaboración y el descubrimiento de proyectos, y sus capacidades para la integración continua y la entrega 
-continua (CI/CD), a través de GitHub Actions, lo convierten en una opción poderosa y atractiva.  
 
-GitLab, por otro lado, se centra en DevOps y CI/CD, ofreciendo un conjunto integral de herramientas, desde el seguimiento 
-de problemas hasta el despliegue automático. Su opción de implementación en servidores locales o en la nube brinda 
-flexibilidad, siendo bastante atractiva de cara a las empresas. 
+\section{Herramientas previas}
 
-Bitbucket parte del ecosistema de Atlassian, se destaca por su estrecha integración con otras herramientas de Atlassian, 
-como Jira y Confluence. Software propietario de carácter colaborativo para la gestión de proyectos destinado sobre todo a 
-entornos corporativos.
+Por lo tanto, ya que el desarrollo se va a basar en los productos mínimamente viables. Lo primero que 
+debemos hacer es definir un repositorio en el que definir estos hitos. Por ello es la primera herramienta
+que vamos a elegir. Teniendo en cuenta el uso de git como sistema de control de versiones debido a su 
+naturaleza distribuida frente a sistemas como subversion con un modelo centralizado, o su popularidad frente 
+a sistemas como mercurial. Porque aunque ambos sistemas poseen características similares, git posee una base 
+masiva y activa de usuarios, obteniendo un mejor soporte y una comunidad más robusta, a diferencia de 
+mercurial. 
 
-En términos económicos, GitHub ofrece planes gratuitos con funciones básicas para repositorios públicos y privados, pero 
-también cuenta con planes de pago que incluyen características adicionales y soporte para proyectos más grandes o equipos 
-que requieren funciones avanzadas. GitLab también proporciona un nivel gratuito con un conjunto de características 
-básicas. Sin embargo, al igual que GitHub, tiene planes de pago que ofrecen funciones más avanzadas y capacidad de 
-escalar para adaptarse a las necesidades de equipos y organizaciones más grandes. Bitbucket, de Atlassian, ofrece una 
-versión gratuita con características esenciales y un límite en el número de colaboradores. Al igual que GitHub y GitLab, 
-hay opciones de pago que amplían las capacidades y eliminan restricciones. Aun asi, sería conveniente el uso de 
-herramienta como Jira o Confluence si usas Bitbucket para un buen seguimiento del proyecto como buena práctica afín con el enfoque ágil visto en la introducción, teniendo en cuenta que estas herramientas son de pago, aunque 
+Teniendo esto presente, tenemos varias opciones para escoger un repositorio basado en git que albergue 
+nuestro proyecto, de manera gratuita y online. Como por ejemplo GitHub\cite{GH_web}, GitLab\cite{GL_web} y 
+Bitbucket\cite{BK_web}, plataformas de desarrollo colaborativo que comparten muchas características, pero 
+presentan algunas diferencias. 
+
+En términos económicos, GitHub ofrece planes gratuitos con funciones básicas para repositorios públicos y 
+privados, pero también cuenta con planes de pago que incluyen características adicionales y soporte para 
+proyectos más grandes o equipos que requieren funciones avanzadas. GitLab también proporciona un nivel 
+gratuito con un conjunto de características básicas. Sin embargo, al igual que GitHub, tiene planes de pago 
+que ofrecen funciones más avanzadas y capacidad de escalar para adaptarse a las necesidades de equipos y 
+organizaciones más grandes. Bitbucket, de Atlassian, ofrece una versión gratuita con características 
+esenciales y un límite en el número de colaboradores. Al igual que GitHub y GitLab, hay opciones de pago que 
+amplían las capacidades y eliminan restricciones. Aun así, sería conveniente el uso de herramienta como Jira 
+o Confluence si usas Bitbucket para un buen seguimiento del proyecto como buena práctica afín con 
+el enfoque ágil visto en la introducción, teniendo en cuenta que estas herramientas son de pago, aunque 
 disponen de una versión gratuita pero con capacidades básicas para los proyectos más simples. 
 
-En general, las opciones gratuitas de estas plataformas son adecuadas para muchos proyectos pequeños y medianos, al menos 
-las de GitHub y GitLab. Por ello, la elección entre una de estas plataformas depende de otros factores. Comparativamente, 
-en relación con GitLab, GitHub ha establecido una posición fuerte en el ámbito de desarrollo colaborativo y es 
-ampliamente adoptado en la comunidad de código abierto. Sin embargo, GitLab también es una opción sólida con 
-características similares, ofreciendo integración continua, entrega continua y más, todo dentro de un repositorio 
-unificado. De este modo, la elección entre estas plataformas dependerá de las necesidades del proyecto y las preferencias 
-personales. 
+En general, las opciones gratuitas de estas plataformas son adecuadas para muchos proyectos pequeños y
+medianos, al menos las de GitHub y GitLab. Por ello, la elección entre una de estas plataformas depende de 
+otros factores, ya que son herramientas muy parecidas. Comparativamente, en relación con GitLab, GitHub ha 
+establecido una posición fuerte en el ámbito de desarrollo colaborativo y es ampliamente adoptado en la comunidad de 
+código abierto.
 
-Por lo tanto, debido a que GitHub es especialmente fuerte en términos de comunidad y visibilidad de proyectos, lo que 
-podría ser esencial para compartir y destacar el trabajo de manera más amplia. Y debido a que se nos ofrece GitHub 
-Actions \cite{BestCI}, una potente herramienta \cite{CI_supp} con la capacidad de automatización directamente integrada 
-en la plataforma y que servirá generalmente para crear la mayoría de flujos de trabajo que necesitemos durante la 
-implementación del proyecto. GitHub será el repositorio para nuestro proyecto \footnote{\url{https://github.com/JoseJordanF/Claqueta}}.
+Por lo tanto, debido a que GitHub es especialmente fuerte en términos de comunidad y visibilidad de 
+proyectos, lo que podría ser esencial para compartir y destacar el trabajo de manera más amplia, siendo esta 
+visibilidad sustancial para la resolución de problemas a través de la colaboración con la comunidad. Formando parte 
+de la esencia del enfoque ágil que describimos en la introducción. Y también debido a que se nos ofrece GitHub 
+Actions \cite{BestCI}, una potente herramienta \cite{CI_supp} con la capacidad de automatización directamente 
+integrada en la plataforma y que servirá generalmente para crear la mayoría de flujos de trabajo que necesitemos 
+durante la implementación del proyecto. GitHub será el repositorio para nuestro proyecto 
+\footnote{\url{https://github.com/JoseJordanF/Claqueta}}.
 
-Una vez escogido el repositorio nos podemos disponer a dividir la implementación del software en hitos. Estos han sido 
-definidos en GitHub y cada uno de ellos contiene un grupo de \textit{issues} que se corresponden con las distintas
-mejoras que se han ido incorporando al proyecto a lo largo de su desarrollo.
+Una vez escogido el repositorio nos podemos disponer a dividir la implementación del software en hitos. 
+Estos han sido definidos en GitHub y cada uno de ellos contiene un grupo de \textit{issues} que se 
+corresponden con las distintas mejoras que se han ido incorporando al proyecto a lo largo de su desarrollo.
 
 El uso de herramientas permiten llevar a cabo el proyecto, asegurando su calidad y buenas prácticas 
-durante el uso de estas.
+durante el uso de estas, velando por el enfoque ágil descrito en el primer capítulo.
 
 Por ello se van a describir las herramientas principales que se van a utilizar para el desarrollo 
 del software, en cada uno de los hitos. Describiendo los lenguajes de programación que se usaran, 
@@ -64,23 +66,6 @@ lenguajes de consulta y manipulación de datos para API, el modelo de datos a us
 se mostraran herramientas que velen por el buen desarrollo en el repositorio y llevar a cabo buenas 
 prácticas. El uso de todas estas herramientas será justificado, explicándose así para qué se va a 
 utilizar dicha herramienta y porque se ha elegido.
-
-\subsection{M0. Configuración inicial del TFG - Estructura, objetivos y metodología usada}
-El primer hito llevará a cabo la planificación inicial y su disposición para verificar la calidad del
-proyecto.
-El objetivo principal de este hito inicial es establecer la estructura del Trabajo de Fin de Grado (TFG) y preparar el 
-proyecto. Después de completar este hito, se espera que los primeros puntos de la documentación estén redactados. Estos 
-puntos incluirán la descripción del problema a abordar, el público objetivo afectado por dicho problema, los objetivos 
-finales del proyecto y el público al que va dirigido. Además, se abordará el estado actual del conocimiento en el área y 
-el enfoque utilizado para desarrollar el producto. Asimismo, se configurará un repositorio que incluirá un verificador 
-ortográfico para la documentación, para ello se han adoptado las mejores prácticas haciendo uso de GitHub Actions creando 
-flujos de trabajo que compilen y comprueben la ortografía y la gramática y los problemas (issues), las historias de 
-usuario y los hitos del proyecto.
-
-\subsection{M05. Capítulo de planificación}
-Debido a la extensión de los primeros capítulos, se ha visto necesario dividir en dos milestones estos cuatro capítulos 
-de la documentación. Donde los tres primeros se encuentran en el M0 y el capítulo de planificación en este.
-El objetivo de este hito es aliviar la carga del milestone de configuración inicial.\vspace{0.5cm}
 
 \section{M1: Definición de objetos - Abstracción del dominio del problema}
 
@@ -172,20 +157,22 @@ interoperabilidad con Java, presentando una combinación equilibrada de simplici
 avanzadas. Siendo bastante atractivo la posibilidad de hacer aplicaciones móviles nativas, punto a 
 tratar cuando concluyamos que tipo de aplicación vamos a desarrollar.
 
-Por otro lado, necesitaremos un flujo de trabajo que nos permita comprobar la calidad del código escrito en dicho 
-lenguaje. Cada cambio, cada nueva incorporación al código, se debe asegurar su calidad, velando por los principios del 
-enfoque ágil, mencionados en el primer capítulo. Para ello se busca un línter o analizador estático de código, siendo 
-este una herramienta que revisa el código en busca de posibles errores, malas prácticas o incumplimientos de estilo antes 
-de que se ejecute. Este enfoque proactivo no solo ayuda a prevenir problemas antes de que afecten el rendimiento o la 
-funcionalidad del software, sino que también se alinea perfectamente con los principios ágiles al fomentar la iteración 
-continua y la mejora constante del código, promoviendo así un desarrollo más ágil y eficiente. 
+Por otro lado, necesitaremos un flujo de trabajo que nos permita comprobar la calidad del código escrito en 
+dicho lenguaje. Cada cambio, cada nueva incorporación al código, se debe asegurar su calidad, velando por 
+los principios del enfoque ágil, mencionados en el primer capítulo. Para ello se busca un línter o 
+analizador estático de código, siendo este una herramienta que revisa el código en busca de posibles 
+errores, malas prácticas o incumplimientos de estilo antes de que se ejecute. Este enfoque proactivo no solo 
+ayuda a prevenir problemas antes de que afecten el rendimiento o la funcionalidad del software, sino que 
+también se alinea perfectamente con los principios ágiles al fomentar la iteración continua y la mejora 
+constante del código, promoviendo así un desarrollo más ágil y eficiente. 
 
-Para la creación de este flujo de trabajo necesitamos un linter para Kotlin que compruebe los ficheros con extensión de 
-archivo Kotlin(.kt). Y hacer esto cada vez que añadamos un nuevo archivo Kotlin al repositorio o modifiquemos alguno ya 
-existente en algún pull request. Para esta tarea es mucho más rentable usar GitHub Actions, ya que debido a su amplia 
-comunidad es sencillo encontrar un linter para el lenguaje que prefieras. Por otra parte, la creación del flujo es 
-prácticamente instantánea debido a la guía por parte de GitHub. También es una tarea sencilla y poco pesada para que 
-GitHub Actions la lleve a cabo, y no ocasiona gastos adicionales.
+Para la creación de este flujo de trabajo necesitamos un linter para Kotlin que compruebe los ficheros con 
+extensión de archivo Kotlin(.kt). Y hacer esto cada vez que añadamos un nuevo archivo Kotlin al repositorio 
+o modifiquemos alguno ya existente en algún pull request. Para esta tarea es mucho más rentable usar GitHub 
+Actions, ya que debido a su amplia comunidad es sencillo encontrar un linter para el lenguaje que prefieras. 
+Por otra parte, la creación del flujo es prácticamente instantánea debido a la guía por parte de GitHub. 
+También es una tarea sencilla y poco pesada para que GitHub Actions la lleve a cabo, y no ocasiona gastos 
+adicionales.
 
 \subsection{Persistencia de datos}
 
@@ -379,11 +366,12 @@ en una nueva película.
 
 Por cada una de estas operaciones se pueden dar varios casos de uso que se han estudiado a través de 
 los test unitarios. Comprobando que cada caso de uso se lleva a cabo como se espera y el conjunto de 
-ellos también. Para proseguir con las buenas prácticas y asegurar la calidad del proyecto y de su desarrollo, debemos 
-seguir los principios vistos en la introducción sobre enfoque ágil, proporcionando una calidad mayor al proyecto y 
-obteniendo un mayor control sobre su desarrollo. Es por esto que debemos crear un flujo de trabajo que permita la 
-ejecución de los test unitarios cada vez que se realice un cambio en los ficheros Kotlin del proyecto. Por lo tanto, es 
-necesario decidir que herramienta de integración continua vamos a usar para ello. GitHub Actions puede usarse 
-perfectamente para la creación del flujo, al igual que se usó para el flujo del linter, ya que solo necesitamos ejecutar 
-test unitarios simples que pueden ser ejecutados en una máquina virtual Ubuntu y en este caso para estar más seguro del 
-correcto funcionamiento de estos, son ejecutados sobre distintas versiones de Java.
+ellos también. Para proseguir con las buenas prácticas y asegurar la calidad del proyecto y de su desarrollo, 
+debemos seguir los principios vistos en la introducción sobre enfoque ágil, proporcionando una calidad mayor al 
+proyecto y obteniendo un mayor control sobre su desarrollo. Es por esto que debemos crear un flujo de trabajo 
+que permita la ejecución de los test unitarios cada vez que se realice un cambio en los ficheros Kotlin del 
+proyecto. Por lo tanto, es necesario decidir que herramienta de integración continua vamos a usar para ello. 
+GitHub Actions puede usarse perfectamente para la creación del flujo, al igual que se usó para el flujo del 
+linter, ya que solo necesitamos ejecutar test unitarios simples que pueden ser ejecutados en una máquina virtual 
+Ubuntu y en este caso para estar más seguro del correcto funcionamiento de estos, son ejecutados sobre distintas 
+versiones de Java.
