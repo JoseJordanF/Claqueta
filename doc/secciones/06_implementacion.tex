@@ -1,23 +1,60 @@
 \chapter{Implementación}
 
 En este capítulo se va a proceder a desarrollar cada uno de los PMV de cara a cada hito relacionado con 
-la implementación, ya que los hitos previos \footnote{\url{https://github.com/JoseJordanF/Claqueta/milestone/1}} 
-\footnote{\url{https://github.com/JoseJordanF/Claqueta/milestone/7}} se encuentran en el capítulo de 
-planificación, ya que definen la infraestructura y organización del proyecto. Además, habrá que 
-discutir que herramientas van a usarse para desarrollar o llevar a cabo estos hitos y el porqué de su 
-elección. 
+la implementación, en los primeros hitos se han dedicado a definir la infraestructura y organización del 
+proyecto. De manera que los siguientes hitos se irán definiendo uno tras otro, debido a que el enfoque 
+interactivo, principio fundamental del desarrollo ágil, no permite una planificación amplia. Por lo que no 
+podríamos establecer todos los PMV desde el principio, además, habrá que discutir qué herramientas van a usarse 
+para desarrollar o llevar a cabo estos hitos y el porqué de su elección. 
 
-Dividiéndose la implementación del software en hitos. Estos han sido definidos en Github
-y cada uno de ellos contiene un grupo de \textit{issues} que se corresponden con las distintas
-mejoras que se han ido incorporando al software a lo largo de su desarrollo.
+Primeramente, se decidirá en este caso qué herramienta se usará para albergar el proyecto y poder definir los 
+hitos, además de permitir un seguimiento del desarrollo mucho más controlado, siguiendo así con el enfoque ágil 
+visto en el primer capítulo. Tras ello se irán desarrollando cada PMV siguiendo las mejores prácticas posibles y 
+obteniendo un producto de calidad, principios afines de nuevo al enfoque ágil.
+
+
+\section{M0: Configuración inicial del TFG - Creación del repositorio}
+
+Ya que el desarrollo avanza a base de productos mínimamente viables, lo primero que 
+debemos hacer es definir un repositorio en el que definir estos hitos. Por ello es la primera herramienta
+que vamos a elegir. Teniendo en cuenta el uso de git como sistema de control de versiones debido a que es 
+la herramienta de control de fuentes más usada genéricamente. 
+
+Teniendo esto presente, buscamos un repositorio basado en git que albergue nuestro proyecto. Además, se busca
+una herramienta online y gratuita, por lo que encontramos varias opciones basadas en git que cumplan estas
+medidas, como por ejemplo GitHub \footnote{\url{https://github.com/}}, GitLab
+\footnote{\url{https://about.gitlab.com/}} y Bitbucket \footnote{\url{https://bitbucket.org/}}, 
+plataformas de desarrollo colaborativo que comparten muchas características. 
+
+En general, las versiones gratuitas de estas plataformas son adecuadas para muchos proyectos pequeños y
+medianos, al menos las de GitHub y GitLab. Por ello, la elección entre una de estas plataformas depende de 
+otros factores, ya que son herramientas muy parecidas, y cualquiera de estas herramientas cumple los criterios
+para su elección.
+
+Es por esto que la herramienta elegida será GitHub debido a la familiaridad que se tiene con esta herramienta y 
+por ende la comodidad de su uso \footnote{\url{https://github.com/JoseJordanF/Claqueta}}.
+
+Para proseguir con el enfoque ágil, y su control sobre cada cambio en el proyecto, apuntando en este caso a la 
+documentación, necesitamos un flujo de trabajo para verificar la ortografía y la gramática de la documentación del 
+proyecto. Por ello se hace uso de GitHub Actions una herramienta de integración continua integrada en GitHub. Esta 
+herramienta nos guía para crear los flujos de trabajo necesarios, en este caso un verificador ortográfico y 
+gramatical, también se aprovechará para crear otro flujo que compile la documentación LaTeX. Debido a que es una 
+herramienta con la que se está familiarizado, al igual que con GitHub, es mucho más cómodo su uso. De manera que 
+será bastante sencilla la creación de estos flujos de trabajo. Esta podría ser otra razón por la que elegir GitHub 
+como repositorio.
+
+Una vez escogido el repositorio y creados los flujos hasta ahora necesarios, nos podemos disponer a dividir la 
+implementación del software en hitos. Estos han sido definidos en GitHub y cada uno de ellos contiene un grupo de 
+\textit{issues} que sé corresponden con las distintas mejoras que se han ido incorporando al proyecto a lo largo
+de su desarrollo.
 
 El uso de herramientas permiten llevar a cabo el proyecto, asegurando su calidad y buenas prácticas 
-durante el uso de estas.
+durante el uso de estas, velando por el enfoque ágil descrito en el primer capítulo.
 
 Por ello se van a describir las herramientas principales que se van a utilizar para el desarrollo 
 del software, en cada uno de los hitos. Describiendo los lenguajes de programación que se usaran, 
 lenguajes de consulta y manipulación de datos para API, el modelo de datos a usar, a su vez también 
-se mostraran herramientas que velen por el buen desarrollo en el repositorio y llevar a cabo buenas 
+se mostrarán herramientas que velen por el buen desarrollo en el repositorio y llevar a cabo buenas 
 prácticas. El uso de todas estas herramientas será justificado, explicándose así para qué se va a 
 utilizar dicha herramienta y porque se ha elegido.
 
@@ -111,112 +148,6 @@ interoperabilidad con Java, presentando una combinación equilibrada de simplici
 avanzadas. Siendo bastante atractivo la posibilidad de hacer aplicaciones móviles nativas, punto a 
 tratar cuando concluyamos que tipo de aplicación vamos a desarrollar.
 
-Por otro lado, necesitaremos un flujo de trabajo que nos permita comprobar la calidad del código escrito en dicho 
-lenguaje. Cada cambio, cada nueva incorporación al código, se debe asegurar su calidad. Para ello se busca un lint para
-Kotlin, que asegure la corrección y calidad del código. Para ello primero debemos elegir un sistema de integración 
-continua para llevar a cabo este flujo de trabajo. Por lo que debemos establecer que buscamos en un sistema de CI, en 
-primer lugar, se debe asegurar la compatibilidad con Kotlin, garantizando que el CI pueda ejecutar tareas específicas 
-para este lenguaje, como el análisis estático de código (lint). Además, es esencial verificar la integración fluida con 
-GitHub, permitiendo la configuración de flujos de trabajo basados en eventos del repositorio. La automatización de tareas 
-de lint debe ser admitida, abarcando la ejecución de herramientas de análisis estático de código para identificar y 
-corregir problemas de estilo y calidad. La personalización de flujos de trabajo es clave, buscando un CI que ofrezca 
-flexibilidad para integrar pasos específicos relacionados con el análisis de código. La capacidad de recibir 
-notificaciones inmediatas sobre los resultados del análisis de código facilitará una retroalimentación rápida. Considerar 
-también el soporte de contenedores para simplificar la configuración del entorno de ejecución. La escalabilidad del 
-sistema de CI es esencial, asegurándose de que pueda manejar proyectos de diferentes tamaños eficientemente. La capacidad 
-de rastrear y analizar el historial de ejecución de flujos de trabajo es crucial para evaluar la consistencia y mejorar 
-continuamente dicho flujo. La seguridad, tanto en la protección de resultados de análisis de código como en la gestión de 
-credenciales. Por último, se debe considerar el modelo de costos y licenciamiento del CI para asegurar que se ajuste al 
-presupuesto del proyecto.
-
-De esta manera pasemos a sopesar varias opciones \cite{BestCI} como \textbf{Jenkins}:
-\begin{itemize}
-  \item \textbf{Compatibilidad con Kotlin:} Jenkins es altamente extensible y tiene soporte para Kotlin a través de 
-  plugins. Puedes utilizar el plugin ''Kotlin'' para ejecutar tareas específicas para este lenguaje.
-  \item \textbf{Integración con GitHub:} Jenkins se integra bien con GitHub mediante plugins como ''GitHub Integration'' 
-  y ''GitHub Branch Source'', permitiendo configurar flujos de trabajo basados en eventos de GitHub.
-  \item \textbf{Automatización de Tareas de lint:} Puedes configurar pasos específicos de lint en Jenkins utilizando 
-  scripts y plugins relevantes para análisis estático de código en proyectos Kotlin.
-  \item \textbf{Personalización de Flujos de Trabajo:} Jenkins es conocido por su flexibilidad y capacidad de 
-  personalización. Puedes definir flujos de trabajo complejos y personalizados según tus necesidades específicas.
-  \item \textbf{Notificaciones y Retroalimentación:} Jenkins proporciona opciones para notificar resultados de manera 
-  inmediata a través de integraciones con servicios como Slack o correo electrónico.
-  \item \textbf{Soporte de Contenedores:} Jenkins es compatible con contenedores a través de plugins como ''Docker 
-  Pipeline'' y ''Kubernetes Continuous Deploy''.
-  \item \textbf{Escalabilidad:} Jenkins es escalable y se puede configurar para manejar proyectos de diferentes tamaños y 
-  complejidades.
-  \item \textbf{Historial y Trazabilidad:} Jenkins mantiene un historial detallado de ejecuciones de trabajos, 
-  proporcionando trazabilidad y permitiendo el análisis de resultados anteriores.
-  \item \textbf{Seguridad:} Jenkins tiene funcionalidades de seguridad robustas, incluyendo opciones para gestionar 
-  credenciales de forma segura y configurar permisos a nivel de proyecto.
-  \item \textbf{Costo y Licenciamiento:} Jenkins es de código abierto y gratuito, lo que lo hace una opción rentable. Sin 
-  embargo, es posible que la implementación y mantenimiento pueden requerir recursos como hardware o extensiones 
-  adicionales.
-\end{itemize}
-
-En resumen, Jenkins cumple con muchos de los criterios necesarios para ejecutar tareas de lint en proyectos Kotlin, 
-brindando flexibilidad y personalización, aunque su configuración y administración pueden ser más complejas en 
-comparación con algunas soluciones más modernas.
-
-Otra opción podría ser \textbf{GitLab CI}:
-\begin{itemize}
-  \item \textbf{Compatibilidad con Kotlin:} GitLab CI admite la ejecución de tareas específicas de Kotlin, incluyendo 
-  linters y otras herramientas de análisis estático de código.
-  \item \textbf{Integración con GitHub:} Aunque el repositorio esté en GitHub, GitLab CI puede integrarse y ejecutarse 
-  sin problemas mediante configuraciones específicas y desencadenadores webhook.
-  \item \textbf{Automatización de Tareas de lint:} GitLab CI permite definir pasos específicos para ejecutar linters y 
-  otras herramientas de análisis estático como parte de un flujo de trabajo.
-   \item \textbf{Personalización de Flujos de Trabajo:} GitLab CI utiliza archivos \texttt{.gitlab-ci.yml} para definir 
-   flujos de trabajo, lo que facilita la configuración y personalización de tareas de lint.
-  \item \textbf{Notificaciones y Retroalimentación:} GitLab CI proporciona opciones para notificar sobre el estado de los 
-  flujos de trabajo, integrándose con servicios como Slack o correo electrónico.
-  \item \textbf{Soporte de Contenedores:} GitLab CI admite la ejecución de flujos de trabajo en diversos ejecutores, 
-  incluyendo máquinas virtuales, contenedores Docker y ejecutores compartidos.
-  \item \textbf{Escalabilidad:} GitLab CI se adapta a proyectos de diversos tamaños y complejidades, permitiendo la 
-  ejecución de flujos de trabajo en paralelo.
-  \item \textbf{Historial y Trazabilidad:} GitLab CI mantiene un historial detallado de ejecuciones de flujos de trabajo,
-  permitiendo la revisión de resultados anteriores y proporcionando trazabilidad completa.
-  \item \textbf{Seguridad:} GitLab CI ofrece opciones para gestionar secretos y credenciales de manera segura, siguiendo 
-  prácticas de seguridad recomendadas.
-  \item \textbf{Costo y Licenciamiento:} GitLab CI es parte integral de GitLab, que ofrece una versión gratuita con 
-  funciones básicas, así como opciones de licenciamiento para funcionalidades avanzadas y soporte empresarial.
-\end{itemize}
-
-Y otra de las mejores herramientas de integración continua como \textbf{GitHub Actions}:
-
-\begin{itemize}
-  \item \textbf{Compatibilidad con Kotlin:} GitHub Actions es versátil y admite fácilmente proyectos Kotlin. Puedes
-  utilizar acciones y configuraciones específicas para ejecutar tareas de lint en código Kotlin.
-  \item \textbf{Integración Profunda con GitHub:} GitHub Actions está estrechamente integrado con GitHub, facilitando la 
-  configuración de flujos de trabajo basados en eventos específicos de GitHub, como push o pull requests.
-  \item \textbf{Automatización de Tareas de lint:} GitHub Actions permite definir pasos personalizados para ejecutar 
-  herramientas de análisis estático de código, incluidos los linters para Kotlin.
-  \item \textbf{Personalización de Flujos de Trabajo:} Puedes personalizar fácilmente flujos de trabajo en GitHub Actions 
-  según tus necesidades, definiendo pasos y acciones específicas para el análisis de código.
-  \item \textbf{Notificaciones y Retroalimentación:} GitHub Actions ofrece integración nativa con notificaciones de 
-  GitHub, Slack, y otras plataformas, proporcionando retroalimentación inmediata sobre los resultados de los flujos de 
-  trabajo.
-  \item \textbf{Soporte de Contenedores:} GitHub Actions incluye soporte nativo para contenedores Docker, lo que facilita 
-  la ejecución de tareas en entornos específicos.
-  \item \textbf{Escalabilidad:} GitHub Actions se escala automáticamente según la demanda, lo que lo hace adecuado para 
-  proyectos de diversos tamaños y complejidades.
-  \item \textbf{Historial y Trazabilidad:} GitHub Actions mantiene un historial detallado de ejecuciones de flujos de 
-  trabajo, permitiendo la revisión de resultados anteriores y proporcionando trazabilidad completa.
-  \item \textbf{Seguridad:} GitHub Actions sigue los protocolos de seguridad de GitHub y proporciona opciones para 
-  gestionar secretos y credenciales de forma segura.
-  \item \textbf{Costo y Licenciamiento:} GitHub Actions ofrece una cantidad gratuita de minutos para ejecutar flujos de
-  trabajo, y los precios adicionales son proporcionales al uso. El modelo de precios es transparente y basado en el 
-  consumo real.
-\end{itemize}
-
-En resumen, GitHub Actions es una solución integral que cumple con los requisitos de ejecución de tareas de lint en 
-proyectos Kotlin, proporcionando una integración profunda con GitHub y una experiencia más moderna y sencilla en 
-comparación con sistemas más antiguos como Jenkins. GitLab CI es una opción sólida para ejecutar tareas de lint en 
-proyectos Kotlin en GitHub, proporcionando flexibilidad, integración y un conjunto de características completo. Sin 
-embargo, la estrecha integración de GitHub Actions y la accesibilidad a la retroalimentación y la comodidad de usarlo en 
-la propia plataforma prevalecen sobre GitLab CI, ya que son herramientas bastante similares, nos aferramos a estos 
-últimos atributos para terminar con la eleccion de GitHub Actions como sistema de CI para nuestro lint.
-
 \subsection{Persistencia de datos}
 
 La persistencia de datos es primordial para realizar cualquier lógica de negocio. Necesitamos tanto 
@@ -239,9 +170,7 @@ básicas, adaptándose bastante bien estos modelos de datos. Siendo idóneas par
 sesión o datos en caché, convirtiéndose en una opción sólida si buscamos alta disponibilidad, dado su rápido 
 acceso a través de claves, y una escalabilidad horizontal.
 
-
 \subsection{Inyección de dependencias}
-
 
 La inyección de dependencias es esencial en proyectos de software \cite{DIart}\cite{BenDI} para 
 promover la modularidad y la reutilización del código. Permite desacoplar componentes, lo que facilita 
@@ -340,6 +269,23 @@ herramientas que nos ofrece Kotlin es necesario la creación de un proyecto.
 Cada una de las siguientes secciones representa un conjunto de issues que se han resuelto para obtener 
 un pmv.
 
+Por otro lado, necesitaremos un flujo de trabajo que nos permita comprobar la calidad del código escrito en 
+dicho lenguaje. Cada cambio, cada nueva incorporación al código, se debe asegurar su calidad, velando por 
+los principios del enfoque ágil, mencionados en el primer capítulo. Para ello se busca un línter o 
+analizador estático de código, siendo este una herramienta que revisa el código en busca de posibles 
+errores, malas prácticas o incumplimientos de estilo antes de que se ejecute. Este enfoque proactivo no solo 
+ayuda a prevenir problemas antes de que afecten el rendimiento o la funcionalidad del software, sino que 
+también se alinea perfectamente con los principios ágiles al fomentar la iteración continua y la mejora 
+constante del código, promoviendo así un desarrollo más ágil y eficiente. 
+
+Para la creación de este flujo de trabajo necesitamos un linter para Kotlin que compruebe los ficheros con 
+extensión de archivo Kotlin(.kt). Y hacer esto cada vez que añadamos un nuevo archivo Kotlin al repositorio 
+o modifiquemos alguno ya existente en algún pull request. Para esta tarea es mucho más rentable usar GitHub 
+Actions, ya que debido a su amplia comunidad es sencillo encontrar un linter para el lenguaje que prefieras. 
+Por otra parte, la creación del flujo es prácticamente instantánea debido a la guía por parte de GitHub y el conocimiento previo que se tenia de estos al haber usado antes dicha herramienta. 
+También es una tarea sencilla y poco pesada para que GitHub Actions la lleve a cabo, y no ocasiona gastos 
+adicionales.
+
 \subsubsection{Identificación y creación de las películas}
 
 Una vez creado el proyecto con nuestros modelos de dominio, estamos listos para comenzar con las 
@@ -411,4 +357,12 @@ en una nueva película.
 
 Por cada una de estas operaciones se pueden dar varios casos de uso que se han estudiado a través de 
 los test unitarios. Comprobando que cada caso de uso se lleva a cabo como se espera y el conjunto de 
-ellos también.
+ellos también. Para proseguir con las buenas prácticas y asegurar la calidad del proyecto y de su desarrollo, 
+debemos seguir los principios vistos en la introducción sobre enfoque ágil, proporcionando una calidad mayor al 
+proyecto y obteniendo un mayor control sobre su desarrollo. Es por esto que debemos crear un flujo de trabajo 
+que permita la ejecución de los test unitarios cada vez que se realice un cambio en los ficheros Kotlin del 
+proyecto. Por lo tanto, es necesario decidir que herramienta de integración continua vamos a usar para ello. 
+GitHub Actions puede usarse perfectamente para la creación del flujo, al igual que se usó para el flujo del 
+linter, ya que solo necesitamos ejecutar test unitarios simples que pueden ser ejecutados en una máquina virtual 
+Ubuntu y en este caso para estar más seguro del correcto funcionamiento de estos, son ejecutados sobre distintas 
+versiones de Java.
