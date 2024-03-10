@@ -327,3 +327,48 @@ GitHub Actions puede usarse perfectamente para la creación del flujo, al igual 
 linter, ya que solo necesitamos ejecutar test unitarios simples que pueden ser ejecutados en una máquina virtual 
 Ubuntu y en este caso para estar más seguro del correcto funcionamiento de estos, son ejecutados sobre distintas 
 versiones de Java.
+
+\subsection{M3: Lógica de negocio - Más operaciones sobre los datos}
+
+En este hito \footnote{\url{https://github.com/JoseJordanF/Claqueta/milestone/4}} se definirán otras operaciones 
+necesarias para cumplir los objetivos del proyecto y se discutirán otras operaciones que definan de forma apropiada
+el funcionamiento de la aplicación. 
+
+Uno de los principales objetivos de este proyecto es que los usuarios puedan confiar en las reseñas de otros
+usuarios. La fiabilidad de los usuarios sobre dichas reseñas se basa en múltiples factores, la diversidad de 
+opiniones ayudaría a obtener una visión más completa de la película, los argumentos que usen los usuarios en sus 
+reseñas también son muy importantes, ya que si estas opiniones son contrastadas con buenos argumentos ayudarán a que 
+los usuarios confíen en ellas. También los usuarios suelen confiar en las reseñas afines a sus gustos, o a su propia 
+opinión, el problema de este factor radica en que muchos usuarios se guían de las reseñas para consumir o no la 
+película, de esta manera este factor solo cobra sentido una vez vista la película.
+
+Otro factor sería la credibilidad o la reputación de la aplicación, aunque puede que esto no siempre ayude, ya que 
+entidades muy prestigiosas como Rotten Tomatoes\cite{RottenTWeb} han sido acusadas de supuestos sobornos para la 
+redacción de reseñas falsas \cite{RtVan}. 
+
+Por último, otro factor quizá clave en este proyecto sería el historial de reseñas del usuario, asegurando así su 
+implicación en la aplicación con reseñas bien fundamentadas, dando así una vista confiable ante el resto de usuarios.
+
+Una vez vistos algunos factores que ayudarían a la confianza de los usuarios en las reseñas, podemos sacarles 
+partido y asegurar que algunos de estos factores puedan asegurarse en la medida de lo posible en la aplicación. Uno 
+de estos factores ya está implementado, no puedes obligar a nadie a escribir una reseña y mostrar los argumentos que 
+fundamentan dicha opinión, pero sí puedes guiarlos. Por ello se pide al usuario que exprese tanto su opinión 
+general sobre la película, como sobre la dirección de esta y de la interpretación de los actores. 
+
+La dirección y la interpretación pueden ser dos argumentos sustanciales que le den sentido a la opinión general que 
+tiene dicho usuario sobre la película. Así se guiaría a estos usuarios a dar dos argumentos que sirvan para aducir 
+su opinión y a que el resto de usuarios entienda esta.
+
+Por otra parte, el resto de factores, como la diversidad de opiniones, no dependen del funcionamiento de la 
+aplicación si no de los propios usuarios. Al igual que la reputación de dicha aplicación, cosa que se podrá dar
+con el tiempo, aunque ya se haya visto que no es algo muy relevante porque hasta Goliat cayó ante David, como le ha 
+ocurrido a Rotten Tomatoes.
+
+Sin embargo, si se podría hacer algo con el historial de reseñas del usuario, el caso sería como mostrar este al 
+resto de usuarios de forma sencilla e instantánea. Se podría contar el número total de reseñas, las interacciones 
+con las reseñas de otros usuarios o ambas, pero esto no asegura que sea un usuario en el que se deba confiar. 
+
+Por lo que una posible solución sería que los usuarios fueran ganando cierta fama o reputación debido a su 
+participación en la aplicación y la relevancia de sus reseñas. Siendo otros usuarios los que acreditan dichas 
+reseñas, aumentando así la reputación del autor y la confianza del resto de usuarios sobre este. Por ende se llevará 
+a cabo el desarrollo de un sistema de reputación \cite{10.1007/978-3-540-74810-6_8}.
