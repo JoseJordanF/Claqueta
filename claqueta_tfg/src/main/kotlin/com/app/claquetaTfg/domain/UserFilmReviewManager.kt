@@ -2,6 +2,7 @@ package com.app.claquetaTfg.domain
 
 import com.app.claquetaTfg.domain.generatorId.generateUniqueId
 import java.lang.RuntimeException
+import java.lang.Thread.sleep
 import java.util.Date
 import java.util.Locale
 
@@ -10,6 +11,7 @@ data class UserFilmReviewManager(
     var reviews: List<Review> = listOf(),
     val films: MutableMap<Long, Film> = mutableMapOf(),
     var recommendations: MutableMap<String, List<Long>> = mutableMapOf(),
+    var reputation: MutableMap<String,Long> = mutableMapOf(),
 ){
 
 
