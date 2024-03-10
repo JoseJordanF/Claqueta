@@ -123,8 +123,8 @@ identificador, ya que el resto de atributos puede coincidir y no identificar de 
 película.
 
 Por último, tenemos una entidad que se encarga de gestionar tanto películas, como reseñas, como 
-usuarios. Además, implementa la interfaz que nos permitirá generar el identificador único para cada 
-película.
+usuarios. Además, hace uso de una función que nos permitirá generar el identificador único para cada 
+película y otros objetos que lo puedan necesitar.
 
 \subsection{Lenguaje de programación}
 
@@ -150,53 +150,12 @@ interoperabilidad con Java, presentando una combinación equilibrada de simplici
 avanzadas. Siendo bastante atractivo la posibilidad de hacer aplicaciones móviles nativas, punto a 
 tratar cuando concluyamos que tipo de aplicación vamos a desarrollar.
 
-\subsection{Persistencia de datos}
-
-La persistencia de datos es primordial para realizar cualquier lógica de negocio. Necesitamos tanto 
-datos del usuario como las entidades que representan los objetos con los que interactúan estos 
-usuarios. Para ello necesitamos una base de datos, en Kotlin poseemos una gran variedad de opciones. Por 
-ejemplo, opciones sencillas de usar y generalmente rápidas como las bases de datos clave-valor, como Firebase 
-Database, Redis, Cassandra y LevelDB, ofrecen soluciones para una amplia gama de aplicaciones. Firebase 
-Database es ideal para aplicaciones web y móviles que necesitan sincronización en tiempo real. Redis 
-sobresale en almacenamiento en memoria y caché, permitiendo la manipulación de varios tipos de datos y 
-brindando una rápida recuperación. Cassandra se destaca en la escalabilidad horizontal y la alta 
-disponibilidad, adecuada para grandes volúmenes de datos. LevelDB ofrece un almacenamiento eficiente en 
-disco. Sin embargo, la elección se inclina hacia Redis, gracias a su capacidad para almacenar datos flexibles 
-y variables, y a su facilidad para manejar diversos tipos de estructuras de datos como las vistas en modelo 
-de dominó. La curva de aprendizaje es baja para Firebase Database, Redis y LevelDB, mientras que Cassandra 
-puede requerir una mayor comprensión de conceptos distribuidos y esquemas de datos más complejos.
-
-También nos podemos apoyar en como se nos indica \cite{NosqlDist}, como podríamos elegir una base de datos 
-NoSQL, mencionando como las bases de datos clave-valor son excelentes para datos simples y estructuras 
-básicas, adaptándose bastante bien estos modelos de datos. Siendo idóneas para almacenar información de 
-sesión o datos en caché, convirtiéndose en una opción sólida si buscamos alta disponibilidad, dado su rápido 
-acceso a través de claves, y una escalabilidad horizontal.
-
-\subsection{Inyección de dependencias}
-
-La inyección de dependencias es esencial en proyectos de software \cite{DIart}\cite{BenDI} para 
-promover la modularidad y la reutilización del código. Permite desacoplar componentes, lo que facilita 
-las pruebas unitarias y el mantenimiento. Al separar la creación de objetos de su uso, se logra una 
-mayor flexibilidad y extensibilidad del sistema, lo que facilita la incorporación de nuevas 
-funcionalidades sin afectar el código existente. En resumen, la inyección de dependencias promueve un 
-diseño limpio y eficiente en el desarrollo de software.
-
-En el mundo de Kotlin, existen varias opciones para facilitar la inyección de dependencias en tus 
-proyectos. Koin destaca por su simplicidad y se integra de manera natural con aplicaciones Android. 
-Dagger 2, una biblioteca de Google, se basa en anotaciones y brinda una inyección de dependencias 
-eficiente y segura, ideal para proyectos extensos. Hilt, una extensión de Dagger 2, simplifica la 
-inyección de dependencias en aplicaciones Android, lo que la hace atractiva para desarrolladores 
-móviles. Ya que no es un proyecto muy extenso, la opción estaría entre Koin y Hilt. Ambas son buenas 
-opciones, sin embargo, Koin es conocido por su enfoque sencillo y sintaxis intuitiva, lo que lo hace 
-ideal para proyectos pequeños o si buscas una curva de aprendizaje suave. Por estos dos motivos, Koin 
-será la opción seleccionada para llevar a cabo la inyección de dependencias.
-
 \subsection{Testing}
 
 Un proyecto con un enfoque ágil está sujeto a pruebas constantemente, algo que estamos apegando en este 
 proyecto a los PMVs resultantes de los milestones. Como ya sabemos de esta manera, aseguramos la 
 calidad del producto y nos cerciora de que todo funciona como debería. Consiguiendo así productos de 
-calidad más robustos minimizando errores.
+calidad más robustos y minimizando errores.
 
 Como hemos mencionado, Kotlin goza de acceso a un extenso conjunto de librerías y \textit{frameworks}. 
 En este conjunto existen varios \textit{frameworks} que nos permiten testear nuestro código.
@@ -208,7 +167,7 @@ característica distintiva de esta herramienta radica en dicha capacidad para ge
 lanzando y evaluando flujos de trabajo en un entorno controlado basado en Docker. Asegurando la funcionalidad y 
 consistencia de los flujos de trabajo antes de su inclusión en el entorno remoto, proporcionando la confianza 
 necesaria en la calidad del código. Siendo una herramienta clave para garantizar una implementación sin 
-contratiempos, mejorando la robustez y la calidad de los flujos de trabajo antes su despliegue.
+contratiempos, mejorando la robustez y la calidad de los flujos de trabajo antes de su despliegue.
 
 Para test unitarios del código encontramos varios \textit{frameworks}, por un lado, tenemos 
 \textit{Spek}\footnote{\url{https://github.com/spekframework/spek}}. Una herramienta escrita para 
@@ -236,7 +195,7 @@ Ambos son buenas herramientas de pruebas. Además, permiten la integración con 
 \textit{framework} de pruebas. Pero ambas herramientas necesitan de otras bibliotecas imprescindibles 
 en las pruebas, estas permiten simular objetos de una clase para trucar el resultado de ciertas 
 funciones que queremos testear. Estos objetos se denominan \textbf{\textit{Mock}}, en Kotlin 
-encontramos la librería nativa \textit{mockk}. Con el par de uno de los \textit{frameworks} 
+encontramos la librería nativa \textit{mockk}. Con uno de los \textit{frameworks} 
 mencionados y esta librería podríamos realizar los test unitarios que necesitemos. Pero principalmente 
 si no en su totalidad usaremos Junit5 debido a la cantidad de información y ejemplos de uso, además de 
 ser la usada por la mayoría de desarrolladores Android.
@@ -260,7 +219,7 @@ objetivos de la aplicación. Siempre dependientes de las necesidades y los prop�
 Como estas vienen definidos por las \textbf{Historias de Usuario}, vamos a recurrir a ellas para 
 determinar las operaciones que se llevaran a cabo con los datos. Aseguraremos la correcta 
 implementación de la lógica de negocio, asegurando la coherencia y validez en las operaciones a través 
-de los test unitarios. siguiendo como siempre la esencia del desarrollo ágil, debemos asegurar las
+de los test unitarios. Siguiendo como siempre la esencia del desarrollo ágil, debemos asegurar las
 buenas prácticas y garantizar la calidad del proyecto, teniendo en cuenta que la lógica de negocio es 
 el núcleo esencial que da vida a una aplicación y hace posible su funcionalidad y utilidad. 
 
@@ -271,12 +230,12 @@ herramientas que nos ofrece Kotlin es necesario la creación de un proyecto.
 Cada una de las siguientes secciones representa un conjunto de issues que se han resuelto para obtener 
 un PMV.
 
-Por otro lado, necesitaremos un flujo de trabajo que nos permita seguir unas buenas practicas comprobando
-la calidad del código escrito en dicho lenguaje. Cada cambio, cada nueva incorporación al código, se debe asegurar su 
-calidad, velando por los principios del enfoque ágil, mencionados en el primer capítulo. Para ello se busca un línter 
-o analizador estático de código, siendo este una herramienta que revisa el código en busca de posibles 
+Por otro lado, necesitaremos un flujo de trabajo que nos permita seguir unas buenas prácticas comprobando
+la calidad del código escrito en dicho lenguaje. Cada cambio, cada nueva incorporación al código, se debe asegurar
+su calidad, velando por los principios del enfoque ágil, mencionados en el primer capítulo. Para ello se busca un 
+línter o analizador estático de código, siendo este una herramienta que revisa el código en busca de posibles 
 errores, malas prácticas o incumplimientos de estilo antes de que se ejecute. Este enfoque proactivo no solo 
-ayuda a prevenir problemas antes de que afecten el rendimiento o la funcionalidad del software, sino que 
+ayuda a prevenir problemas antes de que afecten el rendimiento o la funcionalidad del software, si no que 
 también se alinea perfectamente con los principios ágiles al fomentar la iteración continua y la mejora 
 constante del código, promoviendo así un desarrollo más ágil y eficiente. 
 
@@ -284,7 +243,7 @@ Para la creación de este flujo de trabajo necesitamos un linter para Kotlin que
 extensión de archivo Kotlin(.kt). Y hacer esto cada vez que añadamos un nuevo archivo Kotlin al repositorio 
 o modifiquemos alguno ya existente en algún pull request. Para esta tarea es mucho más rentable usar GitHub 
 Actions, ya que debido a su amplia comunidad es sencillo encontrar un linter para el lenguaje que prefieras. 
-Por otra parte, la creación del flujo es prácticamente instantánea debido a la guía por parte de GitHub y el conocimiento previo que se tenia de estos al haber usado antes dicha herramienta. 
+Por otra parte, la creación del flujo es prácticamente instantánea debido a la guía por parte de GitHub y el conocimiento previo que se tenía de estos al haber usado antes dicha herramienta. 
 También es una tarea sencilla y poco pesada para que GitHub Actions la lleve a cabo, y no ocasiona gastos 
 adicionales.
 
@@ -300,7 +259,7 @@ o el nombre de alguno de los directores sería buena idea. Pero esto nos lleva a
 que nos encontramos películas que poseen el mismo título y son diferentes, al igual que los directores. 
 Incluso por eso se puede llegar a dar la casualidad de que existan dos películas con el mismo título y 
 un director en común, siendo estas diferentes. Por lo tanto, no podríamos usar el título y algún 
-director, o al menos si solo usamos estos datos. Por lo tanto, esta deja de ser una posibilidad, aun 
+director, o al menos si solo usamos estos datos. Por lo tanto, esta deja de ser una posibilidad, aún 
 así tenemos muchas más opciones, podríamos recurrir a la base de datos para generar un identificador 
 único, ya que muchas bases de datos modernas poseen esta función incorporada. Pero no se quiere 
 depender de la base de datos para generar estos identificadores, ya que en este punto del proyecto no 
@@ -310,7 +269,7 @@ métodos que usan una marca en el tiempo y un identificador para cada nodo en el
 entre ambas opciones \cite{compSnowUUID} nos deja que las opciones estilo UUID son valores de 128 bits 
 y no tienen un criterio determinado para generar dicho identificador, mientras que los métodos estilo 
 snowflake son valores enteros de 64 bits y tienen una forma determinada de generar dicho identificador. 
-debido a la facilidad de seguir un algoritmo determinado y que no necesitamos representar demasiados 
+Debido a la facilidad de seguir un algoritmo determinado y que no necesitamos representar demasiados 
 datos como para usar 128 bits, se ha decidido usar snowflake \cite{snowF} método creado por Twitter. 
 Básicamente, se basa en crear un identificador único representando en decimal un número binario creado 
 por bloques, el primero de 41 bits que define los milisegundos pasados desde una marca de tiempo 
