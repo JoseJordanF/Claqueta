@@ -372,3 +372,26 @@ Por lo que una posible solución sería que los usuarios fueran ganando cierta f
 participación en la aplicación y la relevancia de sus reseñas. Siendo otros usuarios los que acreditan dichas 
 reseñas, aumentando así la reputación del autor y la confianza del resto de usuarios sobre este. Por ende se llevará 
 a cabo el desarrollo de un sistema de reputación \cite{10.1007/978-3-540-74810-6_8}.
+
+\subsubsection{Sistema de reputación}
+
+Primero se debe tener una idea clara de que es la reputación, por lo que se definirá como el prestigio o la estima 
+que refleja un usuario, siendo esta la suma de sus acciones y la relevancia de estas en la aplicación. Designando la 
+calidad de sus reseñas frente al resto de usuarios que serán los encargados de acreditar esto, ya que la idea sería 
+que los usuarios se califiquen entre sí. Por lo tanto, se podría definir como un entero que indica la reputación del 
+usuario que irá aumentando o disminuyendo con el tiempo, debido a ciertas acciones.
+
+De manera que debemos discutir cuáles serán esas opciones \footnote{\url{https://es.stackoverflow.com/help/whats-reputation}} que aumentaran o disminuirán la reputación del usuario, y como intervienen el resto de usuarios en 
+ella. 
+
+Por el momento solo existe una interacción en la aplicación, esta sería la creación de una reseña por parte del 
+usuario, pero para obtener un sistema de reputación consistente deben existir más interacciones que permitan darle 
+valor a esta reputación de cara a los usuarios. 
+
+El problema está en que en este momento la aplicación es tan básica que no es posible añadir ninguna interacción, ya 
+que se le debería agregar una interfaz gráfica para ello. 
+
+Siendo más sencillo agregar interacciones para que el usuario pudiera calificar las reseñas de otros, por ejemplo, o 
+interacciones que afecten al propio usuario, como el hecho de dar una mala calificación a una reseña para controlar 
+los ataques sin fundamento a un usuario.
+
