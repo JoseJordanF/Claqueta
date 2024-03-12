@@ -13,7 +13,9 @@ visto en el primer capítulo. Tras ello se irán desarrollando cada PMV siguiend
 obteniendo un producto de calidad, principios afines de nuevo al enfoque ágil.
 
 
-\section{Herramientas previas}
+
+\section{M0: Configuración inicial del TFG - Creación del repositorio}
+
 
 Ya que el desarrollo avanza a base de productos mínimamente viables, lo primero que 
 debemos hacer es definir un repositorio en el que definir estos hitos. Por ello es la primera herramienta
@@ -26,25 +28,41 @@ medidas, como por ejemplo GitHub \footnote{\url{https://github.com/}}, GitLab
 \footnote{\url{https://about.gitlab.com/}} y Bitbucket \footnote{\url{https://bitbucket.org/}}, 
 plataformas de desarrollo colaborativo que comparten muchas características. 
 
-En general, las opciones gratuitas de estas plataformas son adecuadas para muchos proyectos pequeños y
+
+En general, las versiones gratuitas de estas plataformas son adecuadas para muchos proyectos pequeños y
+
 medianos, al menos las de GitHub y GitLab. Por ello, la elección entre una de estas plataformas depende de 
 otros factores, ya que son herramientas muy parecidas, y cualquiera de estas herramientas cumple los criterios
 para su elección.
 
-Es por esto que la herramienta elegida sera GitHub debido a la familiaridad que se tiene con esta herramienta y 
+
+Es por esto que la herramienta elegida será GitHub debido a la familiaridad que se tiene con esta herramienta y 
 por ende la comodidad de su uso \footnote{\url{https://github.com/JoseJordanF/Claqueta}}.
 
-Una vez escogido el repositorio nos podemos disponer a dividir la implementación del software en hitos. 
-Estos han sido definidos en GitHub y cada uno de ellos contiene un grupo de \textit{issues} que se 
-corresponden con las distintas mejoras que se han ido incorporando al proyecto a lo largo de su desarrollo.
+Para proseguir con el enfoque sobre la calidad del proyecto, y su control sobre cada cambio en el proyecto, apuntando 
+en este caso a la documentación, necesitamos un flujo de trabajo para verificar la ortografía y la gramática de la 
+documentación del proyecto. Por ello se hace uso de GitHub Actions una herramienta de integración continua integrada 
+en GitHub. Esta herramienta nos guía para crear los flujos de trabajo necesarios, en este caso un verificador 
+ortográfico y gramatical, también se aprovechará para crear otro flujo que compile la documentación LaTeX. Debido a 
+que es una herramienta con la que se está familiarizado, al igual que con GitHub, es mucho más cómodo su uso. De 
+manera que será bastante sencilla la creación de estos flujos de trabajo. Esta podría ser otra razón por la que 
+elegir GitHub como repositorio.
+
+Una vez escogido el repositorio y creados los flujos hasta ahora necesarios, nos podemos disponer a dividir la 
+implementación del software en hitos. Estos han sido definidos en GitHub y cada uno de ellos contiene un grupo de 
+\textit{issues} que sé corresponden con las distintas mejoras que se han ido incorporando al proyecto a lo largo
+de su desarrollo.
 
 El uso de herramientas permiten llevar a cabo el proyecto, asegurando su calidad y buenas prácticas 
-durante el uso de estas, velando por el enfoque ágil descrito en el primer capítulo.
+durante el uso de estas, velando por el enfoque iterativo del proyecto, su adaptabilidad y flexibilidad.
+Principios ágiles imprescindibles durante el desarrollo del proyecto, ajustándose estas herramientas a cada
+uno de los hitos y adaptándose también a los posibles cambios durante el desarrollo.
+
 
 Por ello se van a describir las herramientas principales que se van a utilizar para el desarrollo 
 del software, en cada uno de los hitos. Describiendo los lenguajes de programación que se usaran, 
 lenguajes de consulta y manipulación de datos para API, el modelo de datos a usar, a su vez también 
-se mostraran herramientas que velen por el buen desarrollo en el repositorio y llevar a cabo buenas 
+se mostrarán herramientas que velen por el buen desarrollo en el repositorio y llevar a cabo buenas 
 prácticas. El uso de todas estas herramientas será justificado, explicándose así para qué se va a 
 utilizar dicha herramienta y porque se ha elegido.
 
@@ -257,7 +275,24 @@ automatización de construcción de código de software por defecto, en este cas
 es imprescindible, ya que para una mayor comodidad en la configuración y el uso de las distintas 
 herramientas que nos ofrece Kotlin es necesario la creación de un proyecto.
 Cada una de las siguientes secciones representa un conjunto de issues que se han resuelto para obtener 
-un pmv.
+un PMV.
+
+Por otro lado, necesitaremos un flujo de trabajo que nos permita seguir unas buenas practicas comprobando
+la calidad del código escrito en dicho lenguaje. Cada cambio, cada nueva incorporación al código, se debe asegurar su 
+calidad, velando por los principios del enfoque ágil, mencionados en el primer capítulo. Para ello se busca un línter 
+o analizador estático de código, siendo este una herramienta que revisa el código en busca de posibles 
+errores, malas prácticas o incumplimientos de estilo antes de que se ejecute. Este enfoque proactivo no solo 
+ayuda a prevenir problemas antes de que afecten el rendimiento o la funcionalidad del software, sino que 
+también se alinea perfectamente con los principios ágiles al fomentar la iteración continua y la mejora 
+constante del código, promoviendo así un desarrollo más ágil y eficiente. 
+
+Para la creación de este flujo de trabajo necesitamos un linter para Kotlin que compruebe los ficheros con 
+extensión de archivo Kotlin(.kt). Y hacer esto cada vez que añadamos un nuevo archivo Kotlin al repositorio 
+o modifiquemos alguno ya existente en algún pull request. Para esta tarea es mucho más rentable usar GitHub 
+Actions, ya que debido a su amplia comunidad es sencillo encontrar un linter para el lenguaje que prefieras. 
+Por otra parte, la creación del flujo es prácticamente instantánea debido a la guía por parte de GitHub y el conocimiento previo que se tenia de estos al haber usado antes dicha herramienta. 
+También es una tarea sencilla y poco pesada para que GitHub Actions la lleve a cabo, y no ocasiona gastos 
+adicionales.
 
 Por otro lado, necesitaremos un flujo de trabajo que nos permita comprobar la calidad del código escrito en 
 dicho lenguaje. Cada cambio, cada nueva incorporación al código, se debe asegurar su calidad, velando por 
@@ -357,8 +392,3 @@ linter, ya que solo necesitamos ejecutar test unitarios simples que pueden ser e
 Ubuntu y en este caso para estar más seguro del correcto funcionamiento de estos, son ejecutados sobre distintas 
 versiones de Java.
 
-
-
-
-%PUESTO SI O SI EN CI
-También es necesario destacar que en este caso se tiene una debido a que GitHub es especialmente fuerte en términos de comunidad y visibilidad de proyectos, lo que podría ser esencial para compartir y destacar el trabajo de manera más amplia, siendo esta visibilidad sustancial para la resolución de problemas a través de la colaboración con la comunidad. Formando parte de la esencia del enfoque ágil que describimos en la introducción. Y también debido a que se nos ofrece GitHub Actions \cite{BestCI}, una potente herramienta \cite{CI_supp} con la capacidad de automatización directamente integrada en la plataforma y que servirá generalmente para crear la mayoría de flujos de trabajo que necesitemos durante la implementación del proyecto. GitHub será el repositorio para nuestro proyecto 
