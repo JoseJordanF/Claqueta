@@ -13,7 +13,9 @@ visto en el primer capítulo. Tras ello se irán desarrollando cada PMV siguiend
 obteniendo un producto de calidad, principios afines de nuevo al enfoque ágil.
 
 
+
 \section{M0: Configuración inicial del TFG - Creación del repositorio}
+
 
 Ya que el desarrollo avanza a base de productos mínimamente viables, lo primero que 
 debemos hacer es definir un repositorio en el que definir estos hitos. Por ello es la primera herramienta
@@ -26,10 +28,13 @@ medidas, como por ejemplo GitHub \footnote{\url{https://github.com/}}, GitLab
 \footnote{\url{https://about.gitlab.com/}} y Bitbucket \footnote{\url{https://bitbucket.org/}}, 
 plataformas de desarrollo colaborativo que comparten muchas características. 
 
+
 En general, las versiones gratuitas de estas plataformas son adecuadas para muchos proyectos pequeños y
+
 medianos, al menos las de GitHub y GitLab. Por ello, la elección entre una de estas plataformas depende de 
 otros factores, ya que son herramientas muy parecidas, y cualquiera de estas herramientas cumple los criterios
 para su elección.
+
 
 Es por esto que la herramienta elegida será GitHub debido a la familiaridad que se tiene con esta herramienta y 
 por ende la comodidad de su uso \footnote{\url{https://github.com/JoseJordanF/Claqueta}}.
@@ -52,6 +57,7 @@ El uso de herramientas permiten llevar a cabo el proyecto, asegurando su calidad
 durante el uso de estas, velando por el enfoque iterativo del proyecto, su adaptabilidad y flexibilidad.
 Principios ágiles imprescindibles durante el desarrollo del proyecto, ajustándose estas herramientas a cada
 uno de los hitos y adaptándose también a los posibles cambios durante el desarrollo.
+
 
 Por ello se van a describir las herramientas principales que se van a utilizar para el desarrollo 
 del software, en cada uno de los hitos. Describiendo los lenguajes de programación que se usaran, 
@@ -288,6 +294,23 @@ Por otra parte, la creación del flujo es prácticamente instantánea debido a l
 También es una tarea sencilla y poco pesada para que GitHub Actions la lleve a cabo, y no ocasiona gastos 
 adicionales.
 
+Por otro lado, necesitaremos un flujo de trabajo que nos permita comprobar la calidad del código escrito en 
+dicho lenguaje. Cada cambio, cada nueva incorporación al código, se debe asegurar su calidad, velando por 
+los principios del enfoque ágil, mencionados en el primer capítulo. Para ello se busca un línter o 
+analizador estático de código, siendo este una herramienta que revisa el código en busca de posibles 
+errores, malas prácticas o incumplimientos de estilo antes de que se ejecute. Este enfoque proactivo no solo 
+ayuda a prevenir problemas antes de que afecten el rendimiento o la funcionalidad del software, sino que 
+también se alinea perfectamente con los principios ágiles al fomentar la iteración continua y la mejora 
+constante del código, promoviendo así un desarrollo más ágil y eficiente. 
+
+Para la creación de este flujo de trabajo necesitamos un linter para Kotlin que compruebe los ficheros con 
+extensión de archivo Kotlin(.kt). Y hacer esto cada vez que añadamos un nuevo archivo Kotlin al repositorio 
+o modifiquemos alguno ya existente en algún pull request. Para esta tarea es mucho más rentable usar GitHub 
+Actions, ya que debido a su amplia comunidad es sencillo encontrar un linter para el lenguaje que prefieras. 
+Por otra parte, la creación del flujo es prácticamente instantánea debido a la guía por parte de GitHub y el conocimiento previo que se tenia de estos al haber usando antes dicha herramienta. 
+También es una tarea sencilla y poco pesada para que GitHub Actions la lleve a cabo, y no ocasiona gastos 
+adicionales.
+
 \subsubsection{Identificación y creación de las películas}
 
 Una vez creado el proyecto con nuestros modelos de dominio, estamos listos para comenzar con las 
@@ -368,3 +391,4 @@ GitHub Actions puede usarse perfectamente para la creación del flujo, al igual 
 linter, ya que solo necesitamos ejecutar test unitarios simples que pueden ser ejecutados en una máquina virtual 
 Ubuntu y en este caso para estar más seguro del correcto funcionamiento de estos, son ejecutados sobre distintas 
 versiones de Java.
+
