@@ -9,8 +9,11 @@ import java.io.File
 import java.lang.RuntimeException
 import java.util.Calendar
 import java.util.Locale
+import kotlin.test.assertEquals
+import kotlin.test.assertNotEquals
+import kotlin.test.assertTrue
 
-//@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+
 class UserFilmReviewManagerTest {
 
     private lateinit var users: List<String>
@@ -22,6 +25,7 @@ class UserFilmReviewManagerTest {
     private lateinit var exampleFilms: List<Film>
     private lateinit var jsonContentReviews: String
     private lateinit var exampleReviews: List<Review>
+    private lateinit var reputation: MutableMap<String, Long>
 
     @BeforeEach
     fun onBefore() {
@@ -29,7 +33,8 @@ class UserFilmReviewManagerTest {
         reviews = listOf()
         films = mutableMapOf()
         recommendations = mutableMapOf()
-        getManager = UserFilmReviewManager(users, reviews, films, recommendations)
+        reputation = mutableMapOf()
+        getManager = UserFilmReviewManager(users, reviews, films, recommendations, reputation)
         jsonContentFilms =
             File("src/test/resources/filmsExamples.json").readText()
         exampleFilms = Json.decodeFromString(jsonContentFilms)
@@ -45,7 +50,7 @@ class UserFilmReviewManagerTest {
         val res = getManager.generateUniqueId(exampleFilms.first())
         println("id: $res")
         //Then
-        assert(res != 0.toLong())
+        assertNotEquals(res, 0.toLong())
     }
 
     @Test
@@ -64,7 +69,7 @@ class UserFilmReviewManagerTest {
         var sizeFilms = getManager.films.size
         println("sizeFilms: $sizeFilms")
         //Then
-        assert(getManager.films.isNotEmpty())
+        assertTrue(getManager.films.isNotEmpty())
 
     }
 
@@ -90,7 +95,7 @@ class UserFilmReviewManagerTest {
         var sizeFilms = getManager.films.size
         println("sizeFilms: $sizeFilms")
         //Then
-        assert(ids[0] != ids[1])
+        assertNotEquals(ids[0], ids[1])
     }
 
     @Test
@@ -102,7 +107,8 @@ class UserFilmReviewManagerTest {
         println("sizeUser: $sizeUser")
         //logger.debug { "id: $res" }
         //Then
-        assert(getManager.users.isNotEmpty())
+        assertTrue(getManager.users.isNotEmpty())
+        assertEquals(getManager.reputation[getManager.users.last()],0)
 
     }
 
@@ -133,6 +139,7 @@ class UserFilmReviewManagerTest {
         )
         var fech = Calendar.getInstance()
         getManager.newUser("JoseJordan")
+        println("USUER::${getManager.users.size}")
         //When
         getManager.newReview(
             exampleReviews.first().contentPlot,
@@ -144,8 +151,9 @@ class UserFilmReviewManagerTest {
         )
         var sizeReviews = getManager.reviews.size
         println("sizeReviews: $sizeReviews")
+        println("Reputacion: ${getManager.reputation["JoseJordan".lowercase(Locale.getDefault())]}")
         //Then
-        assert(getManager.reviews.isNotEmpty())
+        assertTrue(getManager.reviews.isNotEmpty())
     }
 
     @Test
@@ -213,7 +221,7 @@ class UserFilmReviewManagerTest {
             getManager.recommendations["JoseJordan".lowercase(Locale.getDefault())]!!.size
         println("sizeRecommends: $sizeRecommends")
         //Then
-        assert(sizeRecommends == 0)
+        assertEquals(sizeRecommends, 0)
     }
 
     @Test
@@ -258,8 +266,55 @@ class UserFilmReviewManagerTest {
             )]!![0]
         )
         //Then
-        assert(sizeRecommends == 2)
+        assertEquals(sizeRecommends, 2)
     }
 
+    @Test
+    fun `When you increase a user's reputation`() {
+
+        getManager.newUser("JoseJordan")
+        println("inirialReputation: ${getManager.reputation[getManager.users.last()]}")
+
+        //When
+
+        getManager.increaseReputation(getManager.users.last(),20)
+
+        //Then
+
+        assertNotEquals(getManager.reputation[getManager.users.last()],0)
+
+    }
+
+    @Test
+    fun `When you lower a user's reputation`() {
+
+        getManager.newUser("JoseJordan")
+        println("inirialReputation: ${getManager.reputation[getManager.users.last()]}")
+        getManager.increaseReputation(getManager.users.last(),20)
+        //When
+
+        getManager.diminishReputation(getManager.users.last(),10)
+        println("finalReputation: ${getManager.reputation[getManager.users.last()]}")
+        //Then
+
+        assertTrue(getManager.reputation[getManager.users.last()]!! < 20)
+
+    }
+
+    @Test
+    fun `When you take away more of the user's reputation than it has`() {
+
+        getManager.newUser("JoseJordan")
+        println("inirialReputation: ${getManager.reputation[getManager.users.last()]}")
+        getManager.increaseReputation(getManager.users.last(),10)
+        //When
+
+        getManager.diminishReputation(getManager.users.last(),20)
+        println("finalReputation: ${getManager.reputation[getManager.users.last()]}")
+        //Then
+
+        assertEquals(getManager.reputation[getManager.users.last()], 0)
+
+    }
 
 }

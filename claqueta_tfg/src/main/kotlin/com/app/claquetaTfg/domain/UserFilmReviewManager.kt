@@ -10,6 +10,7 @@ data class UserFilmReviewManager(
     var reviews: List<Review> = listOf(),
     val films: MutableMap<Long, Film> = mutableMapOf(),
     var recommendations: MutableMap<String, List<Long>> = mutableMapOf(),
+    var reputation: MutableMap<String,Long> = mutableMapOf(),
 ){
 
 
@@ -44,6 +45,7 @@ data class UserFilmReviewManager(
     fun newUser(username: String) {
         if (!users.contains(username.lowercase(Locale.getDefault()))) {
             users += username.lowercase(Locale.getDefault())
+            reputation[users.last()] = 0
         } else {
             throw RuntimeException("Ese usuario ya existe")
         }
@@ -103,5 +105,18 @@ data class UserFilmReviewManager(
         }
         var recommendRes : List<Long> = filmsToUser.filterNot {  it in filtroIds }
         recommendations[username] = recommendRes
+    }
+
+    fun increaseReputation(username: String, points: Int){
+        reputation[username] = reputation[username]!! + points
+    }
+
+    fun diminishReputation(username: String, points: Int){
+        if (reputation[username]!! < points){
+            reputation[username] = 0
+        }else{
+            reputation[username] = reputation[username]!! - points
+        }
+
     }
 }
