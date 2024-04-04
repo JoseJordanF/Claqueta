@@ -13,6 +13,10 @@ repositories {
 dependencies {
     testImplementation(kotlin("test"))
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.0")
+
+    //Configuration
+    implementation("com.typesafe:config:1.4.3")
+    implementation("io.github.cdimascio:dotenv-java:2.2.0")
 }
 
 tasks.test {
