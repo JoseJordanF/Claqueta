@@ -294,10 +294,10 @@ class UserFilmReviewManagerTest {
     @Test
     fun `When I want to load the configuration of a HOCON file`() {
 
-        val HOCONFilePath = "src/test/resources/configuracion.conf"
+        val hoconFilePath = "src/test/resources/configuracion.conf"
 
         //When
-        val hoconConfig: Config = ConfigFactory.parseFile(File(HOCONFilePath))
+        val hoconConfig: Config = ConfigFactory.parseFile(File(hoconFilePath))
         config = config.withFallback(hoconConfig)
 
         println(config.getInt("database.options.timeout"))
@@ -308,10 +308,10 @@ class UserFilmReviewManagerTest {
     @Test
     fun `When I want to load the configuration of a JSON file`() {
 
-        val JosnFilePath = "src/test/resources/Configuracion.json"
+        val josnFilePath = "src/test/resources/Configuracion.json"
 
         //When
-        val jsonConfig: Config = ConfigFactory.parseFile(File(JosnFilePath))
+        val jsonConfig: Config = ConfigFactory.parseFile(File(josnFilePath))
         config = config.withFallback(jsonConfig)
 
         println(config.getString("database.credentials.username"))
