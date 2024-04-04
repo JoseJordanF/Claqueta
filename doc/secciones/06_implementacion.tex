@@ -392,3 +392,44 @@ linter, ya que solo necesitamos ejecutar test unitarios simples que pueden ser e
 Ubuntu y en este caso para estar más seguro del correcto funcionamiento de estos, son ejecutados sobre distintas 
 versiones de Java.
 
+\section{M3: Persistencia de datos y configuración}
+
+En este hito se pretende añadir la capa de persistencia de datos, ya que el usuario  necesita que su información
+sea guardada de alguna forma, esos datos también son necesarios para realizar las distintas operaciones ya 
+planteadas en la lógica de negocio. Además, siguiendo buenas prácticas y él en enfoque iterativo del desarrollo 
+ágil, deberíamos añadir una forma de depurar las operaciones de la capa de persistencia, ya que esto nos 
+permitiría encontrar más fácilmente los errores que se puedan dar durante estas operaciones. De esta manera 
+obtendríamos un PMV que permita guardar datos creados por el usuario y cargarlos, además de tener un sistema de 
+registro durante esas operaciones.
+
+Pero para llevar a cabo esto, necesitamos añadir un sistema de configuración que nos permita preparar nuestro 
+proyecto para añadir esas dos capas. Ya que este sistema de configuración debería permitir a nuestra aplicación 
+adaptarse a diferentes entornos, ya sea desarrollo, o producción. También nos brinda cierta privacidad, ya que 
+contenido sensible como claves API, direcciones, puertos, rutas o cualquier otro dato que se vaya a usar, en 
+este caso la capa de persistencia y más adelante otras herramientas, quedaran ocultos en dicho archivo. Este 
+también podría portar el formato del registro si fuera necesario.
+ 
+Otra ventaja de usar un sistema de configuración es la portabilidad, ya que cuando se decida desplegar la 
+aplicación en diferentes servidores, este sistema facilita la migración sin necesidad de cambiar el código. Al 
+igual que facilita el mantenimiento y la gestión de esta configuración. Por último, permite escalar la 
+aplicación de manera más eficiente al proporcionar una forma de ajustar la configuración para optimizar el 
+rendimiento y la escalabilidad según sea necesario.
+
+Por lo tanto, primero se debe encontrar la herramienta que permita controlar la configuración de la aplicación. 
+Para Kotlin existen mucha variedad de bibliotecas, pero se busca una que permita leer de distintas fuentes, 
+obteniendo una aplicación más modular y fácil de mantener, ya que se podría cambiar la configuración sin tener 
+que modificar el código fuente. De manera que se busca una biblioteca que sea capaz de leer ficheros de 
+configuración que se pasan por la línea de comandos, ficheros con distintos formatos, variables de entorno del 
+sistema o tus propios archivos .env, e incluso que permita sistemas de configuración remota.
+
+Se busca principalmente en el repositorio oficial de Maven \footnote{\url{https://mvnrepository.com/}}, ya que
+brinda una gran cantidad de opciones, además de más información relacionada con la popularidad de la biblioteca o 
+las vulnerabilidades que estas tienen. Las bibliotecas encontradas serían las siguientes, Apache Commons 
+Configuration, Config de Lightbend, Config Magic, Config de NetworkNT, están listadas en orden de popularidad, la 
+mayoría tiene soporte para leer de distintas fuentes; sin embargo, Config de Lightbend y  Config de NetworkNT 
+poseen soporte nativo para fuentes remotas. Por ende cualquiera de estas dos bibliotecas puede ser escogida, pero 
+Config de NetworkNT es una biblioteca menos popular respecto a Config de Lightbend y por esto es posible que haya 
+menos documentación acerca del soporte para algunas fuentes. Por lo que se concluye que la mejor opción es Config 
+de Lightbend \footnote{\url{https://github.com/lightbend/config}}. Aun así, hay que tener en cuenta que aunque 
+pueda integrarse con varios sistemas de configuración, para algunos serán necesarias algunas bibliotecas, pero 
+esto es algo que pasa con absolutamente todas las bibliotecas de configuración.
