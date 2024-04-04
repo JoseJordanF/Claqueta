@@ -9,8 +9,11 @@ import java.io.File
 import java.lang.RuntimeException
 import java.util.Calendar
 import java.util.Locale
+import kotlin.test.assertEquals
+import kotlin.test.assertNotEquals
+import kotlin.test.assertNotNull
+import kotlin.test.assertTrue
 
-//@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class UserFilmReviewManagerTest {
 
     private lateinit var users: List<String>
@@ -45,7 +48,7 @@ class UserFilmReviewManagerTest {
         val res = getManager.generateUniqueId(exampleFilms.first())
         println("id: $res")
         //Then
-        assert(res != 0.toLong())
+        assertNotEquals(res, 0.toLong())
     }
 
     @Test
@@ -64,7 +67,7 @@ class UserFilmReviewManagerTest {
         var sizeFilms = getManager.films.size
         println("sizeFilms: $sizeFilms")
         //Then
-        assert(getManager.films.isNotEmpty())
+        assertTrue(getManager.films.isNotEmpty())
 
     }
 
@@ -90,7 +93,7 @@ class UserFilmReviewManagerTest {
         var sizeFilms = getManager.films.size
         println("sizeFilms: $sizeFilms")
         //Then
-        assert(ids[0] != ids[1])
+        assertNotEquals(ids[0], ids[1])
     }
 
     @Test
@@ -102,7 +105,7 @@ class UserFilmReviewManagerTest {
         println("sizeUser: $sizeUser")
         //logger.debug { "id: $res" }
         //Then
-        assert(getManager.users.isNotEmpty())
+        assertTrue(getManager.users.isNotEmpty())
 
     }
 
@@ -145,7 +148,7 @@ class UserFilmReviewManagerTest {
         var sizeReviews = getManager.reviews.size
         println("sizeReviews: $sizeReviews")
         //Then
-        assert(getManager.reviews.isNotEmpty())
+        assertTrue(getManager.reviews.isNotEmpty())
     }
 
     @Test
@@ -213,7 +216,7 @@ class UserFilmReviewManagerTest {
             getManager.recommendations["JoseJordan".lowercase(Locale.getDefault())]!!.size
         println("sizeRecommends: $sizeRecommends")
         //Then
-        assert(sizeRecommends == 0)
+        assertEquals(sizeRecommends, 0)
     }
 
     @Test
@@ -258,7 +261,7 @@ class UserFilmReviewManagerTest {
             )]!![0]
         )
         //Then
-        assert(sizeRecommends == 2)
+        assertEquals(sizeRecommends, 2)
     }
 
 
