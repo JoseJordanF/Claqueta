@@ -26,4 +26,5 @@ jobs:
         working-directory: claqueta_tfg/  
         run: |
           chmod +x gradlew
+          sed -i 's/\r$//' ./gradlew
           ./gradlew test
