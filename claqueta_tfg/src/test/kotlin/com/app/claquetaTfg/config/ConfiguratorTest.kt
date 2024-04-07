@@ -63,7 +63,7 @@ class ConfiguratorTest{
     fun `When I want to load the configuration of a JSON file`() {
 
         val josnFilePath =
-            "src/test/resources/configuracion.json"
+            "src/test/resources/Configuracion.json"
 
         //When
         Configurator.loadConfig(josnFilePath)
