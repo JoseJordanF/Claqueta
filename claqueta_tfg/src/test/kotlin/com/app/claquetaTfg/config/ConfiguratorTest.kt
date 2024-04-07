@@ -18,7 +18,7 @@ class ConfiguratorTest{
     fun `When I want to load the configuration of an env file`() {
 
         val envFilePath =
-            "C:\\Users\\34625\\Desktop\\JOB\\TFG\\DEFINITIVO\\claqueta_tfg\\src\\test\\resources\\configuracion.env"
+            "src/test/resources/configuracion.env"
 
         //When
         Configurator.loadConfig(envFilePath)
@@ -33,7 +33,7 @@ class ConfiguratorTest{
     fun `When I want to load the configuration of a HOCON file`() {
 
         val hoconFilePath =
-            "C:\\Users\\34625\\Desktop\\JOB\\TFG\\DEFINITIVO\\claqueta_tfg\\src\\test\\resources\\configuracion.conf"
+            "src/test/resources/configuracion.conf"
 
         //When
         Configurator.loadConfig(hoconFilePath)
@@ -48,7 +48,7 @@ class ConfiguratorTest{
     fun `When I want to load the configuration of a properties file`() {
 
         val propertiesFilePath =
-            "C:\\Users\\34625\\Desktop\\JOB\\TFG\\DEFINITIVO\\claqueta_tfg\\src\\test\\resources\\configuracion.properties"
+            "src/test/resources/configuracion.properties"
 
         //When
         Configurator.loadConfig(propertiesFilePath)
@@ -63,7 +63,7 @@ class ConfiguratorTest{
     fun `When I want to load the configuration of a JSON file`() {
 
         val josnFilePath =
-            "C:\\Users\\34625\\Desktop\\JOB\\TFG\\DEFINITIVO\\claqueta_tfg\\src\\test\\resources\\configuracion.json"
+            "src/test/resources/configuracion.json"
 
         //When
         Configurator.loadConfig(josnFilePath)
@@ -119,13 +119,13 @@ class ConfiguratorTest{
     fun `When I want to load all settings`() {
 
         val envFilePath =
-            "C:\\Users\\34625\\Desktop\\JOB\\TFG\\DEFINITIVO\\claqueta_tfg\\src\\test\\resources\\configuracion.env"
+            "src/test/resources/configuracion.env"
         val hoconFilePath =
-            "C:\\Users\\34625\\Desktop\\JOB\\TFG\\DEFINITIVO\\claqueta_tfg\\src\\test\\resources\\configuracion.conf"
+            "src/test/resources/configuracion.conf"
         val propertiesFilePath =
-            "C:\\Users\\34625\\Desktop\\JOB\\TFG\\DEFINITIVO\\claqueta_tfg\\src\\test\\resources\\configuracion.properties"
+            "src/test/resources/configuracion.properties"
         val josnFilePath =
-            "C:\\Users\\34625\\Desktop\\JOB\\TFG\\DEFINITIVO\\claqueta_tfg\\src\\test\\resources\\configuracion.json"
+            "src/test/resources/configuracion.json"
         val configString = """
         database {
           host = "localhost"
