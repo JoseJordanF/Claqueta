@@ -111,7 +111,6 @@ class ConfiguratorTest{
         assertThrows<RuntimeException> {
             Configurator.loadConfig(configString)
             println(Configurator.getConfig("database.options.max_connections"))
-            val res = Configurator.getConfig("database.options.max_connections")
         }
     }
 
