@@ -1,4 +1,4 @@
-package com.app.claquetaTfg.configuration
+package com.app.claquetaTfg.config
 
 import com.typesafe.config.Config
 import com.typesafe.config.ConfigFactory
