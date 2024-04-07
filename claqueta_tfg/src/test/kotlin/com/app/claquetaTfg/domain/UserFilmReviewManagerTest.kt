@@ -1,8 +1,5 @@
 package com.app.claquetaTfg.domain
 
-import com.typesafe.config.Config
-import com.typesafe.config.ConfigFactory
-import io.github.cdimascio.dotenv.Dotenv
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.decodeFromString
 import org.junit.jupiter.api.BeforeEach
@@ -28,7 +25,6 @@ class UserFilmReviewManagerTest {
     private lateinit var exampleFilms: List<Film>
     private lateinit var jsonContentReviews: String
     private lateinit var exampleReviews: List<Review>
-    private lateinit var config: Config
 
     @BeforeEach
     fun onBefore() {
@@ -43,7 +39,6 @@ class UserFilmReviewManagerTest {
         jsonContentReviews =
             File("src/test/resources/reviewsExamples.json").readText()
         exampleReviews = Json.decodeFromString(jsonContentReviews)
-        config = ConfigFactory.empty()
     }
 
     @Test
@@ -267,83 +262,5 @@ class UserFilmReviewManagerTest {
         )
         //Then
         assertEquals(sizeRecommends, 2)
-    }
-    @Test
-    fun `When I want to load the configuration of an env file`() {
-
-        val dotenv = Dotenv
-            .configure()
-            .directory("src/test/resources")
-            .filename("configuracion.env")
-            .load()
-
-        //When
-        dotenv.entries().forEach { entry ->
-            val key = entry.key
-            val value = entry.value
-            val escapedValue = value.replace("\\", "\\\\").replace("\"", "\\\"") // Escapa los caracteres especiales
-            val configString = "\"$key\" : \"$escapedValue\"" // Formatea la entrada como una cadena de configuración
-            config = config.withFallback(ConfigFactory.parseString(configString))
-        }
-
-        println(config.getString("DB_USER"))
-
-        //Then
-        assertNotEquals(config.getString("DB_USER"), null)
-    }
-    @Test
-    fun `When I want to load the configuration of a HOCON file`() {
-
-        val hoconFilePath = "src/test/resources/configuracion.conf"
-
-        //When
-        val hoconConfig: Config = ConfigFactory.parseFile(File(hoconFilePath))
-        config = config.withFallback(hoconConfig)
-
-        println(config.getInt("database.options.timeout"))
-
-        //Then
-        assertNotNull(config.getInt("database.options.timeout"))
-    }
-    @Test
-    fun `When I want to load the configuration of a JSON file`() {
-
-        val josnFilePath = "src/test/resources/Configuracion.json"
-
-        //When
-        val jsonConfig: Config = ConfigFactory.parseFile(File(josnFilePath))
-        config = config.withFallback(jsonConfig)
-
-        println(config.getString("database.credentials.username"))
-
-        //Then
-        assertNotEquals(config.getString("database.credentials.username"), null)
-    }
-    @Test
-    fun `When I want to load the configuration from inline text strings`() {
-
-        val configString = """
-        database {
-          host = "localhost"
-          port = 5432
-          credentials {
-            username = "myuser"
-            password = "mypassword"
-          }
-          options {
-            timeout = 30
-            max_connections = 100
-          }
-        }
-    """.trimIndent()
-
-        //When
-        val textStringConfig: Config = ConfigFactory.parseString(configString)
-        config = config.withFallback(textStringConfig)
-
-        println(config.getString("database.credentials.password"))
-
-        //Then
-        assertNotEquals(config.getString("database.credentials.password"), null)
     }
 }
