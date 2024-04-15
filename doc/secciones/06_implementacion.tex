@@ -392,34 +392,38 @@ linter, ya que solo necesitamos ejecutar test unitarios simples que pueden ser e
 Ubuntu y en este caso para estar más seguro del correcto funcionamiento de estos, son ejecutados sobre distintas 
 versiones de Java.
 
-\section{M3: Persistencia de datos y configuración}
+\section{M3: Servicios esenciales para la aplicación}
 
-Este hito es muy breve, ya que se pretende obtener un sistema de configuración que permita la futura configuración
-de otras herramientas, de manera que no sea necesario cambiar gran parte del código fuente. Permitiendo que solo 
-se cambien los ficheros de configuración pertinentes; como primer paso hay que definir las fuentes de las que 
-proviene dicha configuración, dado que la aplicación se desarrolla en Kotlin se ha decidido recurrir a las fuentes 
-más populares en aplicaciones de este lenguaje \cite{popularConfig} como JSON, ficheros Java Properties, YAML e 
-incluso ficheros INI. Por lo tanto, al finalizar este hito se debería obtener un PMV, siendo este el proyecto 
-integrado con un sistema de configuración que permita adaptar la aplicación a la fuente de la que provenga la 
-configuración sin cambiar el código fuente. Brindando de esta manera privacidad del contenido sensible guardado en 
-los ficheros de configuración y flexibilidad a la hora de permitir diferentes fuentes de las que provengan estos. 
+En este hito \footnote{\url{https://github.com/JoseJordanF/Claqueta/milestone/9}} se busca dotar a la aplicación de
+dos funcionalidades esenciales para esta, siguiendo el problema planteado por el desarrollador 
+\footnote{\url{https://github.com/JoseJordanF/Claqueta/issues/125}}. De esta manera, primero se debe buscar una 
+herramienta para el primer servicio, que siguiendo lo expuesto por el desarrollador, debe ser una herramienta que 
+permita gestionar la configuración de la aplicación; pudiendo obtener lo necesario para el arranque de la aplicación 
+y su posterior funcionamiento. Esta herramienta debe ser capaz de cargar esta configuración desde distintas fuentes, 
+velando por el arranque de la aplicación, ya que como menciona el desarrollador, estos ficheros pueden ser de 
+distintos tipos, luego afiliarse a uno solo podría llevar desembocar en una carga errónea de este y que la 
+aplicación no funcionase. Por lo que se ha recurrido a las fuentes más populares en aplicaciones Kotlin 
+\cite{popularConfig} como JSON\cite{JsonWiki}, ficheros Java Properties\cite{JProWiki}, YAML\cite{YmlWiki}, 
+HOCON\cite{HoconWiki} o ficheros INI\cite{IniWiki}. Y como mínimo también debería poder leer de fuentes habituales 
+como variables de entorno e incluso a través de archivos dotenv.
 
-Este sistema de configuración facilita el mantenimiento y la gestión de esta configuración. Por último, permite 
-escalar la aplicación de manera más eficiente al proporcionar una forma de ajustar la configuración para optimizar 
-el rendimiento y la escalabilidad según sea necesario.
-
-De modo que se debe encontrar la herramienta que permita controlar la configuración de la aplicación. 
-Para Kotlin existen mucha variedad de bibliotecas, pero se busca una que permita leer de las distintas fuentes
-vistas antes, o al menos de la mayoría. Se busca principalmente en el repositorio oficial de Maven 
-\footnote{\url{https://mvnrepository.com/}}, ya que brinda una gran cantidad de opciones, además de más 
-información relacionada con la popularidad de la biblioteca o las vulnerabilidades que estas tienen. Las 
-bibliotecas encontradas serían las siguientes, Apache Commons Configuration, Config de Lightbend, Config Magic, 
-Config de NetworkNT, están listadas en orden de popularidad, la mayoría tiene soporte para leer de distintas 
-fuentes como JSON o YAML, pero pocas pueden leer de más de una de estas fuentes vistas; sin embargo, Config de 
-Lightbend y  Config de NetworkNT poseen soporte nativo para JSON, ficheros Java Properties y JSON, YAML 
-respectivamente. Por ende cualquiera de estas dos bibliotecas puede ser escogida, pero Config de NetworkNT es una 
-biblioteca menos popular respecto a Config de Lightbend y por esto es posible que haya menos documentación acerca 
-del soporte para algunas fuentes. Además, Config de Lightbend permite leer de otras fuentes populares como HOCON 
-(\begin{otherlanguage} {english}``\textit{\textbf{Human-Optimized Config Object Notation}}''\end{otherlanguage}) e 
-incluso permite leer de fuentes remotas. Por lo que se concluye que la mejor opción es Config de Lightbend 
-\footnote{\url{https://github.com/lightbend/config}}.
+Para Kotlin existen mucha variedad de bibliotecas para controlar la configuración de la aplicación, pero se busca 
+una que permita el máximo número de fuentes vistas antes, e incluso que permita leer variables de entorno y archivos 
+dotenv. Se busca principalmente en el repositorio oficial de Maven \footnote{\url{https://mvnrepository.com/}}, ya 
+que brinda una gran cantidad de opciones, además de más información relacionada con la popularidad de la biblioteca 
+o las vulnerabilidades que estas tienen. Las bibliotecas encontradas serían las siguientes, Apache Commons 
+Configuration\footnote{\url{https://commons.apache.org/proper/commons-configuration/}}, Config de 
+Lightbend\footnote{\url{https://github.com/lightbend/config}}, Config 
+Magic\footnote{\url{https://github.com/brianm/config-magic}}, Config de 
+NetworkNT\footnote{\url{https://mvnrepository.com/artifact/com.networknt/config/2.1.33}}, están listadas en orden de 
+popularidad, la mayoría tiene soporte para leer de distintas fuentes como JSON o YAML, pero pocas pueden leer de más
+de una de estas fuentes; sin embargo, Config de Lightbend y  Config de NetworkNT poseen soporte nativo para JSON, 
+ficheros Java Properties y JSON, YAML respectivamente. Pero desgraciadamente ninguna de ellas puede leer nativamente 
+variables de entorno o archivos dotenv. Por lo que se ha decidido usar una librería creada por el 
+desarrollador\footnote{\url{https://github.com/JoseJordanF/LibraryConfigProject}}, la 
+cual encapsula el funcionamiento de tres bibliotecas, una ya se conoce, ya que es una de las mejores opciones 
+discutida arriba, Config de Lightbend que cubre JSON, Java Properties y HOCON, dotenv-
+java\footnote{\url{https://github.com/cdimascio/dotenv-java}} que cubre las variables de entorno y los archivos 
+dotenv y por último snakeyaml \footnote{\url{https://bitbucket.org/snakeyaml/snakeyaml/src/master/}} que cubre los 
+archivos YAML. De manera que dicha librería lee nativamente archivos JSON, Java Properties, YAML, HOCON e incluso 
+dotenv, así se concluye que es la mejor opción para la aplicación.
