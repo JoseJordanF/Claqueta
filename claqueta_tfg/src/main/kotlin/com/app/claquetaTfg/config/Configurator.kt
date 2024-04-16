@@ -1,24 +1,44 @@
 package com.app.claquetaTfg.config
 
-import com.typesafe.config.Config
-import com.typesafe.config.ConfigFactory
-import io.github.cdimascio.dotenv.Dotenv
+
+import com.app.jconfiglibrary.JConfig
 import java.io.File
-import java.io.FileInputStream
-import java.util.Properties
 
 object Configurator {
 
-    private lateinit var config: Config
+    private lateinit var config: JConfig
 
-    fun init(){
-        config = ConfigFactory.empty()
+    fun init(
+	propertiesFilePath: String = "src/test/resources/configuration/configuracion.properties", 
+	envFilePath: String = "src/test/resources/configuration/configuracion.env", 
+	jsonFilePath: String = "src/test/resources/configuration/configuracion.json", 
+	ymlFilePath: String = "src/test/resources/configuration/configuracion.yml", 
+	hoconFilePath: String = "src/test/resources/configuration/configuracion.conf"
+    ): Boolean {
+
+        config = JConfig()
+        var successfully = false
+
+        if (config.parseFile(File(propertiesFilePath))){
+            successfully = true
+            println("Configuracion properties cargada correctamente")
+        }else if (config.parseFile(File(envFilePath))){
+            successfully = true
+            println("Configuracion env cargada correctamente")
+        }else if (config.parseFile(File(jsonFilePath))){
+            successfully = true
+            println("Configuracion json cargada correctamente")
+        }else if (config.parseFile(File(ymlFilePath))){
+            successfully = true
+            println("Configuracion yml cargada correctamente")
+        }else if (config.parseFile(File(hoconFilePath))){
+            successfully = true
+            println("Configuracion hocon cargada correctamente")
+        }
+        return successfully
     }
 
-    fun loadConfig(pathFile: String) {
-        val fileConfig: Config = ConfigFactory.parseFile(File(pathFile))
-        config = config.withFallback(fileConfig)
+    fun getConfig(key: String): String? {
+        return config.getString(key)
     }
-
-    fun getConfig(key: String) = config.getString(key)
 }
