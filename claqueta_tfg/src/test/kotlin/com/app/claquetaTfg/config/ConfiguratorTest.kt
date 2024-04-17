@@ -60,7 +60,7 @@ class ConfiguratorTest{
     fun `When loading the configuration, the dotenv file is the only one that works`() {
 
         val envFilePath =
-            "src/test/resources/configuration/.env"
+            "src/test/resources/configuration/config.env"
 
         //When
         config = Configurator.instance(envFilePath)
