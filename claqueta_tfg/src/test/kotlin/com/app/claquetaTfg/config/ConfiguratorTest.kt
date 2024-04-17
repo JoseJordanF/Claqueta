@@ -11,7 +11,7 @@ class ConfiguratorTest{
 
     @BeforeEach
     fun onBefore() {
-        config = Configurator.Instance()
+        config = Configurator.instance()
     }
 
     @Test
@@ -21,7 +21,7 @@ class ConfiguratorTest{
             "src/test/resources/configuration/config.conf"
 
         //When
-        config = Configurator.Instance(hoconFilePath)
+        config = Configurator.instance(hoconFilePath)
         val res = config.getConfig("SERVER_TIMEOUT")
 
         //Then
@@ -35,7 +35,7 @@ class ConfiguratorTest{
             "src/test/resources/configuration/config.properties"
 
         //When
-        config = Configurator.Instance(propertiesFilePath)
+        config = Configurator.instance(propertiesFilePath)
         val res = config.getConfig("SERVER_PORT")
 
         //Then
@@ -49,7 +49,7 @@ class ConfiguratorTest{
             "src/test/resources/configuration/config.json"
 
         //When
-        config = Configurator.Instance(jsonFilePath)
+        config = Configurator.instance(jsonFilePath)
         val res = config.getConfig("DB_PASSWORD")
 
         //Then
@@ -63,7 +63,7 @@ class ConfiguratorTest{
             "src/test/resources/configuration/.env"
 
         //When
-        config = Configurator.Instance(envFilePath)
+        config = Configurator.instance(envFilePath)
         val res = config.getConfig("VERSION")
 
         //Then
@@ -77,7 +77,7 @@ class ConfiguratorTest{
             "src/test/resources/configuration/config.yml"
 
         //When
-        config = Configurator.Instance(ymlFilePath)
+        config = Configurator.instance(ymlFilePath)
         val res = config.getConfig("SERVER_TIMEOUT")
 
         //Then

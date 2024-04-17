@@ -10,7 +10,7 @@ class Configurator private constructor() {
     companion object{
         private lateinit var instance: Configurator
 
-        fun Instance(path: String="src/test/resources/configuration/.env"): Configurator {
+        fun instance(path: String="src/test/resources/configuration/.env"): Configurator {
             instance = Configurator()
             instance.config = JConfig()
 
