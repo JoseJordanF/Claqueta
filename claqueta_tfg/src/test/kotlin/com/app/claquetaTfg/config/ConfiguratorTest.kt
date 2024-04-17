@@ -7,15 +7,22 @@ import kotlin.test.assertNotNull
 
 class ConfiguratorTest{
 
+    private lateinit var config: Configurator
+
+    @BeforeEach
+    fun onBefore() {
+        config = Configurator.Instance()
+    }
+
     @Test
     fun `When loading the configuration, the HOCON file is the only one that works`() {
 
-        val hoconFilePath = "src/test/resources/configuration/configuracion.conf"
+        val hoconFilePath =
+            "src/test/resources/configuration/config.conf"
 
         //When
-        Configurator.init("","","","",hoconFilePath)
-        println(Configurator.getConfig("DB_USER"))
-        val res = Configurator.getConfig("DB_USER")
+        config = Configurator.Instance(hoconFilePath)
+        val res = config.getConfig("SERVER_TIMEOUT")
 
         //Then
         assertNotNull(res)
@@ -24,12 +31,12 @@ class ConfiguratorTest{
     @Test
     fun `When loading the configuration, the Java Properties file is the only one that works`() {
 
-        val propertiesFilePath = "src/test/resources/configuration/configuracion.properties"
+        val propertiesFilePath =
+            "src/test/resources/configuration/config.properties"
 
         //When
-        Configurator.init(propertiesFilePath,"","","","")
-        println(Configurator.getConfig("SERVER_PORT"))
-        val res = Configurator.getConfig("SERVER_PORT")
+        config = Configurator.Instance(propertiesFilePath)
+        val res = config.getConfig("SERVER_PORT")
 
         //Then
         assertNotNull(res)
@@ -38,12 +45,12 @@ class ConfiguratorTest{
     @Test
     fun `When loading the configuration, the JSON file is the only one that works`() {
 
-        val jsonFilePath = "src/test/resources/configuration/configuracion.json"
+        val jsonFilePath =
+            "src/test/resources/configuration/config.json"
 
         //When
-        Configurator.init("","",jsonFilePath,"","")
-        println(Configurator.getConfig("DB_PASSWORD"))
-        val res = Configurator.getConfig("DB_PASSWORD")
+        config = Configurator.Instance(jsonFilePath)
+        val res = config.getConfig("DB_PASSWORD")
 
         //Then
         assertNotNull(res)
@@ -52,12 +59,12 @@ class ConfiguratorTest{
     @Test
     fun `When loading the configuration, the dotenv file is the only one that works`() {
 
-        val envFilePath = "src/test/resources/configuration/configuracion.env"
+        val envFilePath =
+            "src/test/resources/configuration/.env"
 
         //When
-        Configurator.init("",envFilePath,"","","")
-        println(Configurator.getConfig("VERSION"))
-        val res = Configurator.getConfig("VERSION")
+        config = Configurator.Instance(envFilePath)
+        val res = config.getConfig("VERSION")
 
         //Then
         assertNotNull(res)
@@ -66,12 +73,12 @@ class ConfiguratorTest{
     @Test
     fun `When loading the configuration, the YAML file is the only one that works`() {
 
-        val ymlFilePath = "src/test/resources/configuration/configuracion.yml"
+        val ymlFilePath =
+            "src/test/resources/configuration/config.yml"
 
         //When
-        Configurator.init("","","",ymlFilePath,"")
-        println(Configurator.getConfig("SERVER_TIMEOUT"))
-        val res = Configurator.getConfig("SERVER_TIMEOUT")
+        config = Configurator.Instance(ymlFilePath)
+        val res = config.getConfig("SERVER_TIMEOUT")
 
         //Then
         assertNotNull(res)
@@ -81,14 +88,7 @@ class ConfiguratorTest{
     fun `When the configuration is loaded normally with the default files`() {
 
         //When
-        if (Configurator.init()){
-            println("Successfull configuration loading")
-        }else{
-            println("Unsuccessfull configuration loading")
-        }
-
-        val configExample = Configurator.getConfig("DB_PASSWORD")
-        println(configExample)
+        val configExample = config.getConfig("DB_PASSWORD")
 
         //Then
         assertFalse { configExample!!.isEmpty()}
