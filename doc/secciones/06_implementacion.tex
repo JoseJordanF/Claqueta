@@ -404,8 +404,16 @@ velando por el arranque de la aplicación, ya que como menciona el desarrollador
 distintos tipos, luego afiliarse a uno solo podría llevar desembocar en una carga errónea de este y que la 
 aplicación no funcionase. Por lo que se ha recurrido a las fuentes más populares en aplicaciones Kotlin 
 \cite{popularConfig} como JSON\cite{JsonWiki}, ficheros Java Properties\cite{JProWiki}, YAML\cite{YmlWiki}, 
-HOCON\cite{HoconWiki} o ficheros INI\cite{IniWiki}. Y como mínimo también debería poder leer de fuentes habituales 
-como variables de entorno e incluso a través de archivos dotenv.
+HOCON\cite{HoconWiki} o ficheros INI\cite{IniWiki}. Esta sería una de las fuentes independientemente del tipo de 
+archivo, otra indudable fuente y más habitual, son las variables de entorno, aunque en lenguajes de la JVM como 
+Kotlin aparece otra fuente similar a las variables de entorno del sistema; en este caso se trata de las propiedades
+del sistema, en sí de la JVM 
+\footnote{\url{https://docs.oracle.com/javase/tutorial/essential/environment/sysprop.html}}. Con estas tres fuentes
+se puede crear una jerarquía de lectura según las practicas más habituales en los lenguajes de la JVM 
+\footnote{\url{https://docs.appdynamics.com/appd/4.5.x/en/application-monitoring/install-app-server-agents/java-agent/administer-the-java-agent}}, 
+en este caso en Kotlin, así se seguirá la siguiente jerarquía, la primera fuente 
+será las variables de entorno del sistema, si esta falla se recurrirá a las propiedades del sistema 
+\cite{SecrectsJavaP} y por último se recurrirá al archivo de configuración.
 
 Para Kotlin existen mucha variedad de bibliotecas para controlar la configuración de la aplicación, pero se busca 
 una que permita el máximo número de fuentes vistas antes, e incluso que permita leer variables de entorno y archivos 
@@ -415,15 +423,28 @@ o las vulnerabilidades que estas tienen. Las bibliotecas encontradas serían las
 Configuration\footnote{\url{https://commons.apache.org/proper/commons-configuration/}}, Config de 
 Lightbend\footnote{\url{https://github.com/lightbend/config}}, Config 
 Magic\footnote{\url{https://github.com/brianm/config-magic}}, Config de 
-NetworkNT\footnote{\url{https://mvnrepository.com/artifact/com.networknt/config/2.1.33}}, están listadas en orden de 
-popularidad, la mayoría tiene soporte para leer de distintas fuentes como JSON o YAML, pero pocas pueden leer de más
-de una de estas fuentes; sin embargo, Config de Lightbend y  Config de NetworkNT poseen soporte nativo para JSON, 
-ficheros Java Properties y JSON, YAML respectivamente. Pero desgraciadamente ninguna de ellas puede leer nativamente 
-variables de entorno o archivos dotenv. Por lo que se ha decidido usar una librería creada por el 
-desarrollador\footnote{\url{https://github.com/JoseJordanF/LibraryConfigProject}}, la 
+NetworkNT\footnote{\url{https://mvnrepository.com/artifact/com.networknt/config/2.1.33}}, están listadas en orden de
+popularidad, la mayoría tiene soporte para leer de distintas extensiones como JSON o YAML, pero pocas pueden leer de
+más de una de estas extensiones; sin embargo, Config de Lightbend y  Config de NetworkNT poseen soporte nativo para 
+JSON, ficheros Java Properties y JSON, YAML respectivamente. Pero desgraciadamente ninguna de ellas puede leer 
+nativamente archivos dotenv, ni variables de entorno, ni propiedades del sistema. Por lo que se ha decidido usar una 
+librería creada por el desarrollador\footnote{\url{https://github.com/JoseJordanF/LibraryConfigProject}}, la 
 cual encapsula el funcionamiento de tres bibliotecas, una ya se conoce, ya que es una de las mejores opciones 
 discutida arriba, Config de Lightbend que cubre JSON, Java Properties y HOCON, dotenv-
 java\footnote{\url{https://github.com/cdimascio/dotenv-java}} que cubre las variables de entorno y los archivos 
 dotenv y por último snakeyaml \footnote{\url{https://bitbucket.org/snakeyaml/snakeyaml/src/master/}} que cubre los 
-archivos YAML. De manera que dicha librería lee nativamente archivos JSON, Java Properties, YAML, HOCON e incluso 
-dotenv, así se concluye que es la mejor opción para la aplicación.
+archivos YAML. También de forma nativa lee propiedades del sistema y variables de entorno del sistema, de manera que 
+dicha librería lee nativamente archivos JSON, Java Properties, YAML, HOCON e incluso dotenv, además encapsula la 
+lectura de fuentes indispensables y más habituales, variables de entorno y propiedades del sistema, por ende es la herramienta 
+perfecta para la aplicación.
+
+De modo que la implementación de esta funcionalidad constara de una clase \begin{otherlanguage} {english}``\textit{\textbf{configurator}}''\end{otherlanguage} 
+que permita cargar la configuración siguiendo la jerarquía comentada, y en cualquier momento permitir obtener dichos datos a través 
+de dicha clase. Se necesita que solo exista una instancia de esta clase, ya que simplemente se cargara la configuración al inicio de 
+la aplicación, sin necesidad de más instancias, aportando control estricto sobre la única instancia, ya que la configuración
+trata con secretos delicados. A este patrón de diseño se le conoce como patrón singleton \cite{PattSingl}, en Kotlin 
+existen algunas formas de conseguir esto \cite{SinglKotlin} en este caso esto se logra marcando el constructor como 
+privado, lo que evita la creación de instancias fuera de la propia clase. Además, se utiliza un objeto companion 
+para almacenar esta única instancia y proporcionar un punto de acceso global a través de la clase. De esta manera, 
+se asegura que cualquier parte del código pueda acceder a la misma instancia de \begin{otherlanguage} {english}``\textit{\textbf{configurator}}''\end{otherlanguage}, 
+garantizando la coherencia de la configuración en toda la aplicación.
