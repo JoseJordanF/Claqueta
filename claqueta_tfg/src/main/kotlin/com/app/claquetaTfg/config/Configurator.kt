@@ -10,13 +10,14 @@ class Configurator private constructor() {
     companion object{
         private lateinit var instance: Configurator
 
-        fun instance(path: String="src/test/resources/configuration/config.env"): Configurator {
+        fun instance(path: String="src/test/resources/configuration/config.properties"): Configurator {
             instance = Configurator()
             instance.config = JConfig()
 
-            if (instance.config.envVarFilter("CLAQUETA_")){
-            }else{
-                instance.config.parseFile(File(path))
+            if (!instance.config.envVarFilter("CLAQUETA_")) {
+                if (!instance.config.propVarFilter("CLAQUETA_")) {
+                    instance.config.parseFile(File(path))
+                }
             }
 
             return instance

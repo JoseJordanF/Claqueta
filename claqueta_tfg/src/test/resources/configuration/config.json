@@ -1,9 +1,9 @@
 {
-  "NAME": "Example configuration",
-  "VERSION": 1.0,
-  "DATABASE_URL": "jdbc:mysql://localhost:3306/db_example",
-  "DB_USER": "user",
-  "DB_PASSWORD": "password",
-  "SERVER_PORT": 8080,
-  "SERVER_TIMEOUT": 5000
+  "CLAQUETA_NAME": "Example configuration",
+  "CLAQUETA_VERSION": 1.0,
+  "CLAQUETA_DATABASE_URL": "jdbc:mysql://localhost:3306/db_example",
+  "CLAQUETA_DB_USER": "user",
+  "CLAQUETA_DB_PASSWORD": "password",
+  "CLAQUETA_SERVER_PORT": 8080,
+  "CLAQUETA_SERVER_TIMEOUT": 5000
 }

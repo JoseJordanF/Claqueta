@@ -16,7 +16,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.0")
 
     //Configuration
-    implementation("com.github.JoseJordanF:LibraryConfigProject:1.2.2")
+    implementation("com.github.JoseJordanF:LibraryConfigProject:1.3.2")
 }
 
 tasks.test {
