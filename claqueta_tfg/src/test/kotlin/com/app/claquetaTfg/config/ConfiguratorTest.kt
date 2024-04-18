@@ -52,5 +52,5 @@ class ConfiguratorTest {
         //Then
         assertNotNull(res)
     }
-}
+
 }
