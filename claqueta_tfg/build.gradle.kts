@@ -8,11 +8,15 @@ version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
+    maven(url = "https://jitpack.io")
 }
 
 dependencies {
     testImplementation(kotlin("test"))
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.0")
+
+    //Configuration
+    implementation("com.github.JoseJordanF:LibraryConfigProject:1.3.2")
 }
 
 tasks.test {

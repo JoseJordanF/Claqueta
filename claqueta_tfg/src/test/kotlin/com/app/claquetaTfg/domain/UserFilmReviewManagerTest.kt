@@ -263,6 +263,4 @@ class UserFilmReviewManagerTest {
         //Then
         assertEquals(sizeRecommends, 2)
     }
-
-
 }
