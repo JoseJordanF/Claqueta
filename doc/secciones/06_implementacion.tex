@@ -438,7 +438,7 @@ dicha librería lee nativamente archivos JSON, Java Properties, YAML, HOCON e in
 lectura de fuentes indispensables y más habituales, variables de entorno y propiedades del sistema, por ende es la herramienta 
 perfecta para la aplicación.
 
-De modo que la implementación de esta funcionalidad constara de una clase \begin{otherlanguage} {english}``\textit{\textbf{configurator}}''\end{otherlanguage} 
+De modo que la implementación de esta funcionalidad constara de una clase \begin{otherlanguage} {english}``\textit{\textbf{Configurator}}''\end{otherlanguage} 
 que permita cargar la configuración siguiendo la jerarquía comentada, y en cualquier momento permitir obtener dichos datos a través 
 de dicha clase. Se necesita que solo exista una instancia de esta clase, ya que simplemente se cargara la configuración al inicio de 
 la aplicación, sin necesidad de más instancias, aportando control estricto sobre la única instancia, ya que la configuración
@@ -446,5 +446,5 @@ trata con secretos delicados. A este patrón de diseño se le conoce como patró
 existen algunas formas de conseguir esto \cite{SinglKotlin} en este caso esto se logra marcando el constructor como 
 privado, lo que evita la creación de instancias fuera de la propia clase. Además, se utiliza un objeto companion 
 para almacenar esta única instancia y proporcionar un punto de acceso global a través de la clase. De esta manera, 
-se asegura que cualquier parte del código pueda acceder a la misma instancia de \begin{otherlanguage} {english}``\textit{\textbf{configurator}}''\end{otherlanguage}, 
+se asegura que cualquier parte del código pueda acceder a la misma instancia de \begin{otherlanguage} {english}``\textit{\textbf{Configurator}}''\end{otherlanguage}, 
 garantizando la coherencia de la configuración en toda la aplicación.
