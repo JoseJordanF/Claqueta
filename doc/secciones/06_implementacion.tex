@@ -448,3 +448,27 @@ privado, lo que evita la creación de instancias fuera de la propia clase. Adem�
 para almacenar esta única instancia y proporcionar un punto de acceso global a través de la clase. De esta manera, 
 se asegura que cualquier parte del código pueda acceder a la misma instancia de \begin{otherlanguage} {english}``\textit{\textbf{Configurator}}''\end{otherlanguage}, 
 garantizando la coherencia de la configuración en toda la aplicación.
+
+Para la segunda funcionalidad esencial, tal como menciona el desarrollador 
+\footnote{\url{https://github.com/JoseJordanF/Claqueta/issues/126}}, se necesita una herramienta que permita 
+registrar las distintas acciones de la aplicación para controlar el correcto funcionamiento de esta, y sobre todo 
+los errores que se puedan dar durante su ejecución. También debe permitir el registro de la actividad de las 
+acciones del usuario; dando estos registros por pantalla o en un archivo de registros, o incluso en ambos, con un 
+formato descriptivo para una lectura clara del registro. En este caso, Kotlin o los lenguajes de la JVM poseen 
+varias opciones populares, destacando del repositorio de Maven el módulo 
+SLF4J\footnote{\url{https://www.slf4j.org/}}. Este módulo sirve de fachada o abstracción para distintos marcos de 
+registro muy populares en estos lenguajes, como LogBack\footnote{\url{https://logback.qos.ch/documentation.html}}, 
+Log4j 2\footnote{\url{https://logging.apache.org/log4j/2.12.x/}} o Apache Commons 
+Logging\footnote{\url{https://commons.apache.org/proper/commons-logging/}}, siendo estos los más usados y populares 
+dentro de la comunidad tal como nos indica Maven\footnote{\url{https://mvnrepository.com/open-source/logging-frameworks}}. 
+De esas tres bibliotecas, LogBack y Log4j 2 cumplen con los requisitos del desarrollador, ya que Apache Commons 
+Logging carece de configuración que permita dar un formato específico a los logs o indicar por la salida de estos, 
+además es una fachada comúnmente usada para redirigir los mensajes de registro a SLF4J. Por lo tanto, cualquier 
+biblioteca entre las dos mencionadas con anterioridad cumpliría con los requisitos, aun así la elección se va a 
+decantar por LogBack, ya que es un poco más popular y usada que Log4j 2.
+
+La implementación de esta funcionalidad será como la anterior, ya que también será una clase singleton llamada 
+\begin{otherlanguage} {english}``\textit{\textbf{Logger}}''\end{otherlanguage}, para tener control sobre la única
+instancia existente y que sea más eficiente, ya que será más fácil de mantener una sola instancia. Esta se encargará 
+de inicializar el objeto responsable de los registros, indicando el nivel mínimo de los registros y la ruta del 
+archivo que también guardará dichos registros. Esto será cargado gracias a las propiedades del sistema.
