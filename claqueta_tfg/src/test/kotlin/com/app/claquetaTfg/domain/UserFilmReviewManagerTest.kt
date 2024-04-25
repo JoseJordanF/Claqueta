@@ -1,5 +1,6 @@
 package com.app.claquetaTfg.domain
 
+import com.app.claquetaTfg.logs.Logger
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.decodeFromString
 import org.junit.jupiter.api.BeforeEach
@@ -11,7 +12,6 @@ import java.util.Calendar
 import java.util.Locale
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
-import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
 class UserFilmReviewManagerTest {
@@ -25,9 +25,11 @@ class UserFilmReviewManagerTest {
     private lateinit var exampleFilms: List<Film>
     private lateinit var jsonContentReviews: String
     private lateinit var exampleReviews: List<Review>
+    private lateinit var logger: Logger
 
     @BeforeEach
     fun onBefore() {
+	System.setProperty("CLAQUETA_LOGBACK_CONFIG","src/main/resources/configLogB.xml")
         users = listOf()
         reviews = listOf()
         films = mutableMapOf()
@@ -39,6 +41,7 @@ class UserFilmReviewManagerTest {
         jsonContentReviews =
             File("src/test/resources/reviewsExamples.json").readText()
         exampleReviews = Json.decodeFromString(jsonContentReviews)
+	logger = Logger.instance(this::class.java,"CLAQUETA_LOGBACK_CONFIG")
     }
 
     @Test
@@ -262,5 +265,104 @@ class UserFilmReviewManagerTest {
         )
         //Then
         assertEquals(sizeRecommends, 2)
+    }
+
+    @Test
+    fun `When a film is created and the log that indicates this is produced`(){
+
+        val sizeLogInMemoryBefore = logger.getLogsInMemory().size
+        
+        //When
+        getManager.newFilm(
+            exampleFilms.first().title,
+            exampleFilms.first().movieDirectors,
+            exampleFilms.first().screenwriters,
+            exampleFilms.first().releaseDate,
+            exampleFilms.first().producers,
+            exampleFilms.first().consPlatforms
+        )
+        val sizeLogInMemoryAfter = logger.getLogsInMemory().size
+
+        //Then
+        assertTrue { sizeLogInMemoryAfter-sizeLogInMemoryBefore == 1 }
+    }
+
+    @Test
+    fun `When a user creates a review of a film, the log reports`(){
+
+	//When doing all these actions, 2 logs must be created,
+        //one for the creation of the film and one for the creation
+        //of the review
+
+        val sizeLogInMemoryBefore = logger.getLogsInMemory().size
+
+        var idFilm = getManager.newFilm(
+            exampleFilms.first().title,
+            exampleFilms.first().movieDirectors,
+            exampleFilms.first().screenwriters,
+            exampleFilms.first().releaseDate,
+            exampleFilms.first().producers,
+            exampleFilms.first().consPlatforms
+        )
+        var fech = Calendar.getInstance()
+        getManager.newUser("JoseJordan")
+        //When
+        getManager.newReview(
+            exampleReviews.first().contentPlot,
+            exampleReviews.first().contentPerformance,
+            exampleReviews.first().contentDirection,
+            "JoseJordan".lowercase(Locale.getDefault()),
+            getManager.films[idFilm]!!.id,
+            fech.time
+        )
+        val sizeLogInMemoryAfter = logger.getLogsInMemory().size
+        //Then
+        assertTrue { sizeLogInMemoryAfter-sizeLogInMemoryBefore == 2}
+    }
+
+    @Test
+    fun `When a user creates a review of a film, in which he or she has already reviewed and should give error log`(){
+
+        //When doing all these actions, 3 logs should be created,
+        //one for the creation of the film, one for the creation of
+        //the first review and one for the error when trying to create
+        //another review of the same film.
+
+        val sizeLogInMemoryBefore = logger.getLogsInMemory().size
+
+        var idFilm = getManager.newFilm(
+            exampleFilms.first().title,
+            exampleFilms.first().movieDirectors,
+            exampleFilms.first().screenwriters,
+            exampleFilms.first().releaseDate,
+            exampleFilms.first().producers,
+            exampleFilms.first().consPlatforms
+        )
+        var fech = Calendar.getInstance()
+        getManager.newUser("JoseJordan")
+
+        //When
+        getManager.newReview(
+            exampleReviews.first().contentPlot,
+            exampleReviews.first().contentPerformance,
+            exampleReviews.first().contentDirection,
+            "JoseJordan".lowercase(Locale.getDefault()),
+            getManager.films[idFilm]!!.id,
+            fech.time
+        )
+
+        //Then
+        assertThrows<RuntimeException> {
+            getManager.newReview(
+                exampleReviews.first().contentPlot,
+                exampleReviews.first().contentPerformance,
+                exampleReviews.first().contentDirection,
+                "JoseJordan".lowercase(Locale.getDefault()),
+                getManager.films[idFilm]!!.id,
+                fech.time
+            )
+        }
+        val sizeLogInMemoryAfter = logger.getLogsInMemory().size
+        assertTrue( sizeLogInMemoryAfter-sizeLogInMemoryBefore == 3 )
     }
 }

@@ -12,7 +12,7 @@ data class UserFilmReviewManager(
     var recommendations: MutableMap<String, List<Long>> = mutableMapOf(),
 ){
 
-
+     var logger = Logger.instance(this::class.java,"CLAQUETA_LOGBACK_CONFIG")
 
      fun generateUniqueId(obj: Any): Long {
         return when (obj) {
@@ -38,6 +38,7 @@ data class UserFilmReviewManager(
 
         val trueFilm = Film(newID, title, movieDirectors, screenwriters, releaseDate, producers, consPlataforms)
         films[newID] = trueFilm
+        logger.debug("Se ha creado una nueva pelicula llamada $title")
         return newID
     }
 
@@ -69,7 +70,10 @@ data class UserFilmReviewManager(
                     )
                     reviews += newR
                     recomendFilmToUser(userAuthor)
+                    logger.info("El usuario $userAuthor a creado una critica de la pelicula ${films[filmId]!!.title}")
         } else {
+	    logger.error("El usuario $userAuthor esta intentando crear una critica de la pelicula ${films[filmId]!!.title}" +
+                    " ya criticada")
             throw RuntimeException("Ya escribiste una reseña de esta pelicula")
         }
     }
