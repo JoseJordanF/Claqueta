@@ -268,12 +268,12 @@ class UserFilmReviewManagerTest {
     }
 
     @Test
-    fun `When a film is created and the log that indicates this is produced`(){
+    fun `When a film is created and the log that indicates this is produced`() {
 
-        val sizeLogInMemoryBefore = logger.getLogsInMemory().size
-        
+        val sizeLogInMemoryBefore = ManagerLogger.getLogsInMemory().size
+
         //When
-        getManager.newFilm(
+        var idFilm =getManager.newFilm(
             exampleFilms.first().title,
             exampleFilms.first().movieDirectors,
             exampleFilms.first().screenwriters,
@@ -281,20 +281,27 @@ class UserFilmReviewManagerTest {
             exampleFilms.first().producers,
             exampleFilms.first().consPlatforms
         )
-        val sizeLogInMemoryAfter = logger.getLogsInMemory().size
+
+        var dataLog = ManagerLogger.dataLogs(
+            ManagerLogger.getLogsInMemory().last().second,
+            "-",
+            "="
+        )
+        val sizeLogInMemoryAfter = ManagerLogger.getLogsInMemory().size
 
         //Then
-        assertTrue { sizeLogInMemoryAfter-sizeLogInMemoryBefore == 1 }
+        assertEquals(idFilm.toString(), dataLog["id_film"])
+        assertTrue { sizeLogInMemoryAfter - sizeLogInMemoryBefore == 1 }
     }
 
     @Test
-    fun `When a user creates a review of a film, the log reports`(){
+    fun `When a user creates a review of a film, the log reports`() {
 
-	//When doing all these actions, 2 logs must be created,
+        //When doing all these actions, 2 logs must be created,
         //one for the creation of the film and one for the creation
         //of the review
 
-        val sizeLogInMemoryBefore = logger.getLogsInMemory().size
+        val sizeLogInMemoryBefore = ManagerLogger.getLogsInMemory().size
 
         var idFilm = getManager.newFilm(
             exampleFilms.first().title,
@@ -315,20 +322,29 @@ class UserFilmReviewManagerTest {
             getManager.films[idFilm]!!.id,
             fech.time
         )
-        val sizeLogInMemoryAfter = logger.getLogsInMemory().size
+
+        val dataLog = ManagerLogger.dataLogs(
+            ManagerLogger.getLogsInMemory().last().second,
+            "-",
+            "="
+        )
+
+        val sizeLogInMemoryAfter = ManagerLogger.getLogsInMemory().size
         //Then
-        assertTrue { sizeLogInMemoryAfter-sizeLogInMemoryBefore == 2}
+        assertEquals(idFilm.toString(), dataLog["id_film"])
+        assertEquals("JoseJordan".lowercase(Locale.getDefault()), dataLog["user"])
+        assertTrue { sizeLogInMemoryAfter - sizeLogInMemoryBefore == 2 }
     }
 
     @Test
-    fun `When a user creates a review of a film, in which he or she has already reviewed and should give error log`(){
+    fun `When a user creates a review of a film, in which he or she has already reviewed and should give error log`() {
 
         //When doing all these actions, 3 logs should be created,
         //one for the creation of the film, one for the creation of
         //the first review and one for the error when trying to create
         //another review of the same film.
 
-        val sizeLogInMemoryBefore = logger.getLogsInMemory().size
+        val sizeLogInMemoryBefore = ManagerLogger.getLogsInMemory().size
 
         var idFilm = getManager.newFilm(
             exampleFilms.first().title,
@@ -351,6 +367,7 @@ class UserFilmReviewManagerTest {
             fech.time
         )
 
+        Thread.sleep(1000)
         //Then
         assertThrows<RuntimeException> {
             getManager.newReview(
@@ -362,7 +379,17 @@ class UserFilmReviewManagerTest {
                 fech.time
             )
         }
-        val sizeLogInMemoryAfter = logger.getLogsInMemory().size
-        assertTrue( sizeLogInMemoryAfter-sizeLogInMemoryBefore == 3 )
+
+        val dataLog = ManagerLogger.dataLogs(
+            ManagerLogger.getLogsInMemory().last().second,
+            "-",
+            "="
+        )
+        val sizeLogInMemoryAfter = ManagerLogger.getLogsInMemory().size
+
+        assertEquals(idFilm.toString(), dataLog["id_film"])
+        assertEquals("JoseJordan".lowercase(Locale.getDefault()), dataLog["user"])
+        assertNotEquals(dataLog["date_of_old_review"],dataLog["date_of_attempted_duplication"])
+        assertTrue(sizeLogInMemoryAfter - sizeLogInMemoryBefore == 3)
     }
 }
