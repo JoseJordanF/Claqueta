@@ -1,6 +1,8 @@
 package com.app.claquetaTfg.domain
 
 import com.app.claquetaTfg.logs.Logger
+import com.app.claquetaTfg.util.Constants.logConfig
+import com.app.claquetaTfg.logs.ManagerLogger
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.decodeFromString
 import org.junit.jupiter.api.BeforeEach
