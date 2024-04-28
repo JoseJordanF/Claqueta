@@ -2,7 +2,9 @@ package com.app.claquetaTfg.domain
 
 import com.app.claquetaTfg.domain.generatorId.generateUniqueId
 import com.app.claquetaTfg.logs.Logger
+import com.app.claquetaTfg.util.Constants.logConfig
 import java.lang.RuntimeException
+import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
@@ -13,7 +15,7 @@ data class UserFilmReviewManager(
     var recommendations: MutableMap<String, List<Long>> = mutableMapOf(),
 ){
 
-     var logger = Logger.instance(this::class.java,"CLAQUETA_LOGBACK_CONFIG")
+     var logger = Logger.instance(this::class.java, logConfig))
 
      fun generateUniqueId(obj: Any): Long {
         return when (obj) {
@@ -39,7 +41,10 @@ data class UserFilmReviewManager(
 
         val trueFilm = Film(newID, title, movieDirectors, screenwriters, releaseDate, producers, consPlataforms)
         films[newID] = trueFilm
-        logger.debug("Se ha creado una nueva pelicula llamada $title")
+        logger.debug("Film creation event:\n" +
+                "-id_film= $newID\n" +
+                "-date_of_creation= ${Calendar.getInstance().time}"
+                )
         return newID
     }
 
@@ -47,7 +52,7 @@ data class UserFilmReviewManager(
         if (!users.contains(username.lowercase(Locale.getDefault()))) {
             users += username.lowercase(Locale.getDefault())
         } else {
-            throw RuntimeException("Ese usuario ya existe")
+            throw UserAlreadyExistsException("This user already exists")
         }
     }
 
@@ -71,11 +76,23 @@ data class UserFilmReviewManager(
                     )
                     reviews += newR
                     recomendFilmToUser(userAuthor)
-                    logger.info("El usuario $userAuthor a creado una critica de la pelicula ${films[filmId]!!.title}")
+                    logger.info(
+                	"Review creation event:\n" +
+                        	"-user= $userAuthor\n" +
+                        	"-id_film= $filmId\n" +
+                        	"-title_film= ${films[filmId]?.title}\n" +
+                        	"-content_plot= $contentPlot"
+            	    )
         } else {
-	    logger.error("El usuario $userAuthor esta intentando crear una critica de la pelicula ${films[filmId]!!.title}" +
-                    " ya criticada")
-            throw RuntimeException("Ya escribiste una reseña de esta pelicula")
+	    logger.error(
+                "Review duplication event:\n" +
+                        "-user= $userAuthor\n" +
+                        "-id_film= $filmId\n" +
+                        "-title_film= ${films[filmId]?.title}\n" +
+                        "-date_of_old_review= ${oldReview.creationDate}\n" +
+                        "-date_of_attempted_duplication= ${Calendar.getInstance().time}"
+            )
+            throw ReviewDuplicateException("You have already written a review of this movie")
         }
     }
 
@@ -109,4 +126,7 @@ data class UserFilmReviewManager(
         var recommendRes : List<Long> = filmsToUser.filterNot {  it in filtroIds }
         recommendations[username] = recommendRes
     }
+
+    class ReviewDuplicateException(message: String) : RuntimeException(message)
+    class UserAlreadyExistsException(message: String) : RuntimeException(message)
 }
