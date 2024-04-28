@@ -15,7 +15,7 @@ data class UserFilmReviewManager(
     var recommendations: MutableMap<String, List<Long>> = mutableMapOf(),
 ){
 
-     var logger = Logger.instance(this::class.java, logConfig))
+     var logger = Logger.instance(this::class.java, logConfig)
 
      fun generateUniqueId(obj: Any): Long {
         return when (obj) {
