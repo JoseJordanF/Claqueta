@@ -13,15 +13,14 @@ class Logger private constructor() {
         private var instance: com.app.claquetaTfg.logs.Logger? = null
 
         fun instance(
-            classType: Class<*> = this::class.java,
-            configName: String,
+            configName: String
         ): com.app.claquetaTfg.logs.Logger {
             val configFile = Configurator.instance().getConfig(configName)
             System.setProperty(propSystemLog, configFile!!)
             instance ?: synchronized(this) {
                 instance ?: Logger().also { instance = it }
             }
-            instance!!.logger = LoggerFactory.getLogger(classType)
+            instance!!.logger = LoggerFactory.getLogger(this::class.java)
 
             return instance as com.app.claquetaTfg.logs.Logger
         }
@@ -51,5 +50,5 @@ class Logger private constructor() {
         logger.error(msg)
         ManagerLogger.addLog(Pair("error", msg))
     }
-    
+
 }
