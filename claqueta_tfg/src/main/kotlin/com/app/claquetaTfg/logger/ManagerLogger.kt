@@ -15,7 +15,7 @@ object ManagerLogger {
 
     private var logInMemory: MutableList<Pair<String, String>> = mutableListOf()
 
-    fun addLog(log: Pair<String,String>){
+    fun addLog(log: Pair<String, String>) {
         logInMemory.add(log)
     }
 
@@ -23,7 +23,7 @@ object ManagerLogger {
         return logInMemory
     }
 
-    fun dataLogs(msg: String, splitRow: String, splitData: String): MutableMap<String,String> {
+    fun dataLogs(msg: String): MutableMap<String, String> {
         val rightMsg = msg.split("=")[1]
         val jsonObject = Json.parseToJsonElement(rightMsg).jsonObject
         val resultMap = mutableMapOf<String, String>()
