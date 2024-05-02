@@ -2,6 +2,7 @@ package com.app.claquetaTfg.domain
 
 import com.app.claquetaTfg.logs.Logger
 import com.app.claquetaTfg.util.Constants.logConfig
+import com.app.claquetaTfg.util.Constants.pathLogConfig
 import com.app.claquetaTfg.logs.ManagerLogger
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.decodeFromString
@@ -31,7 +32,7 @@ class UserFilmReviewManagerTest {
 
     @BeforeEach
     fun onBefore() {
-	System.setProperty("CLAQUETA_LOGBACK_CONFIG","src/main/resources/configLogB.xml")
+	System.setProperty(logConfig,pathLogConfig)
         users = listOf()
         reviews = listOf()
         films = mutableMapOf()
@@ -43,7 +44,7 @@ class UserFilmReviewManagerTest {
         jsonContentReviews =
             File("src/test/resources/reviewsExamples.json").readText()
         exampleReviews = Json.decodeFromString(jsonContentReviews)
-	logger = Logger.instance(this::class.java,"CLAQUETA_LOGBACK_CONFIG")
+	logger = Logger.instance(logConfig)
     }
 
     @Test
@@ -285,14 +286,12 @@ class UserFilmReviewManagerTest {
         )
 
         var dataLog = ManagerLogger.dataLogs(
-            ManagerLogger.getLogsInMemory().last().second,
-            "-",
-            "="
+            ManagerLogger.getLogsInMemory().last().second
         )
         val sizeLogInMemoryAfter = ManagerLogger.getLogsInMemory().size
 
         //Then
-        assertEquals(idFilm.toString(), dataLog["id_film"])
+        assertEquals(idFilm.toString(), dataLog["id"])
         assertTrue { sizeLogInMemoryAfter - sizeLogInMemoryBefore == 1 }
     }
 
@@ -326,15 +325,13 @@ class UserFilmReviewManagerTest {
         )
 
         val dataLog = ManagerLogger.dataLogs(
-            ManagerLogger.getLogsInMemory().last().second,
-            "-",
-            "="
+            ManagerLogger.getLogsInMemory().last().second
         )
 
         val sizeLogInMemoryAfter = ManagerLogger.getLogsInMemory().size
         //Then
-        assertEquals(idFilm.toString(), dataLog["id_film"])
-        assertEquals("JoseJordan".lowercase(Locale.getDefault()), dataLog["user"])
+        assertEquals(idFilm.toString(), dataLog["filmId"])
+        assertEquals("JoseJordan".lowercase(Locale.getDefault()), dataLog["userAuthor"])
         assertTrue { sizeLogInMemoryAfter - sizeLogInMemoryBefore == 2 }
     }
 
@@ -383,15 +380,13 @@ class UserFilmReviewManagerTest {
         }
 
         val dataLog = ManagerLogger.dataLogs(
-            ManagerLogger.getLogsInMemory().last().second,
-            "-",
-            "="
+            ManagerLogger.getLogsInMemory().last().second
         )
         val sizeLogInMemoryAfter = ManagerLogger.getLogsInMemory().size
 
-        assertEquals(idFilm.toString(), dataLog["id_film"])
-        assertEquals("JoseJordan".lowercase(Locale.getDefault()), dataLog["user"])
-        assertNotEquals(dataLog["date_of_old_review"],dataLog["date_of_attempted_duplication"])
+        assertEquals(idFilm.toString(), dataLog["filmId"])
+        assertEquals("JoseJordan".lowercase(Locale.getDefault()), dataLog["userAuthor"])
+        assertEquals(dataLog["creationDate"],dataLog["duplicationReviewEvent"])
         assertTrue(sizeLogInMemoryAfter - sizeLogInMemoryBefore == 3)
     }
 }

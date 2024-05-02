@@ -2,8 +2,10 @@ package com.app.claquetaTfg.domain
 
 import com.app.claquetaTfg.domain.generatorId.generateUniqueId
 import com.app.claquetaTfg.logs.Logger
+import com.app.claquetaTfg.logs.ManagerLogger
 import com.app.claquetaTfg.util.Constants.logConfig
 import java.lang.RuntimeException
+import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
@@ -15,7 +17,7 @@ data class UserFilmReviewManager(
     var recommendations: MutableMap<String, List<Long>> = mutableMapOf(),
 ){
 
-     var logger = Logger.instance(this::class.java, logConfig)
+     var logger = Logger.instance(logConfig)
 
      fun generateUniqueId(obj: Any): Long {
         return when (obj) {
@@ -41,9 +43,8 @@ data class UserFilmReviewManager(
 
         val trueFilm = Film(newID, title, movieDirectors, screenwriters, releaseDate, producers, consPlataforms)
         films[newID] = trueFilm
-        logger.debug("Film creation event:\n" +
-                "-id_film= $newID\n" +
-                "-date_of_creation= ${Calendar.getInstance().time}"
+        logger.debug("Film creation event =\n" +
+                    ManagerLogger.createLog(trueFilm)
                 )
         return newID
     }
@@ -77,20 +78,20 @@ data class UserFilmReviewManager(
                     reviews += newR
                     recomendFilmToUser(userAuthor)
                     logger.info(
-                	"Review creation event:\n" +
-                        	"-user= $userAuthor\n" +
-                        	"-id_film= $filmId\n" +
-                        	"-title_film= ${films[filmId]?.title}\n" +
-                        	"-content_plot= $contentPlot"
+                	"Review creation event =\n" +
+                        ManagerLogger.createLog(newR)
             	    )
         } else {
 	    logger.error(
-                "Review duplication event:\n" +
-                        "-user= $userAuthor\n" +
-                        "-id_film= $filmId\n" +
-                        "-title_film= ${films[filmId]?.title}\n" +
-                        "-date_of_old_review= ${oldReview.creationDate}\n" +
-                        "-date_of_attempted_duplication= ${Calendar.getInstance().time}"
+                "Review duplication event =\n" +
+                        ManagerLogger.createLog(
+                            oldReview, listOf(
+                                Pair(
+                                    "duplicationReviewEvent",
+                                    SimpleDateFormat("dd-MM-yyyy").format(Calendar.getInstance().time)
+                                )
+                            )
+                        )
             )
             throw ReviewDuplicateException("You have already written a review of this movie")
         }
