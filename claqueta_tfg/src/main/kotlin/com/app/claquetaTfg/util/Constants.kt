@@ -1,7 +1,7 @@
 package com.app.claquetaTfg.util
 
+import ch.qos.logback.classic.Level
+
 object Constants {
-    val logConfig="CLAQUETA_LOGBACK_CONFIG"
-    val propSystemLog="logback.configurationFile"
-    val pathLogConfig="src/main/resources/configLogB.xml"
+    val loggerLevel : Level = Level.DEBUG
 }
