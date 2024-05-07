@@ -32,7 +32,6 @@ class UserFilmReviewManagerTest {
 
     @BeforeEach
     fun onBefore() {
-	System.setProperty(logConfig,pathLogConfig)
         users = listOf()
         reviews = listOf()
         films = mutableMapOf()

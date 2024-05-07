@@ -16,7 +16,7 @@ import net.logstash.logback.encoder.LogstashEncoder
 import org.slf4j.LoggerFactory
 import org.slf4j.spi.LoggingEventBuilder
 
-class Logger private constructor() : LoggerInterface, LogbackInterface {
+class SimpleLogger private constructor() : LoggerInterface, LogbackInterface {
     private lateinit var logger: Logger
     private lateinit var memoryAppender: MemoryAppender
 
