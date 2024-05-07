@@ -21,7 +21,9 @@ dependencies {
 
     //Kotlin Logging
     implementation("org.slf4j:slf4j-api:2.0.13")
-    testImplementation("ch.qos.logback:logback-classic:1.3.12")
+    implementation("ch.qos.logback:logback-classic:1.3.12")
+    implementation("ch.qos.logback:logback-core:1.3.12")
+    implementation("net.logstash.logback:logstash-logback-encoder:7.4")
 }
 
 tasks.test {
