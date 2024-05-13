@@ -468,7 +468,20 @@ biblioteca entre las dos mencionadas con anterioridad cumpliría con los requisi
 decantar por LogBack, ya que es un poco más popular y usada que Log4j 2.
 
 La implementación de esta funcionalidad será como la anterior, ya que también será una clase singleton llamada 
-\begin{otherlanguage} {english}``\textit{\textbf{Logger}}''\end{otherlanguage}, para tener control sobre la única
-instancia existente y que sea más eficiente, ya que será más fácil de mantener una sola instancia. Esta se encargará 
-de inicializar el objeto responsable de los registros, indicando el nivel mínimo de los registros y la ruta del 
-archivo que también guardará dichos registros. Esto será cargado gracias a las propiedades del sistema.
+\begin{otherlanguage} {english}``\textit{\textbf{SimpleLogger}}''\end{otherlanguage}, en este caso, ya que pueden 
+crearse múltiples implementaciones del logger sin perturbar el código. Siendo una clase singleton para tener control 
+sobre la única instancia existente y que sea más eficiente, ya que será más fácil de mantener una sola instancia. 
+Esta se encargará de inicializar el objeto responsable de los registros, indicando la configuración de la 
+biblioteca, teniendo en cuenta donde se guardaran los logs, como lo harán y en que formato lo harán, esto se 
+consigue gracias a una interfaz que permite definir los componentes necesarios en la configuración de la biblioteca, 
+los cuales son el \begin{otherlanguage} {english}``\textit{\textbf{appender}}''\end{otherlanguage} y el 
+\begin{otherlanguage} {english}``\textit{\textbf{encoder}}''\end{otherlanguage}, el primero es el encargado de donde 
+y como guardar los logs, mientras que el segundo indica el formato en el que lo hacen. De esta manera podremos hacer 
+distintas implementaciones de estos métodos para disponer de diferentes tipos de logs.
+
+Por otro lado, también se hace uso de una clase LoggerManager la cual se usa para inyectar la implementación de 
+logger que se requiera sin perturbar la implementación en el resto del código. Por último se dará como válida esta
+implementación si pasa los test unitarios correspondientes, estos permiten comprobar si sé crean los registros en 
+distintas operaciones de la aplicación, de manera que se comprueba su creación y si su información es la que se 
+espera. Así se demuestra que las clases que usan el logger lo están usando como deberían y se demuestra que la 
+implementación del logger funciona.
