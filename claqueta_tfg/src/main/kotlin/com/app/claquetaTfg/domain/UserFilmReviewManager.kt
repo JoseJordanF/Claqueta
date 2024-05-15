@@ -1,7 +1,11 @@
 package com.app.claquetaTfg.domain
 
 import com.app.claquetaTfg.domain.generatorId.generateUniqueId
+import com.app.claquetaTfg.logs.LoggerManager
+import com.app.claquetaTfg.logs.SimpleLogger
 import java.lang.RuntimeException
+import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
@@ -12,7 +16,7 @@ data class UserFilmReviewManager(
     var recommendations: MutableMap<String, List<Long>> = mutableMapOf(),
 ){
 
-
+     private val logger = LoggerManager(SimpleLogger.instance())
 
      fun generateUniqueId(obj: Any): Long {
         return when (obj) {
@@ -38,6 +42,10 @@ data class UserFilmReviewManager(
 
         val trueFilm = Film(newID, title, movieDirectors, screenwriters, releaseDate, producers, consPlataforms)
         films[newID] = trueFilm
+        logger.log(
+            "Film creation event",
+            arrayOf(trueFilm)
+                )
         return newID
     }
 
@@ -45,7 +53,7 @@ data class UserFilmReviewManager(
         if (!users.contains(username.lowercase(Locale.getDefault()))) {
             users += username.lowercase(Locale.getDefault())
         } else {
-            throw RuntimeException("Ese usuario ya existe")
+            throw UserAlreadyExistsException("This user already exists")
         }
     }
 
@@ -69,8 +77,16 @@ data class UserFilmReviewManager(
                     )
                     reviews += newR
                     recomendFilmToUser(userAuthor)
+                    logger.log(
+						"Review creation event",
+						arrayOf(newR)
+            	    )
         } else {
-            throw RuntimeException("Ya escribiste una reseña de esta pelicula")
+	    logger.error(
+                "Review duplication error",
+                arrayOf(oldReview, SimpleDateFormat("dd-MM-yyyy").format(Calendar.getInstance().time))
+			)
+            throw ReviewDuplicateException("You have already written a review of this movie")
         }
     }
 
@@ -104,4 +120,7 @@ data class UserFilmReviewManager(
         var recommendRes : List<Long> = filmsToUser.filterNot {  it in filtroIds }
         recommendations[username] = recommendRes
     }
+
+    class ReviewDuplicateException(message: String) : RuntimeException(message)
+    class UserAlreadyExistsException(message: String) : RuntimeException(message)
 }

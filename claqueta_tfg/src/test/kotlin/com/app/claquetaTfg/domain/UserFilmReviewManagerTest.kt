@@ -1,17 +1,20 @@
 package com.app.claquetaTfg.domain
 
-import kotlinx.serialization.json.Json
+import ch.qos.logback.classic.Level
+import com.app.claquetaTfg.logs.LoggerManager
+import com.app.claquetaTfg.logs.SimpleLogger
+import com.app.claquetaTfg.util.Constants.loggerLevel
 import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import java.io.File
-import java.lang.RuntimeException
+import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
-import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
 class UserFilmReviewManagerTest {
@@ -25,6 +28,7 @@ class UserFilmReviewManagerTest {
     private lateinit var exampleFilms: List<Film>
     private lateinit var jsonContentReviews: String
     private lateinit var exampleReviews: List<Review>
+    private lateinit var logger: LoggerManager
 
     @BeforeEach
     fun onBefore() {
@@ -39,6 +43,7 @@ class UserFilmReviewManagerTest {
         jsonContentReviews =
             File("src/test/resources/reviewsExamples.json").readText()
         exampleReviews = Json.decodeFromString(jsonContentReviews)
+		logger = LoggerManager(SimpleLogger.instance())
     }
 
     @Test
@@ -262,5 +267,112 @@ class UserFilmReviewManagerTest {
         )
         //Then
         assertEquals(sizeRecommends, 2)
+    }
+
+    @Test
+    fun `When a film is created and the log that indicates this is produced`() {
+
+        //When
+        var idFilm = getManager.newFilm(
+            exampleFilms.first().title,
+            exampleFilms.first().movieDirectors,
+            exampleFilms.first().screenwriters,
+            exampleFilms.first().releaseDate,
+            exampleFilms.first().producers,
+            exampleFilms.first().consPlatforms
+        )
+        val logs: List<HashMap<String, Any>> = logger.historyLogs() as List<HashMap<String, Any>>
+
+        //Then
+        assertEquals(loggerLevel.toString(),logs.last()["level"].toString())
+        assertEquals("Film creation event", logs.last()["message"].toString())
+        assertTrue(logs.isNotEmpty())
+    }
+
+    @Test
+    fun `When a user creates a review of a film, the log reports`() {
+        //When doing all these actions, 2 logs must be created,
+        //one for the creation of the film and one for the creation
+        //of the review
+        var logs: List<HashMap<String, Any>>
+
+        var idFilm = getManager.newFilm(
+            exampleFilms.first().title,
+            exampleFilms.first().movieDirectors,
+            exampleFilms.first().screenwriters,
+            exampleFilms.first().releaseDate,
+            exampleFilms.first().producers,
+            exampleFilms.first().consPlatforms
+        )
+        var fech = Calendar.getInstance()
+        getManager.newUser("JoseJordan")
+        //When
+        getManager.newReview(
+            exampleReviews.first().contentPlot,
+            exampleReviews.first().contentPerformance,
+            exampleReviews.first().contentDirection,
+            "JoseJordan".lowercase(Locale.getDefault()),
+            getManager.films[idFilm]!!.id,
+            fech.time
+        )
+        logs = logger.historyLogs() as List<HashMap<String, Any>>
+
+        //Then
+        assertEquals(loggerLevel.toString(),logs.last()["level"].toString())
+        assertEquals("Film creation event", logs[logs.size-2]["message"].toString())
+        assertEquals("Review creation event", logs.last()["message"].toString())
+        assertTrue(logs.size >= 2)
+    }
+
+    @Test
+    fun `When a user creates a review of a film, in which he or she has already reviewed and should give error log`() {
+        //When doing all these actions, 3 logs should be created,
+        //one for the creation of the film, one for the creation of
+        //the first review and one for the error when trying to create
+        //another review of the same film.
+        var logs: List<HashMap<String, Any>>
+
+        var idFilm = getManager.newFilm(
+            exampleFilms.first().title,
+            exampleFilms.first().movieDirectors,
+            exampleFilms.first().screenwriters,
+            exampleFilms.first().releaseDate,
+            exampleFilms.first().producers,
+            exampleFilms.first().consPlatforms
+        )
+        var fech = Calendar.getInstance()
+        getManager.newUser("JoseJordan")
+
+        //When
+        getManager.newReview(
+            exampleReviews.first().contentPlot,
+            exampleReviews.first().contentPerformance,
+            exampleReviews.first().contentDirection,
+            "JoseJordan".lowercase(Locale.getDefault()),
+            getManager.films[idFilm]!!.id,
+            fech.time
+        )
+        //Then
+        assertThrows<RuntimeException> {
+            getManager.newReview(
+                exampleReviews.first().contentPlot,
+                exampleReviews.first().contentPerformance,
+                exampleReviews.first().contentDirection,
+                "JoseJordan".lowercase(Locale.getDefault()),
+                getManager.films[idFilm]!!.id,
+                fech.time
+            )
+        }
+        logs = logger.historyLogs() as List<HashMap<String, Any>>
+
+        assertEquals(Level.ERROR.toString(), logs.last()["level"].toString())
+        assertEquals("Film creation event", logs[logs.size - 3]["message"].toString())
+        assertEquals("Review creation event", logs[logs.size - 2]["message"].toString())
+        assertEquals("Review duplication error", logs.last()["message"].toString())
+        assertEquals(
+            SimpleDateFormat("dd-MM-yyyy").format(Calendar.getInstance().time),
+            logs.last()["item_involved_2"].toString()
+        )
+        assertTrue(logs.size == 3)
     }
 }
