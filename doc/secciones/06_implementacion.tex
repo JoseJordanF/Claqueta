@@ -485,3 +485,46 @@ implementación si pasa los test unitarios correspondientes, estos permiten comp
 distintas operaciones de la aplicación, de manera que se comprueba su creación y si su información es la que se 
 espera. Así se demuestra que las clases que usan el logger lo están usando como deberían y se demuestra que la 
 implementación del logger funciona.
+
+\section{M4: Optimización del rendimiento y estandarización del manejo de errores}
+
+En este hito se pretende hacer ciertos cambios basados en algunas historias del 
+desarrollador,\footnote{\url{https://github.com/JoseJordanF/Claqueta/issues/132}}
+estas aseguran un funcionamiento más eficiente de la aplicación mediante del uso de estructuras más eficientes y por
+consiguiente de operaciones más eficientes. También por parte del desarrollador 
+\footnote{\url{https://github.com/JoseJordanF/Claqueta/issues/129}} se pretende establecer una jerarquía de clase 
+para los posibles errores que puedan ocurrir en la aplicación. Por lo que el PMV resultante de este hito será una 
+versión más optimizada de la aplicación y la estandarización del manejo de errores en esta.
+
+Para mejorar la eficiencia de la aplicación se ha recurrido al uso o al cambio de estructuras de datos, como por 
+ejemplo las reseñas, anteriormente estaban localizadas en una lista de objetos 
+\begin{otherlanguage} {english}``\textit{\textbf{Review}}''\end{otherlanguage}, 
+pero esto lo hacía tremendamente ineficiente, ya que si se quisiera buscar las reseñas de un usuario o las reseñas 
+de una película tenían que localizarse recorriendo la lista. Pero haciendo uso de un diccionario\cite{OaksJava} que 
+relaciona un identificador con un grupo de reseñas es eternamente más eficiente. Para ello se han realizado varios 
+cambios, los identificadores únicos han llegado también a los usuarios, ya que la forma de añadir un usuario 
+comprobando que no existía ya uno con dicho nombre era bastante ineficiente, ya que requería recorrer la lista, por 
+lo que se ha decidido usar un conjunto para guardar los usuarios que ahora serán un objeto definido por un ID único 
+al igual que las películas y un string el cual representa el nombre de usuario. Así se ha sobrecargado los métodos 
+de conjunto para considerar dos usuarios iguales si tienen el mismo nombre de usuario, de manera que agregar nuevos 
+usuarios es más sencillo y más eficiente a la hora de comprobar si ya existe alguno con el mismo nombre de usuario.
+
+Una vez hecho el cambio de los usuarios, al crear una reseña ahora se añade dos entradas a la estructura de datos 
+que las contiene, una representa las reseñas realizadas por el usuario y otra las reseñas referentes a una misma 
+película. Así se tendría una eficiencia constante al realizar operaciones de búsqueda sobre dicha estructura; 
+también se hace más eficiente la forma de comprobar si un usuario ya ha escrito una reseña sobre una película, ya 
+que el conjunto de reseñas afiliado a esa clave del mapa que representa a una película o a un usuario, es un 
+conjunto, de modo que también se sobrecargan los métodos del conjunto para designar una reseña igual a otra siempre 
+que los identificadores que guarda dicha reseña sean iguales a los de otra. Así se impide la adición de reseñas 
+repetidas porque en un conjunto de reseñas referentes a una película o aún usuario no puede haber más de una reseña 
+con la misma ID de usuario o la misma ID de película, respectivamente. Estos cambios han supuesto que el resto de 
+operaciones puedan modificarse para ser más eficientes.
+
+Por otra parte, se ha introducido una jerarquía de clase para designar los distintos errores que pueden ocurrir
+durante la ejecución de la aplicación, siendo perfectamente identificados los datos que los provocaron, a su vez 
+también sé muestra el origen, y se usa un mensaje que explicito para la comprensión del error. Su implementación se 
+basa en la creación de clases que heredan de clases que manejan excepciones como lo es 
+\begin{otherlanguage} {english}``\textit{\textbf{RuntimeException}}''\end{otherlanguage}, 
+dependiendo del tipo de error se decidirá en cada momento de qué clase heredar.
+
+Este hito se dará por válido si pasa los mismos test unitarios que existían hasta ahora.
