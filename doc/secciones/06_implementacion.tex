@@ -488,13 +488,14 @@ implementación del logger funciona.
 
 \section{M4: Optimización del rendimiento y estandarización del manejo de errores}
 
-En este hito se pretende hacer ciertos cambios basados en algunas historias del 
+En este hito se pretende realizar una refactorización basada en algunas historias del 
 desarrollador,\footnote{\url{https://github.com/JoseJordanF/Claqueta/issues/132}}
-estas aseguran un funcionamiento más eficiente de la aplicación mediante del uso de estructuras más eficientes y por
-consiguiente de operaciones más eficientes. También por parte del desarrollador 
-\footnote{\url{https://github.com/JoseJordanF/Claqueta/issues/129}} se pretende establecer una jerarquía de clase 
-para los posibles errores que puedan ocurrir en la aplicación. Por lo que el PMV resultante de este hito será una 
-versión más optimizada de la aplicación y la estandarización del manejo de errores en esta.
+estas aseguran un funcionamiento más óptimo de la aplicación mediante el uso de las mejores prácticas sobre las 
+estructuras de datos, disminuyendo el número de operaciones, o haciendo que estas sean más eficientes. También por 
+parte del desarrollador \footnote{\url{https://github.com/JoseJordanF/Claqueta/issues/129}} se pretende establecer una 
+jerarquía de clase para los posibles errores que puedan ocurrir en la aplicación. De esta manera se obtendrá una 
+refactorización del código actual en el que se siguen las mejores prácticas en el manejo de estructuras de datos y el 
+manejo de errores, siendo este el PMV obtenido tras la validación de este hito
 
 Para mejorar la eficiencia de la aplicación se ha recurrido al uso o al cambio de estructuras de datos, como por 
 ejemplo las reseñas, anteriormente estaban localizadas en una lista de objetos 
@@ -506,19 +507,20 @@ cambios, los identificadores únicos han llegado también a los usuarios, ya que
 comprobando que no existía ya uno con dicho nombre era bastante ineficiente, ya que requería recorrer la lista, por 
 lo que se ha decidido usar un conjunto para guardar los usuarios que ahora serán un objeto definido por un ID único 
 al igual que las películas y un string el cual representa el nombre de usuario. Así se ha sobrecargado los métodos 
-de conjunto para considerar dos usuarios iguales si tienen el mismo nombre de usuario, de manera que agregar nuevos 
-usuarios es más sencillo y más eficiente a la hora de comprobar si ya existe alguno con el mismo nombre de usuario.
+de conjunto\cite{BlochEffective} para considerar dos usuarios iguales si tienen el mismo nombre de usuario, de manera 
+que agregar nuevos usuarios es más sencillo y más eficiente a la hora de comprobar si ya existe alguno con el mismo 
+nombre de usuario.
 
 Una vez hecho el cambio de los usuarios, al crear una reseña ahora se añade dos entradas a la estructura de datos 
 que las contiene, una representa las reseñas realizadas por el usuario y otra las reseñas referentes a una misma 
-película. Así se tendría una eficiencia constante al realizar operaciones de búsqueda sobre dicha estructura; 
-también se hace más eficiente la forma de comprobar si un usuario ya ha escrito una reseña sobre una película, ya 
-que el conjunto de reseñas afiliado a esa clave del mapa que representa a una película o a un usuario, es un 
-conjunto, de modo que también se sobrecargan los métodos del conjunto para designar una reseña igual a otra siempre 
-que los identificadores que guarda dicha reseña sean iguales a los de otra. Así se impide la adición de reseñas 
-repetidas porque en un conjunto de reseñas referentes a una película o aún usuario no puede haber más de una reseña 
-con la misma ID de usuario o la misma ID de película, respectivamente. Estos cambios han supuesto que el resto de 
-operaciones puedan modificarse para ser más eficientes.
+película. Así se tendría una eficiencia constante al realizar operaciones de búsqueda sobre dicha 
+estructura\cite{LaforeData}; también se hace más eficiente la forma de comprobar si un usuario ya ha escrito una 
+reseña sobre una película, ya que el conjunto de reseñas afiliado a esa clave del mapa que representa a una película o 
+a un usuario, es un conjunto, de modo que también se sobrecargan los métodos del conjunto para designar una reseña 
+igual a otra siempre que los identificadores que guarda dicha reseña sean iguales a los de otra. Así se impide la 
+adición de reseñas repetidas porque en un conjunto de reseñas referentes a una película o aún usuario no puede haber 
+más de una reseña con la misma ID de usuario o la misma ID de película, respectivamente. Estos cambios han supuesto 
+que el resto de operaciones puedan modificarse para ser más eficientes.
 
 Por otra parte, se ha introducido una jerarquía de clase para designar los distintos errores que pueden ocurrir
 durante la ejecución de la aplicación, siendo perfectamente identificados los datos que los provocaron, a su vez 
@@ -527,4 +529,4 @@ basa en la creación de clases que heredan de clases que manejan excepciones com
 \begin{otherlanguage} {english}``\textit{\textbf{RuntimeException}}''\end{otherlanguage}, 
 dependiendo del tipo de error se decidirá en cada momento de qué clase heredar.
 
-Este hito se dará por válido si pasa los mismos test unitarios que existían hasta ahora.
+Este hito se dará por válido si pasa todos los test unitarios dispuestos hasta ahora.
