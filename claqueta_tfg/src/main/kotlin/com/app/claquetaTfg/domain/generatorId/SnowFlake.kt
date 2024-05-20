@@ -9,7 +9,7 @@ private val epoch = 1027231200000L
 private val maxIncrement = 4096
 private val maxWordId = 1024
 
-fun generateUniqueId(fword: String, sword: String): Long {
+fun generateUniqueId(fword: String, sword: String): String {
     val currentTs = System.currentTimeMillis() - epoch
     val binaryTimestamp =
         String.format("%42s", java.lang.Long.toBinaryString(currentTs)).replace(' ', '0')
@@ -32,7 +32,7 @@ fun generateUniqueId(fword: String, sword: String): Long {
     val concatenatedLong =
         (long1 shl (binaryUniqueId.length + binaryIncrement.length)) or (long2 shl binaryIncrement.length) or long3
 
-    return concatenatedLong
+    return concatenatedLong.toString()
 
 }
 

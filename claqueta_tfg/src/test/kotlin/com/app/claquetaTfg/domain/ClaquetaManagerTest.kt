@@ -4,6 +4,7 @@ import ch.qos.logback.classic.Level
 import com.app.claquetaTfg.logs.LoggerManager
 import com.app.claquetaTfg.logs.SimpleLogger
 import com.app.claquetaTfg.util.Constants.loggerLevel
+import com.app.claquetaTfg.util.Constants.resourcesExamplePath
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import org.junit.jupiter.api.BeforeEach
@@ -12,18 +13,18 @@ import org.junit.jupiter.api.assertThrows
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Calendar
-import java.util.Locale
+import kotlin.collections.HashSet
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
 import kotlin.test.assertTrue
 
-class UserFilmReviewManagerTest {
+class ClaquetaManagerTest {
 
-    private lateinit var users: List<String>
-    private lateinit var reviews: List<Review>
-    private lateinit var films: MutableMap<Long, Film>
-    private lateinit var recommendations: MutableMap<String, List<Long>>
-    private lateinit var getManager: UserFilmReviewManager
+    private lateinit var users: HashSet<User>
+    private lateinit var reviews: HashMap<String, HashSet<Review>>
+    private lateinit var films: HashMap<String, Film>
+    private lateinit var recommendations: HashMap<String, List<String>>
+    private lateinit var getManager: ClaquetaManager
     private lateinit var jsonContentFilms: String
     private lateinit var exampleFilms: List<Film>
     private lateinit var jsonContentReviews: String
@@ -32,18 +33,20 @@ class UserFilmReviewManagerTest {
 
     @BeforeEach
     fun onBefore() {
-        users = listOf()
-        reviews = listOf()
-        films = mutableMapOf()
-        recommendations = mutableMapOf()
-        getManager = UserFilmReviewManager(users, reviews, films, recommendations)
+        users = hashSetOf()
+        reviews = hashMapOf()
+        films = hashMapOf()
+        recommendations = hashMapOf()
+        getManager = ClaquetaManager(users, reviews, films, recommendations)
         jsonContentFilms =
-            File("src/test/resources/filmsExamples.json").readText()
+            File(resourcesExamplePath + "examples/filmsExamples.json").readText()
         exampleFilms = Json.decodeFromString(jsonContentFilms)
         jsonContentReviews =
-            File("src/test/resources/reviewsExamples.json").readText()
+            File(resourcesExamplePath + "examples/reviewsExamples.json").readText()
         exampleReviews = Json.decodeFromString(jsonContentReviews)
-		logger = LoggerManager(SimpleLogger.instance())
+
+        //LOGGER
+        logger = LoggerManager(SimpleLogger.instance())
     }
 
     @Test
@@ -51,9 +54,8 @@ class UserFilmReviewManagerTest {
 
         //When
         val res = getManager.generateUniqueId(exampleFilms.first())
-        println("id: $res")
         //Then
-        assertNotEquals(res, 0.toLong())
+        assertNotEquals(res, "0")
     }
 
     @Test
@@ -68,18 +70,13 @@ class UserFilmReviewManagerTest {
             exampleFilms.first().producers,
             exampleFilms.first().consPlatforms
         )
-
-        var sizeFilms = getManager.films.size
-        println("sizeFilms: $sizeFilms")
         //Then
         assertTrue(getManager.films.isNotEmpty())
-
     }
-
 
     @Test
     fun `When we create two movies with the same data`() {
-        var ids: MutableList<Long> = mutableListOf()
+        val ids: MutableList<String> = mutableListOf()
 
         //When
         for (i in 0..1) {
@@ -94,9 +91,7 @@ class UserFilmReviewManagerTest {
                 )
             )
         }
-        println("ids: $ids")
-        var sizeFilms = getManager.films.size
-        println("sizeFilms: $sizeFilms")
+
         //Then
         assertNotEquals(ids[0], ids[1])
     }
@@ -106,32 +101,27 @@ class UserFilmReviewManagerTest {
 
         //When
         getManager.newUser("JoseJordan")
-        var sizeUser = getManager.users.size
-        println("sizeUser: $sizeUser")
-        //logger.debug { "id: $res" }
+
         //Then
         assertTrue(getManager.users.isNotEmpty())
-
     }
 
     @Test
     fun `When we create a new user but one already exists with that name`() {
 
         //When
-        getManager.newUser("josejordan")
-        var sizeUser = getManager.users.size
-        println("sizeUser: $sizeUser")
+        getManager.newUser("JoseJordan")
 
         //Then
         assertThrows<RuntimeException> {
-            getManager.newUser("JoseJordan")
+            getManager.newUser("joseJordan")
         }
     }
 
     @Test
     fun `When a review is created`() {
 
-        var idFilm = getManager.newFilm(
+        val idFilm = getManager.newFilm(
             exampleFilms.first().title,
             exampleFilms.first().movieDirectors,
             exampleFilms.first().screenwriters,
@@ -139,19 +129,17 @@ class UserFilmReviewManagerTest {
             exampleFilms.first().producers,
             exampleFilms.first().consPlatforms
         )
-        var fech = Calendar.getInstance()
-        getManager.newUser("JoseJordan")
+        val fech = Calendar.getInstance()
+        getManager.newUser("josejordan")
         //When
         getManager.newReview(
             exampleReviews.first().contentPlot,
             exampleReviews.first().contentPerformance,
             exampleReviews.first().contentDirection,
-            "JoseJordan".lowercase(Locale.getDefault()),
+            getManager.users.last().userId,
             getManager.films[idFilm]!!.id,
             fech.time
         )
-        var sizeReviews = getManager.reviews.size
-        println("sizeReviews: $sizeReviews")
         //Then
         assertTrue(getManager.reviews.isNotEmpty())
     }
@@ -159,7 +147,7 @@ class UserFilmReviewManagerTest {
     @Test
     fun `When we try to create a review of a film that we have already reviewed`() {
 
-        var idFilm = getManager.newFilm(
+        val idFilm = getManager.newFilm(
             exampleFilms.first().title,
             exampleFilms.first().movieDirectors,
             exampleFilms.first().screenwriters,
@@ -167,26 +155,24 @@ class UserFilmReviewManagerTest {
             exampleFilms.first().producers,
             exampleFilms.first().consPlatforms
         )
-        var fech = Calendar.getInstance()
-        getManager.newUser("JoseJordan")
+        val fech = Calendar.getInstance()
+        getManager.newUser("josejordan")
         //When
         getManager.newReview(
             exampleReviews.first().contentPlot,
             exampleReviews.first().contentPerformance,
             exampleReviews.first().contentDirection,
-            "JoseJordan".lowercase(Locale.getDefault()),
+            getManager.users.last().userId,
             getManager.films[idFilm]!!.id,
             fech.time
         )
-        var sizeReviews = getManager.reviews.size
-        println("sizeReviews: $sizeReviews")
         //Then
         assertThrows<RuntimeException> {
             getManager.newReview(
                 exampleReviews.first().contentPlot,
                 exampleReviews.first().contentPerformance,
                 exampleReviews.first().contentDirection,
-                "JoseJordan".lowercase(Locale.getDefault()),
+                getManager.users.last().userId,
                 getManager.films[idFilm]!!.id,
                 fech.time
             )
@@ -196,7 +182,7 @@ class UserFilmReviewManagerTest {
     @Test
     fun `When we create a review of a movie, that movie is not added to recommendations`() {
 
-        var idFilm = getManager.newFilm(
+        val idFilm = getManager.newFilm(
             exampleFilms.first().title,
             exampleFilms.first().movieDirectors,
             exampleFilms.first().screenwriters,
@@ -204,22 +190,19 @@ class UserFilmReviewManagerTest {
             exampleFilms.first().producers,
             exampleFilms.first().consPlatforms
         )
-        var fech = Calendar.getInstance()
-        getManager.newUser("JoseJordan")
+        val fech = Calendar.getInstance()
+        getManager.newUser("josejordan")
         //When
         getManager.newReview(
             exampleReviews.first().contentPlot,
             exampleReviews.first().contentPerformance,
             exampleReviews.first().contentDirection,
-            "JoseJordan".lowercase(Locale.getDefault()),
+            getManager.users.last().userId,
             getManager.films[idFilm]!!.id,
             fech.time
         )
-        var sizeReviews = getManager.reviews.size
-        println("sizeReviews: $sizeReviews")
-        var sizeRecommends =
-            getManager.recommendations["JoseJordan".lowercase(Locale.getDefault())]!!.size
-        println("sizeRecommends: $sizeRecommends")
+        val sizeRecommends =
+            getManager.recommendations[getManager.users.last().userId]!!.size
         //Then
         assertEquals(sizeRecommends, 0)
     }
@@ -227,7 +210,7 @@ class UserFilmReviewManagerTest {
     @Test
     fun `When we create a review and there are movies with related data, for the recommendations`() {
 
-        var ids: MutableList<Long> = mutableListOf()
+        val ids: MutableList<String> = mutableListOf()
 
         //When
         for (i in 0..3) {
@@ -242,29 +225,19 @@ class UserFilmReviewManagerTest {
                 )
             )
         }
-        println(ids[1])
-        var fech = Calendar.getInstance()
-        getManager.newUser("JoseJordan")
+        val fech = Calendar.getInstance()
+        getManager.newUser("josejordan")
         //When
         getManager.newReview(
             exampleReviews.first().contentPlot,
             exampleReviews.first().contentPerformance,
             exampleReviews.first().contentDirection,
-            "JoseJordan".lowercase(Locale.getDefault()),
+            getManager.users.last().userId,
             getManager.films[ids[0]]!!.id,
             fech.time
         )
-        var sizeReviews = getManager.reviews.size
-        println("sizeReviews: $sizeReviews")
-        var sizeFilms = getManager.films.size
-        println("sizeFilms: $sizeFilms")
-        var sizeRecommends =
-            getManager.recommendations["JoseJordan".lowercase(Locale.getDefault())]!!.size
-        println(
-            "sizeRecommends: $sizeRecommends id:" + getManager.recommendations["JoseJordan".lowercase(
-                Locale.getDefault()
-            )]!![0]
-        )
+        val sizeRecommends =
+            getManager.recommendations[getManager.users.last().userId]!!.size
         //Then
         assertEquals(sizeRecommends, 2)
     }
@@ -273,7 +246,7 @@ class UserFilmReviewManagerTest {
     fun `When a film is created and the log that indicates this is produced`() {
 
         //When
-        var idFilm = getManager.newFilm(
+        getManager.newFilm(
             exampleFilms.first().title,
             exampleFilms.first().movieDirectors,
             exampleFilms.first().screenwriters,
@@ -284,7 +257,7 @@ class UserFilmReviewManagerTest {
         val logs: List<HashMap<String, Any>> = logger.historyLogs() as List<HashMap<String, Any>>
 
         //Then
-        assertEquals(loggerLevel.toString(),logs.last()["level"].toString())
+        assertEquals(loggerLevel.toString(), logs.last()["level"].toString())
         assertEquals("Film creation event", logs.last()["message"].toString())
         assertTrue(logs.isNotEmpty())
     }
@@ -294,9 +267,9 @@ class UserFilmReviewManagerTest {
         //When doing all these actions, 2 logs must be created,
         //one for the creation of the film and one for the creation
         //of the review
-        var logs: List<HashMap<String, Any>>
+        val logs: List<HashMap<String, Any>>
 
-        var idFilm = getManager.newFilm(
+        val idFilm = getManager.newFilm(
             exampleFilms.first().title,
             exampleFilms.first().movieDirectors,
             exampleFilms.first().screenwriters,
@@ -304,24 +277,25 @@ class UserFilmReviewManagerTest {
             exampleFilms.first().producers,
             exampleFilms.first().consPlatforms
         )
-        var fech = Calendar.getInstance()
-        getManager.newUser("JoseJordan")
+        val fech = Calendar.getInstance()
+        getManager.newUser("josejordan")
         //When
         getManager.newReview(
             exampleReviews.first().contentPlot,
             exampleReviews.first().contentPerformance,
             exampleReviews.first().contentDirection,
-            "JoseJordan".lowercase(Locale.getDefault()),
+            getManager.users.last().userId,
             getManager.films[idFilm]!!.id,
             fech.time
         )
         logs = logger.historyLogs() as List<HashMap<String, Any>>
 
         //Then
-        assertEquals(loggerLevel.toString(),logs.last()["level"].toString())
-        assertEquals("Film creation event", logs[logs.size-2]["message"].toString())
+        assertEquals(loggerLevel.toString(), logs.last()["level"].toString())
+        assertEquals("Film creation event", logs[logs.size - 3]["message"].toString())
+        assertEquals("User creation event", logs[logs.size - 2]["message"].toString())
         assertEquals("Review creation event", logs.last()["message"].toString())
-        assertTrue(logs.size >= 2)
+        assertTrue(logs.size >= 3)
     }
 
     @Test
@@ -330,9 +304,9 @@ class UserFilmReviewManagerTest {
         //one for the creation of the film, one for the creation of
         //the first review and one for the error when trying to create
         //another review of the same film.
-        var logs: List<HashMap<String, Any>>
+        val logs: List<HashMap<String, Any>>
 
-        var idFilm = getManager.newFilm(
+        val idFilm = getManager.newFilm(
             exampleFilms.first().title,
             exampleFilms.first().movieDirectors,
             exampleFilms.first().screenwriters,
@@ -340,15 +314,15 @@ class UserFilmReviewManagerTest {
             exampleFilms.first().producers,
             exampleFilms.first().consPlatforms
         )
-        var fech = Calendar.getInstance()
-        getManager.newUser("JoseJordan")
+        val fech = Calendar.getInstance()
+        getManager.newUser("josejordan")
 
         //When
         getManager.newReview(
             exampleReviews.first().contentPlot,
             exampleReviews.first().contentPerformance,
             exampleReviews.first().contentDirection,
-            "JoseJordan".lowercase(Locale.getDefault()),
+            getManager.users.last().userId,
             getManager.films[idFilm]!!.id,
             fech.time
         )
@@ -358,7 +332,7 @@ class UserFilmReviewManagerTest {
                 exampleReviews.first().contentPlot,
                 exampleReviews.first().contentPerformance,
                 exampleReviews.first().contentDirection,
-                "JoseJordan".lowercase(Locale.getDefault()),
+                getManager.users.last().userId,
                 getManager.films[idFilm]!!.id,
                 fech.time
             )
@@ -366,13 +340,14 @@ class UserFilmReviewManagerTest {
         logs = logger.historyLogs() as List<HashMap<String, Any>>
 
         assertEquals(Level.ERROR.toString(), logs.last()["level"].toString())
-        assertEquals("Film creation event", logs[logs.size - 3]["message"].toString())
+        assertEquals("Film creation event", logs[logs.size - 4]["message"].toString())
+        assertEquals("User creation event", logs[logs.size - 3]["message"].toString())
         assertEquals("Review creation event", logs[logs.size - 2]["message"].toString())
         assertEquals("Review duplication error", logs.last()["message"].toString())
         assertEquals(
             SimpleDateFormat("dd-MM-yyyy").format(Calendar.getInstance().time),
             logs.last()["item_involved_2"].toString()
         )
-        assertTrue(logs.size == 3)
+        assertTrue(logs.size >= 4)
     }
 }

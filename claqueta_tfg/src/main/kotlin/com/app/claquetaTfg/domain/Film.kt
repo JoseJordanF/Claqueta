@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Film(
-    val id: Long,
+    val id: String,
     val title: String,
     val movieDirectors: List<String> = listOf(),
     val screenwriters: List<String> = listOf(),
