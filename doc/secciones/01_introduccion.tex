@@ -288,6 +288,48 @@ Además, teniendo en cuenta que estás enfocado en satisfacer al usuario, tienes
 transparencia del progreso del proyecto. Resumiendo, el enfoque ágil me ha permitido desarrollar de 
 manera más efectiva mi TFG, y logrando una gran calidad.
 
+\subsection{Buenas prácticas}
+
+Dentro del marco para el desarrollo software se establecen también unas buenas prácticas para una parte de este, la 
+escritura de código. Se guiará mediante el conjunto de principios SOLID\cite{martinFunctional}, conjunto de reglas 
+diseñado para la programación orientada a objetos, que asegura la calidad del código, ya que esta está definida por la 
+cantidad de principios SOLID que se cumplen en el código. 
+
+El nombre que reciben estos principios es un acrónimo formado por la inicial de los mismos, los cuales fueros creados por \textit{''Robert C. Martin''}\cite{UncleBob} o \begin{otherlanguage} {english}``\textit{\textbf{Uncle Bob}}''\end{otherlanguage}, como se le llama de forma amistosa, famoso ingeniero de software y autor 
+estadounidense. Estos principios se crearon para asegurar el sencillo mantenimiento y la escalabilidad de un sistema:
+
+\begin{itemize}
+    \item S - (\begin{otherlanguage} {english}\textit{Single Responsibility Principle}):  ``\textit{\textbf{Gather together the things that change for the same reasons. Separate things that change for different reasons}}''\end{otherlanguage},
+    la definición de este principio viene a decir que un módulo software solo debería tener una responsabilidad, 
+    debería encargarse únicamente de un trabajo y si cambia solo lo debería hacer por una razón. De manera que si un 
+    módulo se encarga de diferentes tareas, no solo va a existir una razón de cambiar, sino una por cada tarea 
+    diferente de la que se encargue el módulo. 
+    \item O - (\begin{otherlanguage} {english}\textit{Open-Closed Principle}): ``\textit{\textbf{A Module should be open for extension but closed for modification}}''\end{otherlanguage},
+    este principio advierte que un módulo debe estar abierto a cambios en caso de ampliación, pero cerrado a 
+    modificación, si se piensa qué dicho módulo se basa en un inicio de sesión se puede alegar como amplificación el 
+    propio inicio de sesión, pero a través de otro sistema, como lo es Google o GitHub. Así se entiende esta 
+    amplificación como añadir más funcionalidades al módulo, pero sin perturbar el código ya escrito; en el momento 
+    que cualquier funcionalidad añadida haga cambiar el código previo, se consideraría una modificación.
+    \item L - (\begin{otherlanguage} {english}\textit{Liskov Substitution Principle}):
+    ``\textit{\textbf{A program that uses an interface must not be confused by an implementation of that interface}}''\end{otherlanguage},
+    el principio de sustitución indica que no se cometa el error de pensar que las clases que implementan una interfaz
+    son implementaciones de esta, cuando realmente son subtipos de dicha interfaz. Este principio previene que al 
+    cambiar instancias de una interfaz por subtipos de ella, el funcionamiento del programa no se ve afectado.
+    \item I - (\begin{otherlanguage} {english}\textit{Interface Segregation Principle}):
+    ``\textit{\textbf{Keep interfaces small so that users don’t end up depending on things they don’t need}}''\end{otherlanguage},
+    este hace referencia a que un objeto no debería depender de una interfaz que no usa, o sea que no use todas las
+    funciones de dicha interfaz, ya que provoca que crezca el código de la interfaz y se fuerce a objetos a usar 
+    funciones que no tienen sentido que utilicen.
+    \item D - (\begin{otherlanguage} {english}\textit{Dependency Inversion Principle}):
+    ``\textit{\textbf{Depend in the direction of abstraction. High level modules should not depend upon low level details}}''\end{otherlanguage}
+    este principio indica que los módulos de alto nivel como la lógica de negocio no dependen de los 
+    módulos de bajo nivel como el mecanismo de persistencia, por lo tanto, deben estar separados y ambos deberían 
+    depender de abstracciones. Siendo estas lo suficientemente flexibles como para permitir que diferentes
+    implementaciones se conecten a ellas, independientemente de los \textit{''detalles''}, implementaciones concretas 
+    como, el mecanismo de persistencia o el servicio que se utiliza para acceder a la red. Una técnica que permite
+    preservar la inversión de dependencias es la inyección dependencias, esta permite crear la instancia de una clase 
+    inyectando como parámetro, en este caso la implementación concreta que se necesite de la abstracción.
+\end{itemize}
 
 \subsection{Conclusiones}
 
@@ -302,7 +344,9 @@ del producto.
 
 En resumen, el enfoque ágil se considera una elección sólida para este TFG, ya que proporciona una 
 estructura flexible y eficiente que permitirá una gestión efectiva del proyecto, una entrega de valor 
-continua y una alta probabilidad de alcanzar los objetivos propuestos.
+continua y una alta probabilidad de alcanzar los objetivos propuestos.Además, el conjunto de buenas prácticas 
+aseguran la calidad y la prosperidad del código, ofreciendo un sencillo mantenimiento y permitiendo la escalabilidad 
+del proyecto.
 
 
 Este proyecto es software libre, y está liberado con la licencia \cite{gplv3}. Y se puede encontrar en 
