@@ -10,7 +10,7 @@ data class Review(
     val contentPlot: String,
     val contentPerformance: String,
     val contentDirection: String,
-    val userId: String,
+    val userName: String,
     val filmId: String,
     @Serializable(with = DateSerializer::class)
     val creationDate: Date = Calendar.getInstance().time
@@ -19,12 +19,12 @@ data class Review(
 	override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is Review) return false
-        return this.filmId == other.filmId && this.userId == other.userId
+        return this.filmId == other.filmId && this.userName == other.userName
     }
 
     override fun hashCode(): Int {
         var res = filmId.hashCode()
-        res = 31 * res + userId.hashCode()
+        res = 31 * res + userName.hashCode()
         return res
     }
 

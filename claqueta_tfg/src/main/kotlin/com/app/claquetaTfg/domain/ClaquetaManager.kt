@@ -9,7 +9,7 @@ import java.util.Calendar
 import java.util.Date
 
 data class ClaquetaManager(
-    var users: HashSet<User> = hashSetOf(),
+    var users: HashSet<String> = hashSetOf(),
     var reviews: HashMap<String, HashSet<Review>> = hashMapOf(),
     val films: HashMap<String, Film> = hashMapOf(),
     var recommendations: HashMap<String, List<String>> = hashMapOf(),
@@ -20,7 +20,6 @@ data class ClaquetaManager(
     fun generateUniqueId(obj: Any): String {
         return when (obj) {
             is Film -> generateFilmUniqueId(obj)
-            is User -> generateUserUniqueId(obj)
             else -> throw UnsupportedObjectToGenerateIdException(
                 "Object of type ${obj::class.java} not" +
                         " supported to generate unique identifier"
@@ -30,10 +29,6 @@ data class ClaquetaManager(
 
     private fun generateFilmUniqueId(film: Film): String {
         return generateUniqueId(film.title, film.movieDirectors[0])
-    }
-
-    private fun generateUserUniqueId(user: User): String {
-        return generateUniqueId(user.userName, user.userName.reversed())
     }
 
     fun newFilm(
@@ -56,15 +51,12 @@ data class ClaquetaManager(
     }
 
     fun newUser(name: String) {
-        val newU = User("0", name)
-        val newId = generateUniqueId(newU)
-        val trueUser = User(newId, name)
-        if (users.add(trueUser)) {
+        if (users.add(name.lowercase())) {
             logger.log(
-                "User creation event", arrayOf(trueUser)
+                "User creation event", arrayOf(name)
             )
         } else {
-            val anotherUser = users.find { it == newU }
+            val anotherUser = users.find { it == name }
             logger.error(
                 "Error username already in use", arrayOf(anotherUser)
             )
@@ -78,23 +70,23 @@ data class ClaquetaManager(
         contentPlot: String,
         contentPerformance: String,
         contentDirection: String,
-        userId: String,
+        userName: String,
         filmId: String,
         creationDate: Date,
     ) {
         val newR = Review(
-            contentPlot, contentPerformance, contentDirection, userId, filmId, creationDate
+            contentPlot, contentPerformance, contentDirection, userName, filmId, creationDate
         )
         val setFilmR = reviews.getOrPut(filmId) { HashSet() }
         if (setFilmR.add(newR)) {
-            val setUserR = reviews.getOrPut(userId) { HashSet() }
+            val setUserR = reviews.getOrPut(userName) { HashSet() }
             setUserR.add(newR)
             logger.log(
                 "Review creation event", arrayOf(newR)
             )
-            recomendFilmToUser(userId)
+            recomendFilmToUser(userName)
         } else {
-            val anotherReview = setFilmR.filter { it.userId == userId }.last()
+            val anotherReview = setFilmR.filter { it.userName == userName }.last()
             logger.error(
                 "Review duplication error", arrayOf(
                     anotherReview,
@@ -102,13 +94,13 @@ data class ClaquetaManager(
                 )
             )
             throw ReviewDuplicateException(
-                "The user $userId had already written a review about the movie $filmId. This was his review: $anotherReview"
+                "The user $userName had already written a review about the movie $filmId. This was his review: $anotherReview"
             )
         }
     }
 
-    fun recomendFilmToUser(userId: String) {
-        val filtro = reviews[userId]
+    fun recomendFilmToUser(userName: String) {
+        val filtro = reviews[userName]
         val filtroIds: List<String>? = filtro?.map { it.filmId }
 
         val dataToRecommeds = hashSetOf<String>()
@@ -129,7 +121,7 @@ data class ClaquetaManager(
                 recommendRes.add(key)
             }
         }
-        recommendations[userId] = recommendRes
+        recommendations[userName] = recommendRes
     }
 
     class ReviewDuplicateException(message: String) : RuntimeException(message)
