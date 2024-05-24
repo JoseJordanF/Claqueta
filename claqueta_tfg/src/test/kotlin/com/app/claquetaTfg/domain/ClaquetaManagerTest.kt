@@ -136,7 +136,7 @@ class ClaquetaManagerTest {
             exampleReviews.first().contentPlot,
             exampleReviews.first().contentPerformance,
             exampleReviews.first().contentDirection,
-            getManager.users.last().userId,
+            getManager.users.last().id,
             getManager.films[idFilm]!!.id,
             fech.time
         )
@@ -162,7 +162,7 @@ class ClaquetaManagerTest {
             exampleReviews.first().contentPlot,
             exampleReviews.first().contentPerformance,
             exampleReviews.first().contentDirection,
-            getManager.users.last().userId,
+            getManager.users.last().id,
             getManager.films[idFilm]!!.id,
             fech.time
         )
@@ -172,7 +172,7 @@ class ClaquetaManagerTest {
                 exampleReviews.first().contentPlot,
                 exampleReviews.first().contentPerformance,
                 exampleReviews.first().contentDirection,
-                getManager.users.last().userId,
+                getManager.users.last().id,
                 getManager.films[idFilm]!!.id,
                 fech.time
             )
@@ -197,12 +197,12 @@ class ClaquetaManagerTest {
             exampleReviews.first().contentPlot,
             exampleReviews.first().contentPerformance,
             exampleReviews.first().contentDirection,
-            getManager.users.last().userId,
+            getManager.users.last().id,
             getManager.films[idFilm]!!.id,
             fech.time
         )
         val sizeRecommends =
-            getManager.recommendations[getManager.users.last().userId]!!.size
+            getManager.recommendations[getManager.users.last().id]!!.size
         //Then
         assertEquals(sizeRecommends, 0)
     }
@@ -232,12 +232,12 @@ class ClaquetaManagerTest {
             exampleReviews.first().contentPlot,
             exampleReviews.first().contentPerformance,
             exampleReviews.first().contentDirection,
-            getManager.users.last().userId,
+            getManager.users.last().id,
             getManager.films[ids[0]]!!.id,
             fech.time
         )
         val sizeRecommends =
-            getManager.recommendations[getManager.users.last().userId]!!.size
+            getManager.recommendations[getManager.users.last().id]!!.size
         //Then
         assertEquals(sizeRecommends, 2)
     }
@@ -284,7 +284,7 @@ class ClaquetaManagerTest {
             exampleReviews.first().contentPlot,
             exampleReviews.first().contentPerformance,
             exampleReviews.first().contentDirection,
-            getManager.users.last().userId,
+            getManager.users.last().id,
             getManager.films[idFilm]!!.id,
             fech.time
         )
@@ -322,7 +322,7 @@ class ClaquetaManagerTest {
             exampleReviews.first().contentPlot,
             exampleReviews.first().contentPerformance,
             exampleReviews.first().contentDirection,
-            getManager.users.last().userId,
+            getManager.users.last().id,
             getManager.films[idFilm]!!.id,
             fech.time
         )
@@ -332,7 +332,7 @@ class ClaquetaManagerTest {
                 exampleReviews.first().contentPlot,
                 exampleReviews.first().contentPerformance,
                 exampleReviews.first().contentDirection,
-                getManager.users.last().userId,
+                getManager.users.last().id,
                 getManager.films[idFilm]!!.id,
                 fech.time
             )
