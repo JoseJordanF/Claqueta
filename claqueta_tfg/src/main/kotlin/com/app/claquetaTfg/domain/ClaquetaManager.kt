@@ -60,7 +60,7 @@ data class ClaquetaManager(
                 "Error username already in use", arrayOf(name)
             )
             throw UserAlreadyExistsException(
-                "The username $name is in use by another user.
+                "The username $name is in use by another user."
             )
         }
     }
