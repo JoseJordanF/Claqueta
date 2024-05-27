@@ -56,12 +56,11 @@ data class ClaquetaManager(
                 "User creation event", arrayOf(name)
             )
         } else {
-            val anotherUser = users.find { it == name }
             logger.error(
-                "Error username already in use", arrayOf(anotherUser)
+                "Error username already in use", arrayOf(name)
             )
             throw UserAlreadyExistsException(
-                "The username $name is in use by another user. Which is:" + "$anotherUser"
+                "The username $name is in use by another user.
             )
         }
     }
