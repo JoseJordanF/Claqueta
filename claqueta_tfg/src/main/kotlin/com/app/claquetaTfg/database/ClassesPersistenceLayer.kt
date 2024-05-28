@@ -49,8 +49,9 @@ class DatabasePersistenceLayer<T : Any>(
         }
     }
 
-    override fun loadData(): Any {
+    override fun loadData(): List<Any> {
         val content = file.readText()
+		if(content.isEmpty()) return emptyList()
         return jsonPrettyFormat.decodeFromString(ListSerializer(serializer), content)
     }
 }
