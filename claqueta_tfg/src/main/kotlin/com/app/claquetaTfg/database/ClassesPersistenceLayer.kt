@@ -1,5 +1,7 @@
 package com.app.claquetaTfg.database
 
+import com.app.claquetaTfg.domain.Film
+import com.app.claquetaTfg.domain.Review
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.Json
@@ -49,10 +51,31 @@ class DatabasePersistenceLayer<T : Any>(
         }
     }
 
-    override fun loadData(): List<Any> {
+    override fun loadData(): Any {
         val content = file.readText()
-		if(content.isEmpty()) return emptyList()
-        return jsonPrettyFormat.decodeFromString(ListSerializer(serializer), content)
+        if (content.isEmpty()) return hashMapOf<Any, Any>()
+        when (classType) {
+            Film::class -> {
+                val list = jsonPrettyFormat.decodeFromString(ListSerializer(serializer), content)
+                val map: HashMap<String, Film> = hashMapOf()
+                for (film: Film in list as List<Film>) {
+                    map.getOrPut(film.id) { film }
+                }
+                return map
+            }
+
+            Review::class -> {
+                val list = jsonPrettyFormat.decodeFromString(ListSerializer(serializer), content)
+                val map: HashMap<String, HashSet<Review>> = hashMapOf()
+                for (review: Review in list as List<Review>) {
+                    map.getOrPut(review.filmId) { HashSet() }.add(review)
+                    map.getOrPut(review.userName) { HashSet() }.add(review)
+                }
+                return map
+            }
+
+            else -> return hashMapOf<Any, Any>()
+        }
     }
 }
 
