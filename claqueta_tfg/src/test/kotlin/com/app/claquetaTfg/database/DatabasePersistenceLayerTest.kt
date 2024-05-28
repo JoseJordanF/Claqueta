@@ -5,6 +5,7 @@ import com.app.claquetaTfg.domain.Film
 import com.app.claquetaTfg.domain.Review
 import com.app.claquetaTfg.util.Constants.resourcesExamplePath
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.decodeFromString
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import java.io.File
