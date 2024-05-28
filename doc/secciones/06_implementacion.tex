@@ -541,12 +541,11 @@ Para el primer recurso se necesita definir una capa de persistencia para los dat
 guardar y cargar los datos de la aplicación para realizar cualquier operación de la lógica de negocio o simplemente 
 mostrar información al usuario. Pero para seguir buenas prácticas se debe tener en cuenta uno de los principios 
 SOLID, principios afines al desarrollo ágil\cite{AgilPrinc}, ya que como este buscan crear software de 
-manera eficiente, flexible y mantenible, solo que estos principios son referentes al diseño orientado a objetos tal 
+manera eficiente, flexible y mantenible, solo que estos principios son referentes al diseño orientado a objetos tal
 como se explicaba en la introducción. 
 
 El principio que se debe tener en cuenta es el de inversión de dependencias 
 (\begin{otherlanguage} {english}``\textit{\textbf{Dependency Inversion Principle}}''\end{otherlanguage}), 
-
 Obteniendo así una abstracción del módulo de persistencia, mediante protocolos, interfaces o clases abstractas, se 
 podrá establecer la implementación concreta que se prefiera en todo momento sin perturbar prácticamente el código, 
 solo habría que añadir dicho mecanismo concreto, pero el resto de código donde se hace uso de este no cambiaria.
@@ -557,11 +556,10 @@ con dos operaciones, la operación de guardar datos y la de cargar dichos datos,
 genéricos \cite{genericsBook}, ya que gracias a ellos se puede dar cualquier tipo de implementación que se quiera de 
 la capa de persistencia mientras herede de la interfaz, ya que no especifica el uso de tipos para los parámetros o 
 para los datos que se retornan. Por ende haciendo uso de la interfaz se ha llevado a cabo la implementación de una 
-capa de persistencia que guarda y recupera datos de archivos Json llamada 
-\begin{otherlanguage}{english}``\textit{\textbf{DatabasePersistenceLayer}}''\end{otherlanguage}
-, esta se encarga de sobrescribir los métodos de la interfaz para guardar y cargar datos, además puede operar con 
-objetos individuales o listas de objetos. Por otra parte, se ha creado una clase para inyectar cualquier 
-implementación, siguiendo las mejores prácticas para cumplir con el principio de inversión de dependencias, además de 
-asegurar que no se viola el principio de sustitución de Liskov. 
+capa de persistencia que guarda y recupera datos de archivos Json, esta se encarga de sobrescribir los métodos de la
+interfaz para guardar y cargar datos, además puede operar con objetos individuales o listas de objetos. Por otra 
+parte, se ha creado una clase para inyectar cualquier implementación, siguiendo las mejores prácticas para cumplir 
+con el principio de inversión de dependencias, además de asegurar que no se viola el principio de sustitución de 
+Liskov. 
 
 Se concederá la validación a este hito si pasa los test unitarios para guardar y cargar distintos tipos de datos.   
