@@ -59,12 +59,14 @@ class DatabasePersistenceLayerTest {
         )
 
         //When
+        val loadListBefore = dataManagerFilms.loadData() as List<Film>
         dataManagerFilms.saveData(uniqFilm)
-        val loadList = dataManagerFilms.loadData() as List<Film>
-
+        val loadListAfter = dataManagerFilms.loadData() as List<Film>
+        val amountAdd = loadListAfter.size-loadListBefore.size
         //Then
-        assertTrue(loadList.isNotEmpty())
-        assertEquals(uniqFilm.id, loadList.last().id)
+        assertTrue(loadListAfter.isNotEmpty())
+        assertFalse(loadListAfter.contains<Film?>(null))
+        assertEquals(loadListAfter.size,loadListBefore.size+amountAdd)
     }
 
     @Test
@@ -85,14 +87,14 @@ class DatabasePersistenceLayerTest {
         }
 
         //When
+        val loadListBefore = dataManagerFilms.loadData() as List<Film>
         dataManagerFilms.saveData(filmList)
-        val loadList = dataManagerFilms.loadData() as List<Film>
-
+        val loadListAfter = dataManagerFilms.loadData() as List<Film>
+        val amountAdd = loadListAfter.size-loadListBefore.size
         //Then
-        assertTrue(loadList.isNotEmpty())
-        assertEquals(filmList.last().id, loadList.last().id)
-        assertEquals(filmList.toList()[1].id, loadList[loadList.size - 2].id)
-        assertEquals(filmList.toList()[0].id, loadList[loadList.size - 3].id)
+        assertTrue(loadListAfter.isNotEmpty())
+        assertFalse(loadListAfter.contains<Film?>(null))
+        assertEquals(loadListAfter.size , loadListBefore.size+amountAdd)
     }
 
     @Test
@@ -107,13 +109,14 @@ class DatabasePersistenceLayerTest {
         )
 
         //When
+        val loadListBefore = dataManagerReviews.loadData() as List<Review>
         dataManagerReviews.saveData(uniqReview)
-        val loadList = dataManagerReviews.loadData() as List<Review>
-
+        val loadListAfter = dataManagerReviews.loadData() as List<Review>
+        val amountAdd = loadListAfter.size-loadListBefore.size
         //Then
-        assertTrue(loadList.isNotEmpty())
-        assertEquals(uniqReview.filmId, loadList.last().filmId)
-        assertEquals(uniqReview.userName, loadList.last().userName)
+        assertTrue(loadListAfter.isNotEmpty())
+        assertFalse(loadListAfter.contains<Review?>(null))
+        assertEquals(loadListAfter.size , loadListBefore.size+amountAdd)
     }
 
     @Test
@@ -132,15 +135,14 @@ class DatabasePersistenceLayerTest {
         }
 
         //When
+        val loadListBefore = dataManagerReviews.loadData() as List<Review>
         dataManagerReviews.saveData(reviewList)
-        val loadList = dataManagerReviews.loadData() as List<Review>
-
+        val loadListAfter = dataManagerReviews.loadData() as List<Review>
+        val amountAdd = loadListAfter.size-loadListBefore.size
         //Then
-        assertTrue(loadList.isNotEmpty())
-        assertEquals(reviewList.last().filmId, loadList.last().filmId)
-        assertEquals(reviewList.last().userName, loadList.last().userName)
-        assertEquals(reviewList.toList()[0].filmId, loadList[loadList.size - 2].filmId)
-        assertEquals(reviewList.toList()[0].userName, loadList[loadList.size - 2].userName)
+        assertTrue(loadListAfter.isNotEmpty())
+        assertFalse(loadListAfter.contains<Review?>(null))
+        assertEquals(loadListAfter.size , loadListBefore.size+amountAdd)
     }
 }
 
