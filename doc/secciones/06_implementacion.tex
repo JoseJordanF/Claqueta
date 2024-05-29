@@ -553,13 +553,18 @@ solo habría que añadir dicho mecanismo concreto, pero el resto de código dond
 Para la implementación de la abstracción se ha recurrido a crear una interfaz llamada 
 \begin{otherlanguage} {english}``\textit{\textbf{PersistenceLayer}}''\end{otherlanguage}, 
 con dos operaciones, la operación de guardar datos y la de cargar dichos datos, estas se han creado usando 
-genéricos \cite{genericsBook}, ya que gracias a ellos se puede dar cualquier tipo de implementación que se quiera de 
-la capa de persistencia mientras herede de la interfaz, ya que no especifica el uso de tipos para los parámetros o 
-para los datos que se retornan. Por ende haciendo uso de la interfaz se ha llevado a cabo la implementación de una 
-capa de persistencia que guarda y recupera datos de archivos Json, esta se encarga de sobrescribir los métodos de la
-interfaz para guardar y cargar datos, además puede operar con objetos individuales o listas de objetos. Por otra 
-parte, se ha creado una clase para inyectar cualquier implementación, siguiendo las mejores prácticas para cumplir 
-con el principio de inversión de dependencias, además de asegurar que no se viola el principio de sustitución de 
-Liskov. 
+genéricos \cite{genericsBook}, ya que gracias a ellos se puede dar cualquier tipo de implementación que se quiera 
+de la capa de persistencia mientras herede de la interfaz, ya que no especifica el uso de tipos para los parámetros 
+o para los datos que se retornan. Por ende haciendo uso de la interfaz se ha llevado a cabo la implementación de 
+una capa de persistencia que guarda y recupera datos de archivos Json, esta se encarga de sobrescribir los métodos 
+de la interfaz para guardar y cargar datos, además puede operar con objetos individuales o listas de objetos. La 
+carga de datos de esta implementación se realiza a razón de las estructuras de la clase 
+\begin{otherlanguage} {english}``\textit{\textbf{manager}}''\end{otherlanguage} 
+vista en el modelo de dominio, en este caso devuelve los 
+datos en mapas, estructuras que se definen y explican en el hito anterior.
+
+Por otra parte, se ha creado una clase para inyectar cualquier implementación, siguiendo las mejores prácticas para 
+cumplir con el principio de inversión de dependencias, además de asegurar que no se viola el principio de 
+sustitución de Liskov.  
 
 Se concederá la validación a este hito si pasa los test unitarios para guardar y cargar distintos tipos de datos.   
