@@ -4,8 +4,8 @@ package com.app.claquetaTfg.database
 import com.app.claquetaTfg.domain.Film
 import com.app.claquetaTfg.domain.Review
 import com.app.claquetaTfg.util.Constants.resourcesExamplePath
-import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.decodeFromString
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import java.io.File
@@ -49,6 +49,7 @@ class DatabasePersistenceLayerTest {
 
     @Test
     fun `When I want to save only one film`() {
+
         val uniqFilm = Film(
             exampleFilms[1].id,
             exampleFilms[1].title,
@@ -60,14 +61,14 @@ class DatabasePersistenceLayerTest {
         )
 
         //When
-        val loadListBefore = dataManagerFilms.loadData() as List<Film>
+        val loadDataBefore = dataManagerFilms.loadData() as HashMap<*, *>
         dataManagerFilms.saveData(uniqFilm)
-        val loadListAfter = dataManagerFilms.loadData() as List<Film>
-        val amountAdd = loadListAfter.size-loadListBefore.size
+        val loadDataAfter = dataManagerFilms.loadData() as HashMap<*, *>
+        val amountAdd = loadDataAfter.size-loadDataBefore.size
         //Then
-        assertTrue(loadListAfter.isNotEmpty())
-        assertFalse(loadListAfter.contains<Film?>(null))
-        assertEquals(loadListAfter.size,loadListBefore.size+amountAdd)
+        assertTrue(loadDataAfter.isNotEmpty())
+        assertFalse(loadDataAfter.values.any{it==null})
+        assertEquals(loadDataAfter.size,loadDataBefore.size+amountAdd)
     }
 
     @Test
@@ -88,14 +89,15 @@ class DatabasePersistenceLayerTest {
         }
 
         //When
-        val loadListBefore = dataManagerFilms.loadData() as List<Film>
+        val loadDataBefore = dataManagerFilms.loadData() as HashMap<*, *>
         dataManagerFilms.saveData(filmList)
-        val loadListAfter = dataManagerFilms.loadData() as List<Film>
-        val amountAdd = loadListAfter.size-loadListBefore.size
+        val loadDataAfter = dataManagerFilms.loadData() as HashMap<*, *>
+        val amountAdd = loadDataAfter.size-loadDataBefore.size
+        println(loadDataBefore)
         //Then
-        assertTrue(loadListAfter.isNotEmpty())
-        assertFalse(loadListAfter.contains<Film?>(null))
-        assertEquals(loadListAfter.size , loadListBefore.size+amountAdd)
+        assertTrue(loadDataAfter.isNotEmpty())
+        assertFalse(loadDataAfter.values.any{it==null})
+        assertEquals(loadDataAfter.size , loadDataBefore.size+amountAdd)
     }
 
     @Test
@@ -110,14 +112,15 @@ class DatabasePersistenceLayerTest {
         )
 
         //When
-        val loadListBefore = dataManagerReviews.loadData() as List<Review>
+        val loadDataBefore = dataManagerReviews.loadData() as HashMap<*, *>
         dataManagerReviews.saveData(uniqReview)
-        val loadListAfter = dataManagerReviews.loadData() as List<Review>
-        val amountAdd = loadListAfter.size-loadListBefore.size
+        val loadDataAfter = dataManagerReviews.loadData() as HashMap<*, *>
+        val amountAdd = loadDataAfter.size-loadDataBefore.size
         //Then
-        assertTrue(loadListAfter.isNotEmpty())
-        assertFalse(loadListAfter.contains<Review?>(null))
-        assertEquals(loadListAfter.size , loadListBefore.size+amountAdd)
+        println(loadDataAfter)
+        assertTrue(loadDataAfter.isNotEmpty())
+        assertFalse(loadDataAfter.values.any{it==null})
+        assertEquals(loadDataAfter.size , loadDataBefore.size+amountAdd)
     }
 
     @Test
@@ -136,14 +139,15 @@ class DatabasePersistenceLayerTest {
         }
 
         //When
-        val loadListBefore = dataManagerReviews.loadData() as List<Review>
+        val loadDataBefore = dataManagerReviews.loadData() as HashMap<*, *>
         dataManagerReviews.saveData(reviewList)
-        val loadListAfter = dataManagerReviews.loadData() as List<Review>
-        val amountAdd = loadListAfter.size-loadListBefore.size
+        val loadDataAfter = dataManagerReviews.loadData() as HashMap<*, *>
+        val amountAdd = loadDataAfter.size-loadDataBefore.size
         //Then
-        assertTrue(loadListAfter.isNotEmpty())
-        assertFalse(loadListAfter.contains<Review?>(null))
-        assertEquals(loadListAfter.size , loadListBefore.size+amountAdd)
+        println(loadDataAfter)
+        assertTrue(loadDataAfter.isNotEmpty())
+        assertFalse(loadDataAfter.values.any{it==null})
+        assertEquals(loadDataAfter.size , loadDataBefore.size+amountAdd)
     }
 }
 
