@@ -1,6 +1,5 @@
 package com.app.claquetaTfg.database
 
-
 import com.app.claquetaTfg.domain.Film
 import com.app.claquetaTfg.domain.Review
 import com.app.claquetaTfg.util.Constants.resourcesExamplePath
@@ -17,6 +16,8 @@ class DatabasePersistenceLayerTest {
 
     private lateinit var dataManagerFilms: DataManager
     private lateinit var dataManagerReviews: DataManager
+	private lateinit var dataManagerRecomend: DataManager
+    private lateinit var dataManagerUsers: DataManager
     private lateinit var jsonContentFilms: String
     private lateinit var exampleFilms: List<Film>
     private lateinit var jsonContentReviews: String
@@ -37,6 +38,18 @@ class DatabasePersistenceLayerTest {
                 DatabasePersistenceLayer<Review>(
                     "$resourcesExamplePath/database/reviewsData.json",
                     Review.serializer(), Review::class
+                )
+            )
+		dataManagerRecomend =
+            DataManager(
+                RecomendationsDatabasePersistenceLayer(
+                    "$resourcesExamplePath/database/recomendationsData.json",
+                )
+            )
+        dataManagerUsers =
+            DataManager(
+                UsersDatabasePersistenceLayer(
+                    "$resourcesExamplePath/database/usersData.json",
                 )
             )
         jsonContentFilms =
@@ -148,6 +161,38 @@ class DatabasePersistenceLayerTest {
         assertTrue(loadDataAfter.isNotEmpty())
         assertFalse(loadDataAfter.values.any{it==null})
         assertEquals(loadDataAfter.size , loadDataBefore.size+amountAdd)
+    }
+	
+	@Test
+    fun `When I want to save recommendations`() {
+        val recommendMap: HashMap<String, List<String>> =
+            dataManagerRecomend.loadData() as HashMap<String, List<String>>
+
+        //When
+        val loadDataBefore = dataManagerRecomend.loadData() as HashMap<*, *>
+        recommendMap[exampleReviews[1].userName] = listOf(exampleFilms[0].id, exampleFilms[2].id)
+        dataManagerRecomend.saveData(recommendMap)
+        val loadDataAfter = dataManagerRecomend.loadData() as HashMap<*, *>
+        val amountAdd = loadDataAfter.size - loadDataBefore.size
+        //Then
+        assertTrue(loadDataAfter.isNotEmpty())
+        assertFalse(loadDataAfter.values.any { it == null })
+        assertEquals(loadDataAfter.size, loadDataBefore.size + amountAdd)
+    }
+
+    @Test
+    fun `When I want to save users`() {
+        val userAux = exampleReviews[0].userName
+
+        //When
+        val loadDataBefore = dataManagerUsers.loadData() as HashSet<*>
+        dataManagerUsers.saveData(userAux)
+        val loadDataAfter = dataManagerUsers.loadData() as HashSet<*>
+        val amountAdd = loadDataAfter.size - loadDataBefore.size
+        //Then
+        assertTrue(loadDataAfter.isNotEmpty())
+        assertFalse(loadDataAfter.any { it == null })
+        assertEquals(loadDataAfter.size, loadDataBefore.size + amountAdd)
     }
 }
 
