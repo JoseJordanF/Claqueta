@@ -17,6 +17,7 @@ import kotlin.collections.HashSet
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
 import kotlin.test.assertTrue
+import kotlin.test.assertFalse
 
 class ClaquetaManagerTest {
 
