@@ -2,20 +2,18 @@ package com.app.claquetaTfg.domain
 
 import com.app.claquetaTfg.domain.generatorId.generateUniqueId
 import com.app.claquetaTfg.logs.LoggerManager
-import com.app.claquetaTfg.logs.SimpleLogger
 import java.lang.RuntimeException
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 
-data class ClaquetaManager(
-    var users: HashSet<String> = hashSetOf(),
-    var reviews: HashMap<String, HashSet<Review>> = hashMapOf(),
-    val films: HashMap<String, Film> = hashMapOf(),
-    var recommendations: HashMap<String, List<String>> = hashMapOf(),
-) {
 
-    private val logger = LoggerManager(SimpleLogger.instance())
+interface ClaquetaManager {
+    var users: HashSet<String>
+    var reviews: HashMap<String, HashSet<Review>>
+    val films: HashMap<String, Film>
+    var recommendations: HashMap<String, List<String>>
+    var logger : LoggerManager
 
     fun generateUniqueId(obj: Any): String {
         return when (obj) {
@@ -32,17 +30,19 @@ data class ClaquetaManager(
     }
 
     fun newFilm(
-        title: String,
-        movieDirectors: List<String>,
-        screenwriters: List<String>,
-        releaseDate: Int,
-        producers: List<String>,
-        consPlataforms: List<String>,
+        nfilm: Film,
     ): String {
-        val newF = Film("0", title, movieDirectors, screenwriters, releaseDate, producers, consPlataforms)
-        val newID = generateUniqueId(newF)
+        val newID = generateUniqueId(nfilm)
 
-        val trueFilm = Film(newID, title, movieDirectors, screenwriters, releaseDate, producers, consPlataforms)
+        val trueFilm = Film(
+            newID,
+            nfilm.title,
+            nfilm.movieDirectors,
+            nfilm.screenwriters,
+            nfilm.releaseDate,
+            nfilm.producers,
+            nfilm.consPlatforms
+        )
         films[newID] = trueFilm
         logger.log(
             "Film creation event", arrayOf(trueFilm)
@@ -66,26 +66,18 @@ data class ClaquetaManager(
     }
 
     fun newReview(
-        contentPlot: String,
-        contentPerformance: String,
-        contentDirection: String,
-        userName: String,
-        filmId: String,
-        creationDate: Date,
+        nreview: Review
     ) {
-        val newR = Review(
-            contentPlot, contentPerformance, contentDirection, userName, filmId, creationDate
-        )
-        val setFilmR = reviews.getOrPut(filmId) { HashSet() }
-        if (setFilmR.add(newR)) {
-            val setUserR = reviews.getOrPut(userName) { HashSet() }
-            setUserR.add(newR)
+        val setFilmR = reviews.getOrPut(nreview.filmId) { HashSet() }
+        if (setFilmR.add(nreview)) {
+            val setUserR = reviews.getOrPut(nreview.userName) { HashSet() }
+            setUserR.add(nreview)
             logger.log(
-                "Review creation event", arrayOf(newR)
+                "Review creation event", arrayOf(nreview)
             )
-            recomendFilmToUser(userName)
+            recomendFilmToUser(nreview.userName)
         } else {
-            val anotherReview = setFilmR.filter { it.userName == userName }.last()
+            val anotherReview = setFilmR.filter { it.userName == nreview.userName }.last()
             logger.error(
                 "Review duplication error", arrayOf(
                     anotherReview,
@@ -93,7 +85,7 @@ data class ClaquetaManager(
                 )
             )
             throw ReviewDuplicateException(
-                "The user $userName had already written a review about the movie $filmId. This was his review: $anotherReview"
+                "The user ${nreview.userName} had already written a review about the movie ${nreview.filmId}. This was his review: $anotherReview"
             )
         }
     }
@@ -103,6 +95,7 @@ data class ClaquetaManager(
         val filtroIds: List<String>? = filtro?.map { it.filmId }
 
         val dataToRecommeds = hashSetOf<String>()
+        println(filtroIds)
         for (id in filtroIds!!) {
             dataToRecommeds.addAll(films[id]!!.movieDirectors)
             dataToRecommeds.addAll(films[id]!!.producers)
@@ -126,5 +119,4 @@ data class ClaquetaManager(
     class ReviewDuplicateException(message: String) : RuntimeException(message)
     class UserAlreadyExistsException(message: String) : RuntimeException(message)
     class UnsupportedObjectToGenerateIdException(message: String) : IllegalArgumentException(message)
-
 }
