@@ -1,6 +1,6 @@
 plugins {
     kotlin("jvm") version "1.9.0"
-    kotlin("plugin.serialization") version "1.4.21"
+    kotlin("plugin.serialization") version "1.9.10"
 }
 
 group = "org.example"
@@ -14,6 +14,8 @@ repositories {
 dependencies {
     testImplementation(kotlin("test"))
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.0")
+	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.17.1")
+    implementation("com.fasterxml.jackson.core:jackson-core:2.17.1")
     testImplementation("io.mockk:mockk:1.12.0")
 
     //Configuration

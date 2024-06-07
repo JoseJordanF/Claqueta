@@ -560,8 +560,9 @@ una capa de persistencia que guarda y recupera datos de archivos Json, esta se e
 de la interfaz para guardar y cargar datos, además puede operar con objetos individuales o listas de objetos. La 
 carga de datos de esta implementación se realiza a razón de las estructuras de la clase 
 \begin{otherlanguage} {english}``\textit{\textbf{manager}}''\end{otherlanguage} 
-vista en el modelo de dominio, en este caso devuelve los 
-datos en mapas, estructuras que se definen y explican en el hito anterior.
+vista en el modelo de dominio, en este caso devuelve los datos en mapas para las películas, reseñas y 
+recomendaciones, y para los usuarios un conjunto. De manera que se pueden guardar todos los datos y cargarlos 
+siempre que sea necesario.
 
 Por otra parte, se ha creado una clase para inyectar cualquier implementación, siguiendo las mejores prácticas para 
 cumplir con el principio de inversión de dependencias, además de asegurar que no se viola el principio de 

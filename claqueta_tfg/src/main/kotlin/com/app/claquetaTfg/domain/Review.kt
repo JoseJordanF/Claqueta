@@ -7,11 +7,11 @@ import java.util.Calendar
 
 @Serializable
 data class Review(
-    val contentPlot: String,
-    val contentPerformance: String,
-    val contentDirection: String,
-    val userName: String,
-    val filmId: String,
+    val contentPlot: String="",
+    val contentPerformance: String="",
+    val contentDirection: String="",
+    val userName: String="",
+    val filmId: String="",
     @Serializable(with = DateSerializer::class)
     val creationDate: Date = Calendar.getInstance().time
 ){
