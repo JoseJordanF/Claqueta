@@ -8,6 +8,7 @@ import com.app.claquetaTfg.logs.SimpleLogger
 import com.app.claquetaTfg.util.Constants.loggerLevel
 import com.app.claquetaTfg.util.Constants.resourcesExamplePath
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.decodeFromString
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
