@@ -20,11 +20,7 @@ import kotlin.test.assertTrue
 
 class ClaquetaManagerTest {
 
-    private lateinit var users: HashSet<String>
-    private lateinit var reviews: HashMap<String, HashSet<Review>>
-    private lateinit var films: HashMap<String, Film>
-    private lateinit var recommendations: HashMap<String, List<String>>
-    private lateinit var getManager: ClaquetaManager
+     private lateinit var getManager: ClaquetaManager
     private lateinit var jsonContentFilms: String
     private lateinit var exampleFilms: List<Film>
     private lateinit var jsonContentReviews: String
@@ -33,11 +29,7 @@ class ClaquetaManagerTest {
 
     @BeforeEach
     fun onBefore() {
-        users = hashSetOf()
-        reviews = hashMapOf()
-        films = hashMapOf()
-        recommendations = hashMapOf()
-        getManager = ClaquetaManager(users, reviews, films, recommendations)
+        getManager = ClaquetaManagerInMemory()
         jsonContentFilms =
             File(resourcesExamplePath + "examples/filmsExamples.json").readText()
         exampleFilms = Json.decodeFromString(jsonContentFilms)
