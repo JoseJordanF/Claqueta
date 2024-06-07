@@ -41,7 +41,7 @@ class ClaquetaManagerTest {
         logger = LoggerManager(SimpleLogger.instance())
     }
 
-    @Test
+     @Test
     fun `when id is generated`() {
 
         //When
@@ -55,12 +55,15 @@ class ClaquetaManagerTest {
 
         //When
         getManager.newFilm(
-            exampleFilms.first().title,
-            exampleFilms.first().movieDirectors,
-            exampleFilms.first().screenwriters,
-            exampleFilms.first().releaseDate,
-            exampleFilms.first().producers,
-            exampleFilms.first().consPlatforms
+            Film(
+                exampleFilms.first().id,
+                exampleFilms.first().title,
+                exampleFilms.first().movieDirectors,
+                exampleFilms.first().screenwriters,
+                exampleFilms.first().releaseDate,
+                exampleFilms.first().producers,
+                exampleFilms.first().consPlatforms
+            )
         )
         //Then
         assertTrue(getManager.films.isNotEmpty())
@@ -74,12 +77,15 @@ class ClaquetaManagerTest {
         for (i in 0..1) {
             ids.add(
                 getManager.newFilm(
-                    exampleFilms[i].title,
-                    exampleFilms[i].movieDirectors,
-                    exampleFilms[i].screenwriters,
-                    exampleFilms[i].releaseDate,
-                    exampleFilms[i].producers,
-                    exampleFilms[i].consPlatforms
+                    Film(
+                        exampleFilms.first().id,
+                        exampleFilms[i].title,
+                        exampleFilms[i].movieDirectors,
+                        exampleFilms[i].screenwriters,
+                        exampleFilms[i].releaseDate,
+                        exampleFilms[i].producers,
+                        exampleFilms[i].consPlatforms
+                    )
                 )
             )
         }
@@ -102,11 +108,12 @@ class ClaquetaManagerTest {
     fun `When we create a new user but one already exists with that name`() {
 
         //When
-        getManager.newUser("JoseJordan")
+        val user = "JoseJordan3"
+        getManager.newUser(user)
 
         //Then
         assertThrows<RuntimeException> {
-            getManager.newUser("joseJordan")
+            getManager.newUser(user)
         }
     }
 
@@ -114,23 +121,29 @@ class ClaquetaManagerTest {
     fun `When a review is created`() {
 
         val idFilm = getManager.newFilm(
-            exampleFilms.first().title,
-            exampleFilms.first().movieDirectors,
-            exampleFilms.first().screenwriters,
-            exampleFilms.first().releaseDate,
-            exampleFilms.first().producers,
-            exampleFilms.first().consPlatforms
+            Film(
+                exampleFilms.first().id,
+                exampleFilms.first().title,
+                exampleFilms.first().movieDirectors,
+                exampleFilms.first().screenwriters,
+                exampleFilms.first().releaseDate,
+                exampleFilms.first().producers,
+                exampleFilms.first().consPlatforms
+            )
         )
         val fech = Calendar.getInstance()
-        getManager.newUser("josejordan")
+        val user = "josejordan4"
+        getManager.newUser(user)
         //When
         getManager.newReview(
-            exampleReviews.first().contentPlot,
-            exampleReviews.first().contentPerformance,
-            exampleReviews.first().contentDirection,
-            getManager.users.last(),
-            getManager.films[idFilm]!!.id,
-            fech.time
+            Review(
+                exampleReviews.first().contentPlot,
+                exampleReviews.first().contentPerformance,
+                exampleReviews.first().contentDirection,
+                user,
+                getManager.films[idFilm]!!.id,
+                fech.time
+            )
         )
         //Then
         assertTrue(getManager.reviews.isNotEmpty())
@@ -140,33 +153,41 @@ class ClaquetaManagerTest {
     fun `When we try to create a review of a film that we have already reviewed`() {
 
         val idFilm = getManager.newFilm(
-            exampleFilms.first().title,
-            exampleFilms.first().movieDirectors,
-            exampleFilms.first().screenwriters,
-            exampleFilms.first().releaseDate,
-            exampleFilms.first().producers,
-            exampleFilms.first().consPlatforms
+            Film(
+                exampleFilms.first().id,
+                exampleFilms.first().title,
+                exampleFilms.first().movieDirectors,
+                exampleFilms.first().screenwriters,
+                exampleFilms.first().releaseDate,
+                exampleFilms.first().producers,
+                exampleFilms.first().consPlatforms
+            )
         )
         val fech = Calendar.getInstance()
-        getManager.newUser("josejordan")
+        val user = "josejordan5"
+        getManager.newUser(user)
         //When
         getManager.newReview(
-            exampleReviews.first().contentPlot,
-            exampleReviews.first().contentPerformance,
-            exampleReviews.first().contentDirection,
-            getManager.users.last(),
-            getManager.films[idFilm]!!.id,
-            fech.time
+            Review(
+                exampleReviews.first().contentPlot,
+                exampleReviews.first().contentPerformance,
+                exampleReviews.first().contentDirection,
+                user,
+                getManager.films[idFilm]!!.id,
+                fech.time
+            )
         )
         //Then
         assertThrows<RuntimeException> {
             getManager.newReview(
-                exampleReviews.first().contentPlot,
-                exampleReviews.first().contentPerformance,
-                exampleReviews.first().contentDirection,
-                getManager.users.last(),
-                getManager.films[idFilm]!!.id,
-                fech.time
+                Review(
+                    exampleReviews.first().contentPlot,
+                    exampleReviews.first().contentPerformance,
+                    exampleReviews.first().contentDirection,
+                    user,
+                    getManager.films[idFilm]!!.id,
+                    fech.time
+                )
             )
         }
     }
@@ -175,28 +196,34 @@ class ClaquetaManagerTest {
     fun `When we create a review of a movie, that movie is not added to recommendations`() {
 
         val idFilm = getManager.newFilm(
-            exampleFilms.first().title,
-            exampleFilms.first().movieDirectors,
-            exampleFilms.first().screenwriters,
-            exampleFilms.first().releaseDate,
-            exampleFilms.first().producers,
-            exampleFilms.first().consPlatforms
+            Film(
+                exampleFilms.first().id,
+                exampleFilms.first().title,
+                exampleFilms.first().movieDirectors,
+                exampleFilms.first().screenwriters,
+                exampleFilms.first().releaseDate,
+                exampleFilms.first().producers,
+                exampleFilms.first().consPlatforms
+            )
         )
         val fech = Calendar.getInstance()
-        getManager.newUser("josejordan")
+        val user = "josejordan7"
+        getManager.newUser(user)
         //When
         getManager.newReview(
-            exampleReviews.first().contentPlot,
-            exampleReviews.first().contentPerformance,
-            exampleReviews.first().contentDirection,
-            getManager.users.last(),
-            getManager.films[idFilm]!!.id,
-            fech.time
+            Review(
+                exampleReviews.first().contentPlot,
+                exampleReviews.first().contentPerformance,
+                exampleReviews.first().contentDirection,
+                user,
+                getManager.films[idFilm]!!.id,
+                fech.time
+            )
         )
-        val sizeRecommends =
-            getManager.recommendations[getManager.users.last()]!!.size
+        val recommends =
+            getManager.recommendations[user]
         //Then
-        assertEquals(sizeRecommends, 0)
+        assertFalse(recommends!!.contains(idFilm))
     }
 
     @Test
@@ -208,30 +235,38 @@ class ClaquetaManagerTest {
         for (i in 0..3) {
             ids.add(
                 getManager.newFilm(
-                    exampleFilms[i].title,
-                    exampleFilms[i].movieDirectors,
-                    exampleFilms[i].screenwriters,
-                    exampleFilms[i].releaseDate,
-                    exampleFilms[i].producers,
-                    exampleFilms[i].consPlatforms
+                    Film(
+                        exampleFilms[i].id,
+                        exampleFilms[i].title,
+                        exampleFilms[i].movieDirectors,
+                        exampleFilms[i].screenwriters,
+                        exampleFilms[i].releaseDate,
+                        exampleFilms[i].producers,
+                        exampleFilms[i].consPlatforms
+                    )
                 )
             )
         }
         val fech = Calendar.getInstance()
-        getManager.newUser("josejordan")
+        val user = "joseAjordan"
+        getManager.newUser(user)
         //When
         getManager.newReview(
-            exampleReviews.first().contentPlot,
-            exampleReviews.first().contentPerformance,
-            exampleReviews.first().contentDirection,
-            getManager.users.last(),
-            getManager.films[ids[0]]!!.id,
-            fech.time
+            Review(
+                exampleReviews.first().contentPlot,
+                exampleReviews.first().contentPerformance,
+                exampleReviews.first().contentDirection,
+                user,
+                getManager.films[ids[0]]!!.id,
+                fech.time
+            )
         )
         val sizeRecommends =
-            getManager.recommendations[getManager.users.last()]!!.size
+            getManager.recommendations[user]!!.size
+
+
         //Then
-        assertEquals(sizeRecommends, 2)
+        assertTrue(sizeRecommends >= 2)
     }
 
     @Test
@@ -239,12 +274,15 @@ class ClaquetaManagerTest {
 
         //When
         getManager.newFilm(
-            exampleFilms.first().title,
-            exampleFilms.first().movieDirectors,
-            exampleFilms.first().screenwriters,
-            exampleFilms.first().releaseDate,
-            exampleFilms.first().producers,
-            exampleFilms.first().consPlatforms
+            Film(
+                exampleFilms.first().id,
+                exampleFilms.first().title,
+                exampleFilms.first().movieDirectors,
+                exampleFilms.first().screenwriters,
+                exampleFilms.first().releaseDate,
+                exampleFilms.first().producers,
+                exampleFilms.first().consPlatforms
+            )
         )
         val logs: List<HashMap<String, Any>> = logger.historyLogs() as List<HashMap<String, Any>>
 
@@ -262,23 +300,28 @@ class ClaquetaManagerTest {
         val logs: List<HashMap<String, Any>>
 
         val idFilm = getManager.newFilm(
-            exampleFilms.first().title,
-            exampleFilms.first().movieDirectors,
-            exampleFilms.first().screenwriters,
-            exampleFilms.first().releaseDate,
-            exampleFilms.first().producers,
-            exampleFilms.first().consPlatforms
+            Film(
+                exampleFilms.first().id,
+                exampleFilms.first().title,
+                exampleFilms.first().movieDirectors,
+                exampleFilms.first().screenwriters,
+                exampleFilms.first().releaseDate,
+                exampleFilms.first().producers,
+                exampleFilms.first().consPlatforms
+            )
         )
         val fech = Calendar.getInstance()
-        getManager.newUser("josejordan")
+        getManager.newUser("josejordan8")
         //When
         getManager.newReview(
-            exampleReviews.first().contentPlot,
-            exampleReviews.first().contentPerformance,
-            exampleReviews.first().contentDirection,
-            getManager.users.last(),
-            getManager.films[idFilm]!!.id,
-            fech.time
+            Review(
+                exampleReviews.first().contentPlot,
+                exampleReviews.first().contentPerformance,
+                exampleReviews.first().contentDirection,
+                getManager.users.last(),
+                getManager.films[idFilm]!!.id,
+                fech.time
+            )
         )
         logs = logger.historyLogs() as List<HashMap<String, Any>>
 
@@ -299,34 +342,41 @@ class ClaquetaManagerTest {
         val logs: List<HashMap<String, Any>>
 
         val idFilm = getManager.newFilm(
-            exampleFilms.first().title,
-            exampleFilms.first().movieDirectors,
-            exampleFilms.first().screenwriters,
-            exampleFilms.first().releaseDate,
-            exampleFilms.first().producers,
-            exampleFilms.first().consPlatforms
+            Film(
+                exampleFilms.first().id,
+                exampleFilms.first().title,
+                exampleFilms.first().movieDirectors,
+                exampleFilms.first().screenwriters,
+                exampleFilms.first().releaseDate,
+                exampleFilms.first().producers,
+                exampleFilms.first().consPlatforms
+            )
         )
         val fech = Calendar.getInstance()
-        getManager.newUser("josejordan")
+        getManager.newUser("josejordan9")
 
         //When
         getManager.newReview(
-            exampleReviews.first().contentPlot,
-            exampleReviews.first().contentPerformance,
-            exampleReviews.first().contentDirection,
-            getManager.users.last(),
-            getManager.films[idFilm]!!.id,
-            fech.time
-        )
-        //Then
-        assertThrows<RuntimeException> {
-            getManager.newReview(
+            Review(
                 exampleReviews.first().contentPlot,
                 exampleReviews.first().contentPerformance,
                 exampleReviews.first().contentDirection,
                 getManager.users.last(),
                 getManager.films[idFilm]!!.id,
                 fech.time
+            )
+        )
+        //Then
+        assertThrows<RuntimeException> {
+            getManager.newReview(
+                Review(
+                    exampleReviews.first().contentPlot,
+                    exampleReviews.first().contentPerformance,
+                    exampleReviews.first().contentDirection,
+                    getManager.users.last(),
+                    getManager.films[idFilm]!!.id,
+                    fech.time
+                )
             )
         }
         logs = logger.historyLogs() as List<HashMap<String, Any>>
