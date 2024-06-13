@@ -535,4 +535,34 @@ principio de sustitución de Liskov visto en los principios SOLID.
 
 Este hito se dará por válido si pasa todos los test unitarios dispuestos hasta ahora.
 
- 
+\section{M6: Despliegue de la API}
+
+En este hito se pretende llevar a cabo el diseño de la API y su despliegue para poder acceder a todos 
+los recursos de la aplicación, ya sea para recuperar o crear objetos o acceder a la 
+lógica de negocio. Por eso, en este hito se pretende buscar un framework que permita desplegar la aplicación como 
+API y establecer rutas para acceder a los distintos recursos de la aplicación. Agregando valor para el
+desarrollador e indirectamente al cliente, pudiendo acceder a los recursos desde la aplicación cliente de forma 
+sencilla y segura, dándose un PMV.
+
+El desarrollador \footnote{\url{https://github.com/JoseJordanF/Claqueta/issues/137}} busca un framework con una
+curva de aprendizaje empinada, que sea modular\cite{modularSoft} para velar que su implementación sea ligera, 
+también debe permitir que el formato de las respuestas pueda ser adaptado según las necesidades de la aplicación.
+Bajo estos criterios de búsqueda aparecen varias herramientas conocidas, como Spring Boot y la herramienta por la 
+que puede ser sustituida Spring Boot, Ktor \cite{ktorVSsboot}. Ambas cumplen con los mínimos requisitos, aunque 
+Ktor está guiada para aplicaciones ligeras y escalables, además el uso de Spring Boot es más complejo que el de 
+Ktor, y su uso no tiene mucho sentido si no se está creando una aplicación basada en 
+Spring\cite{springFrameW}. Por lo que se va a usar Ktor para desplegar la aplicación y establecer las rutas de 
+acceso a los recursos.
+
+Para la implementación se ha creado un módulo encargado de inicializar la configuración de las rutas para 
+ofrecer respuestas en formato Json, además sé configura el servidor para el despliegue de 
+manera sencilla y se inicia el servidor. 
+
+Por otra parte, se añade la implementación de una clase donde se define la API con métodos centrados en los recursos,
+como las películas, el detalle de una película, las reseñas de una película o las recomendaciones de un usuario. De
+esta manera se han diseñado las rutas siguiendo las mejores prácticas \cite{RestPract} y recurriendo a los recursos a 
+través de los métodos de la clase mencionada. Además, al principio del código de las rutas se ha incluido el 
+complemento de Ktor para permitir que la salida de todas las peticiones sea en formato Json.
+
+Para la validación de este hito será necesario que se compruebe con test las peticiones a los distintos recursos, 
+tanto el contenido como el mensaje de estado.
