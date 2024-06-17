@@ -19,7 +19,7 @@ class ClaquetaService {
 
 
     suspend fun findAllFilms(): Flow<Film> {
-        logger.log("All films have been requested to be returned.", arrayOf(getManager.films.size))
+        logger.log(::findAllFilms.name, arrayOf(getManager.films.size))
         return withContext(Dispatchers.IO) {
             if (getManager.films.isNotEmpty()) {
                 return@withContext getManager.films.values.toList().asFlow()
@@ -30,7 +30,7 @@ class ClaquetaService {
     }
 
     suspend fun findFilmById(id: String): Film {
-        logger.log("the film corresponding to the id is requested.", arrayOf(id as String))
+        logger.log(::findFilmById.name, arrayOf(id as String))
         return withContext(Dispatchers.IO) {
             try {
                 return@withContext getManager.films[id] as Film
@@ -55,7 +55,7 @@ class ClaquetaService {
     class FilmNotFoundException(message: String) : RuntimeException(message)
 
     suspend fun findReviewsById(id: Any): Flow<Review> {
-        logger.log("Reviews affiliated to an id are requested.", arrayOf(id as String))
+        logger.log(::findReviewsById.name, arrayOf(id as String))
         return withContext(Dispatchers.IO) {
             try {
                 return@withContext getManager.reviews[id]!!.toList().asFlow()
@@ -81,7 +81,7 @@ class ClaquetaService {
     class ReviewsNotFoundException(message: String) : RuntimeException(message)
 
     suspend fun findRecomendationsById(id: Any): Flow<Film> {
-        logger.log("Recommendations affiliated to an id are requested.", arrayOf(id as String))
+        logger.log(::findRecomendationsById.name, arrayOf(id as String))
         return withContext(Dispatchers.IO) {
             try {
                 getManager.recomendFilmToUser(id)
@@ -97,7 +97,7 @@ class ClaquetaService {
     class UserHasNotWrittenReviewException(message: String) : RuntimeException(message)
 
     suspend fun findAllUsers(): Flow<String> {
-        logger.log("all users are requested.", arrayOf(getManager.users.size))
+        logger.log(::findAllUsers.name, arrayOf(getManager.users.size))
         return withContext(Dispatchers.IO) {
             if (getManager.users.isNotEmpty()) {
                 return@withContext getManager.users.toList().asFlow()
