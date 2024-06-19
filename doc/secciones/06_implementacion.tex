@@ -535,4 +535,43 @@ principio de sustitución de Liskov visto en los principios SOLID.
 
 Este hito se dará por válido si pasa todos los test unitarios dispuestos hasta ahora.
 
- 
+\section{M5: Acceso a los recursos de la API}
+
+Antes de seguir con este hito, un pequeño inciso para aclarar que se tomó la decisión de no llevar a cabo la 
+persistencia de datos y se dejara para una segunda refactorización, ya que por el momento la persistencia no es 
+necesaria para responder a la historia del aficionado, por ende no forma parte de un PMV.
+
+Ahora si en este hito se pretende llevar a cabo el diseño de la API estableciendo el  acceso a todos 
+los recursos de la aplicación, ya sea para recuperar o crear objetos o acceder a la 
+lógica de negocio. Por eso, en este hito se pretende buscar un framework que permita desplegar la aplicación como 
+API y establecer rutas para acceder a los distintos recursos de la aplicación. Agregando valor para el
+desarrollador e indirectamente al cliente, pudiendo acceder a los recursos desde la aplicación cliente de forma 
+sencilla y segura, dándose un PMV.
+
+El desarrollador \footnote{\url{https://github.com/JoseJordanF/Claqueta/issues/137}} busca un framework con una
+curva de aprendizaje llana, que sea modular\cite{modularSoft} para velar que su implementación sea ligera, 
+también debe permitir que el formato de las respuestas pueda ser adaptado según las necesidades de la aplicación.
+En este campo podemos encontrar varias herramientas conocidas en el ámbito Java y Kotlin, donde tendríamos Spring 
+Boot y Ktor respectivamente; siendo Ktor la herramienta por la que puede ser sustituida Spring Boot en un futuro 
+\cite{ktorVSsboot}. En este caso ambas herramientas son modulares, pero el uso de Spring Boot es más complejo que el 
+de Ktor, luego su curva sería más empinada, además el uso de Spring Boot no tiene sentido fuera de una aplicación 
+basada en Spring\cite{springFrameW}. Por otro lado, Ktor también está guiada para aplicaciones ligeras y escalables, 
+por lo que se va a usar Ktor como herramienta para el establecer el acceso a los distintos recursos de la API y el 
+posible despliegue futuro
+
+Para la implementación se ha creado un módulo encargado de inicializar la configuración de las rutas para 
+ofrecer respuestas a las distintas peticiones, además sé configura el servidor para probar las rutas de 
+manera sencilla. 
+
+Por otra parte, se añade la implementación de una clase donde se define la API con métodos centrados en los recursos,
+como las películas, el detalle de una película, las reseñas de una película o las recomendaciones de un usuario. De
+esta manera se han diseñado las rutas siguiendo las mejores prácticas \cite{RestPract} como respetar el nombre de los 
+puntos finales, para que no contengan verbos ni acciones, ya que para diferenciar entre operaciones sobre dichos 
+puntos finales se encuentran los verbos HTTP\footnote{\url{https://en.wikipedia.org/w/index.php?title=HTTP&ref=hackernoon.com##Request_methods}}. 
+Y también se cuida que cada recurso sí es necesario este bajo otro recurso, dando sentido y describiendo el punto 
+final.  Así y recurriendo a los recursos a través de los métodos de la clase mencionada. Además, al principio del 
+código de las rutas se ha incluido el complemento de Ktor para permitir que la salida de todas las peticiones sea en 
+formato Json.
+
+Para la validación de este hito será necesario que se compruebe con test las peticiones a los distintos recursos, 
+tanto el contenido como el mensaje de estado.

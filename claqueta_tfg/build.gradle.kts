@@ -1,6 +1,7 @@
 plugins {
     kotlin("jvm") version "1.9.0"
     kotlin("plugin.serialization") version "1.4.21"
+	id("io.ktor.plugin") version "2.3.9"
 }
 
 group = "org.example"
@@ -24,6 +25,18 @@ dependencies {
     implementation("ch.qos.logback:logback-classic:1.3.12")
     implementation("ch.qos.logback:logback-core:1.3.12")
     implementation("net.logstash.logback:logstash-logback-encoder:7.4")
+	
+	//Ktor
+	implementation("io.ktor:ktor-server-core-jvm")
+    implementation("io.ktor:ktor-server-content-negotiation-jvm")
+    implementation("io.ktor:ktor-serialization-kotlinx-json-jvm")
+    implementation("io.ktor:ktor-server-netty-jvm")
+    testImplementation("io.ktor:ktor-server-test-host:2.3.5")
+    implementation("io.ktor:ktor-client-core:2.x.x")
+    implementation("io.ktor:ktor-client-cio:2.x.x")
+    implementation("io.ktor:ktor-client-content-negotiation:2.x.x")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:2.x.x")
+    testImplementation("io.ktor:ktor-server-tests:2.x.x")
 }
 
 tasks.test {
