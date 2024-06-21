@@ -575,3 +575,45 @@ formato Json.
 
 Para la validación de este hito será necesario que se compruebe con test las peticiones a los distintos recursos, 
 tanto el contenido como el mensaje de estado.
+
+\section{M6: Aplicación cliente}
+
+En este hito se quiere obtener una visión de la aplicación cliente, de forma que el PMV obtenido será una maqueta 
+donde se pueda apreciar su funcionamiento, no un producto extensivo, el cual se dará en un hito posterior. Este PMV 
+ofrecerá gran valor al desarrollador y al usuario, ya que podrá dar una vista a la interfaz que entrara en contacto 
+con la API y con la que el usuario podrá satisfacer sus necesidades.
+
+Por tanto, atendiendo al desarrollador \footnote{\url{https://github.com/JoseJordanF/Claqueta/issues/158}} se buscan 
+herramientas que permitan el desarrollo de esta aplicación cliente, para ser escogidas deberán poseer una curva de 
+aprendizaje llana, ser bastante conocidas y usadas actualmente para tener acceso a los distintos conocimientos 
+compartidos por la comunidad de desarrolladores. Siendo así más fácil la implementación para con los posibles errores 
+que se puedan dar.
+
+Como primera instancia encontramos dos herramientas omnipresentes en el desarrollo web, 
+HTML\cite{WikiHtml}/CSS\cite{WikiCss}, ya que son dos pilares presentes en todas las herramientas usadas para llevar 
+a cabo la construcción y el diseño de páginas web, ya que estas otras herramientas simplemente son abstracciones para 
+trabajar a un nivel más alto, pero siempre mantienen dichos pilares bajo el capo. Siendo el fin conseguir un PMV se 
+usará HTML/CSS puro, ya que su curva es llana al principio\cite{BookHtmlCss} y son ampliamente utilizadas
+\footnote{\url{https://survey.stackoverflow.co/2023/##technology-most-popular-technologies}}. El diseño y la 
+estructura de la página están cubiertos, pero aún se necesita una herramienta que permita hacer peticiones a la API 
+para mostrar los datos en la página. Para realizar estas acciones se encuentran algunas opciones como 
+JavaScript(JS)\cite{WhatIsJS}, TypeScript(TS)\cite{WhatIsTS} o Dart\cite{WhatIsDart}, si comparamos las curvas de 
+aprendizaje, la de JS es bastante baja al comienzo, a diferencia de TS que es un poco más pronunciada aún siendo un 
+superconjunto de JS, pero es más complejo debido al tipado estático, por último la curva de Dart es relativamente 
+baja como JS. Ahora si, si se pasa a ver el uso de cada uno 
+\footnote{\url{https://survey.stackoverflow.co/2023/##technology-most-popular-technologies}},
+se puede observar que distinguidamente JS es el más usado, seguido de TS y por último Dart, que no tiene mucho 
+sentido usar si no lo haces junto a Flutter. Por lo que junto a HTML/CSS se usara JavaScript para la obtención de la 
+primera vista de la aplicación cliente.
+
+Para la implementación, se dispone de distintos archivos, el archivo.html donde se describe la estructura de la 
+página, el archivo.css donde se describe el diseño de la página, y los archivos.js donde se describen las distintas 
+acciones interactivas que ocurren durante el uso de la página. Una decisión destacada de esta sección, dada por un 
+problema del usuario \footnote{\url{https://github.com/JoseJordanF/Claqueta/issues/159}}, lo que viene a decir que el 
+usuario tiene una imagen distintiva para ponerle cara a las películas en una web, cara que no se ha tenido en cuenta 
+hasta ahora porque no ha sido necesaria; pero en ahora es imprescindible que el usuario ponga cara a las distintas 
+películas listadas, por lo que se ha decidido en darles la vista común que espera el usuario, la portada de la 
+película. Para ello no ha sido necesario perturbar ningún código anterior, simplemente se usan los datos de los que 
+ya se disponen, una vez se solicitan desde la aplicación cliente se recurre a una API gratuita
+\footnote{\url{https://developer.themoviedb.org/docs/getting-started}} que guarda las imágenes de estas películas, 
+gracias a que se dispone del título y el año de estreno de cada película se puede obtener la imagen correspondiente.
