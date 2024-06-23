@@ -633,3 +633,51 @@ prueba, entra dentro de nuestro PMV. Una vez descubiertas ambas plataformas, se 
 dominio generado por Railway\footnote{\url{https://api-node-production-493e.up.railway.app}}, por tanto, se cambió el 
 código referente a las peticiones por parte de la aplicación cliente respecto a este nuevo dominio y también se desplegó 
 \footnote{\url{https://claquetaweb.000webhostapp.com/}}. Actualmente ambas están desplegadas.
+
+\section{Estimación de costes}
+
+En esta sección se quiere realizar un cálculo estimado de los costes del proyecto, para ello se tienen que tener en 
+cuenta distintos factores. Primero se debe tener en cuenta que ninguna herramienta usada ha requerido ningún gasto, ya 
+que todas han sido de uso gratuito, siendo software libre o de código abierto. Por lo que el cálculo se centrara en la 
+amortización del equipo usado para el desarrollo del proyecto, y el salario relativo del estudiante que realiza el 
+proyecto. Primero se realizará el cálculo de amortización lineal del equipo\cite{CalcAmortizacion}:
+
+\subsection{Amortización del equipo}
+
+Respecto a los siguientes datos, se ha usado un PC que se compró hace un año por 1500€ y que según la agencia tributaria 
+de España\cite{TablaAmortizacion} tiene una vida útil de 5 años y un coeficiente lineal máximo del 40\%. Podemos 
+calcular la amortización del primer año, ya que esta sería un valor residual para la de este año:
+\begin{equation}
+    1500\cdot0.4 = 600
+\end{equation}
+De manera que la amortización del primer año serían 600€, este sería el valor residual de la amortización de este año dando lugar a que el valor del equipo para este año tras la depreciación sea:
+\begin{equation}
+    1500-600 = 900
+\end{equation}
+Y sobre este valor aplicamos el coeficiente lineal máximo:
+\begin{equation}
+    900\cdot0.4 = 360
+\end{equation}
+Siendo la amortización de este año de 360€.
+
+\subsection{Salario del estudiante}
+
+Siendo realistas, se debe tener en cuenta que se está hablando de un estudiante sin experiencia, por lo cual se tomara
+una media del salario de alguien con las mismas responsabilidades pero sin experiencia alguna. Según se puede 
+comprobar\cite{WebSalary} el salario promedio en España para un desarrollador web sin experiencia seria de 30.324€ 
+brutos al año, si se tiene en cuenta que se trabaja a jornada completa, luego 40 horas semanales, lo que daría 
+redondeando 15€ por hora. Ahora se contempla que esto es una asignatura que ocupa un peso de 12 créditos y cada crédito 
+es equivalente a 25 horas de trabajo 
+\footnote{\url{https://www.educacionfpydeportes.gob.es/italia/dam/jcr:b53864d2-65a3-4526-abf4-61ef02f5be34/el-sistema-universitario-espa-ol2.pdf}} 
+por lo tanto:
+\begin{equation}
+    12\cdot25 = 300
+\end{equation}
+\begin{equation}
+    300\cdot15 = 4.500
+\end{equation}
+Lo que se resumiría en un salario de 4500€.
+
+\subsection{Total costes}
+
+Por lo que sí unimos los costes de amortización y el salario del estudiante quedaría un coste de 4860€.
