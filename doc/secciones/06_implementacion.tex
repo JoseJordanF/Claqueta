@@ -617,3 +617,19 @@ película. Para ello no ha sido necesario perturbar ningún código anterior, si
 ya se disponen, una vez se solicitan desde la aplicación cliente se recurre a una API gratuita
 \footnote{\url{https://developer.themoviedb.org/docs/getting-started}} que guarda las imágenes de estas películas, 
 gracias a que se dispone del título y el año de estreno de cada película se puede obtener la imagen correspondiente.
+
+\section{M7: Despliegue de prueba}
+
+Para este pequeño hito se quiere realizar un despliegue de prueba de ambas aplicaciones, según el desarrollador 
+\footnote{\url{https://github.com/JoseJordanF/Claqueta/issues/161}} se necesita encontrar una plataforma gratuita que 
+permita subir la API en un contenedor\cite{BenefDocker}. Aparentemente, podría haber muchas opciones, pero la mayoría 
+obligan a inscribirse a un plan de pago. Por lo que se ha encontrado la plataforma 
+Railway\footnote{\url{https://docs.railway.app/overview/about-railway}}, la cual ofrece un mes gratuito y tiene soporte 
+para desplegar contenedores o imágenes directamente de Docker. Por lo que ha sido escogida para el despliegue del back-
+end, en cambio no se ha conseguido desplegar mediante esta plataforma el front-end. Por lo que se ha recurrido a otra 
+opción gratuita, 000Webhost\footnote{\url{https://www.000webhost.com/forum/about}} el cual está impulsado por 
+Hostinguer\cite{WhatIsHostinger}; este ofrece un año gratis de hosting, y teniendo en cuenta que es un despliegue de 
+prueba, entra dentro de nuestro PMV. Una vez descubiertas ambas plataformas, se desplegó primero la API obteniéndose un 
+dominio generado por Railway\footnote{\url{https://api-node-production-493e.up.railway.app}}, por tanto, se cambió el 
+código referente a las peticiones por parte de la aplicación cliente respecto a este nuevo dominio y también se desplegó 
+\footnote{\url{https://claquetaweb.000webhostapp.com/}}. Actualmente ambas están desplegadas.
