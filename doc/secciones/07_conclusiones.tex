@@ -1,2 +1,46 @@
-\chapter{Conclusiones y trabajos futuros}
+\chapter{Conclusiones y futuro del proyecto}
+
+En este capítulo se verá si realmente se han cumplido los objetivos expuestos al comienzo del 
+proyecto, en el caso de que lo hayan hecho, ver si la solución realmente ha sido óptima y los que aún no se hayan 
+cumplido, como lo podrían hacer resumidamente. Y tratar alguna de las decisiones futuras del proyecto que estaría bien 
+vislumbrar.
+
+Al comienzo del proyecto se veía la necesidad del usuario por exponer su opinión referente al contenido consumido, en 
+este aspecto se ha creado un sistema para la creación de reseñas fundadas, que de manera sencilla construye una reseña 
+consistente describiendo aspectos fundamentales de cualquier película. También se mostraba el problema de indecisión 
+entre la gente respecto a decidir que contenido cinematográfico iba a ver, debido a la cantidad de contenido existente, 
+sin ninguna opción que conectara películas ya vistas con otras que les podían interesar. Por eso aparece en uno de los 
+objetivos crear un algoritmo que sea capaz de recomendar a los usuarios contenidos según su consumo. Este es uno de los 
+objetivos que se cree cumplido tras llegar al final del camino, ya que a través de las reseñas las recomendaciones le 
+llueven al usuario, siempre conectadas de alguna forma con las películas ya consumidas y reseñadas. Otro de los 
+objetivos que se cree cumplido es el de la creación de una aplicación para que el algoritmo de recomendaciones pueda ser 
+consumido por los usuarios, además al crear una API indirectamente se puede apreciar una pequeña aportación para 
+aquellos usuarios que quieran hacer uso del algoritmo en sus propias versiones de este proyecto, por lo que también 
+sería consumido por desarrolladores.
+
+Por otro lado, uno de los objetivos también era la creación de un algoritmo de fiabilidad de las reseñas. 
+Lamentablemente con la solución actual no se ha podido lograr este objetivo, aunque un futuro próximo al proyecto podría 
+conseguirlo. Ya que en la solución actual se ha podido satisfacer la historia del aficionado, la historia del cinéfilo 
+tendría la clave para cumplir con el objetivo de lograr unas reseñas fiables, a través de distintos hitos, se obtendrían 
+diversos PMV que terminaran cumpliendo con dicho objetivo y satisfaciendo las necesidades del cinéfilo. Es un objetivo 
+que puede plantear varios problemas, pero que puede obtenerse a través de una solución no muy complicada, como sería el 
+posible uso de un sistema de reputación como el existente en Stack Overflow. Permitiendo valorar al usuario cada reseña 
+por el peso de la reputación del usuario que la haya escrito. Pero para obtener dicha solución, en este caso tendría que 
+haberse solucionado el tema de la persistencia, ya que en la solución actual no ha sido necesaria, pero en esta 
+situación para la integridad de los datos de reputación sería imprescindible.
+
+Ya se discutiría que sistema de persistencia se usaría, relacional o no relacional, tratándose de un PMV en primera 
+estancia y sin entrar en detalle se podría optar por una opción no relacional, ya que sería más flexible para el esquema 
+pudiendo guardar las estructuras que se quiera mientras este más o menos bien organizado y la conversión para la 
+respuesta de la API también podrían ser instantáneas siendo más sencilla su implementación. Además, ofrecen un gran 
+desempeño para cargas de trabajo como realizar lecturas o escrituras rápidas y de un gran volumen de datos, gracias a 
+poseer menos sobrecarga en la gestión de relaciones.
+
+Aunque un sistema relacionar tampoco sería difícil de implantar aportando gran consistencia a los datos, permitiendo un 
+mayor control sobre los datos y asegurando su consistencia. Pudiendo incluso sustituir el algoritmo de las 
+recomendaciones por un conjunto de consultas complejas.
+
+En un futuro se podría ver la elección de cualquiera de los dos sistemas, ya que ambos podrían ser implantados, la 
+elección radicara en las necesidades del proyecto en ese momento, respecto a la escalabilidad de este, vertical u 
+horizontal siendo un sistema no relacional o uno relacional la elección respectivamente.
 
