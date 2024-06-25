@@ -23,6 +23,10 @@
 \usepackage{booktabs}
 \usepackage{setspace}
 \usepackage{ragged2e}
+\usepackage{amsmath}
+\usepackage[nottoc,notlot,notlof]{tocbibind}
+\usepackage{nomencl}
+
 % Definir el estilo para tener líneas de 80 caracteres
 \newcommand{\lineasochenta}{\setstretch{1.2}\setlength{\parindent}{0pt}\RaggedRight\setlength{\emergencystretch}{1em}\setlength{\parskip}{1em}}
 
@@ -45,7 +49,9 @@
 %\renewcommand{\headrulewidth}{0pt} % Remove header underlines
 \renewcommand{\footrulewidth}{0pt} % Remove footer underlines
 \setlength{\headheight}{13.6pt} % Customize the height of the header
-%\setlength{\linewidth}{80pt} % longitud máxima de línea
+%\setlength{\textwidth}{350pt} % Prueba con 400pt
+%\setlength{\textwidth}{480pt} % Ancho de página de 80 caracteres a 6pt por carácter
+
 
 \usepackage{titlesec, blindtext, color}
 \definecolor{gray75}{gray}{0.75}
@@ -67,13 +73,20 @@
 	\newpage
 	\tableofcontents
 
-	% Índice de imágenes y tablas
+	% Índice de imágenes y ecuaciones
 	\newpage
 	\listoffigures
-
+ 
 	% Si hay suficientes se incluirá dicho índice
-	\listoftables 
+    
+    \listoftables
+	 
 	\newpage
+    \makenomenclature
+    \renewcommand{\nomname}{Índice de Operaciones}
+    \newcommand{\eqindex}[1]{\nomenclature{#1}{\pageref{#1}}}
+    \printnomenclature[2cm]
+    \newpage
 
 	% Introducción 
 	\input{secciones/01_introduccion}
@@ -93,7 +106,7 @@
 	% 2. Análisis de las soluciones
 	% 3. Solucion propuesta
 	% 4. Análisis de seguridad
-	\input{secciones/05_analisis}
+	
 
 	% Desarrollo bajo sprints: 
 	% 	1. Permitir registros y login de usuarios
@@ -101,12 +114,12 @@
 	% 	3. Desarrollo del sistema de denuncias administrativas y accidentes
 	% 	4. Desarrollo del sistema de croquis
 	%   5. Instalación de la aplicación de manera automática
-	\input{secciones/06_implementacion}
+	\input{secciones/05_implementacion}
 
 	% Presupuesto
 
 	% Conclusiones
-	\input{secciones/07_conclusiones}
+	\input{secciones/06_conclusiones}
 
 	% Trabajos futuros
 
@@ -114,7 +127,7 @@
 	
 	\newpage
 	\bibliography{bibliografia}
-	\bibliographystyle{plain}
+	\bibliographystyle{unsrt}
 	
 \end{document}
 
