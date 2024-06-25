@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claqueta</title>
+    <link rel="shortcut icon" href="./images/favicon-32x32.png" type="image/x-icon">
+    <link rel="stylesheet" href="./css/normalize.css">
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+
+<body>
+    <header class="hero">
+
+        <nav class="nav container">
+            <div class="nav__logo">
+                <h2 class="nav__title">Claqueta</h2>
+            </div>
+            <ul class="nav__link ">
+                <li class="nav__items" id="nav__items1">
+                    <a href="#" class="nav__links">Peliculas</a>
+                </li>
+                <li class="nav__items" id="nav__items2">
+                    <a href="#" class="nav__links">Recomendaciones</a>
+                </li>
+                <li class="nav__items" id="nav__items3">
+                    <a href="#" class="nav__links">
+                        <img src="./images/exit.svg" alt="Cerrar Sesion"></a>
+                </li>
+            </ul>
+        </nav>
+
+        <section class="hero__container container">
+            <img src="./images/apiLogo.svg" alt="logo api cover" class="apiCover">
+            <div class="text__container">
+                <h1 class="hero__title">Entra y encuentra las respuestas que buscas sobre el cine</h1>
+                <p class="hero__paragraph">Comparte tu opinion sobre las peliculas que ves, disfruta conociendo la de
+                    otros
+                    usuarios y obten recomendaciones de que peliculas ver</p>
+            </div>
+            <div class="enter__container">
+                <a href="#" class="cta" style="visibility: visible;">Entra y diviertete</a>
+                <div class="enter__text" style="visibility: hidden;">
+                    <input type="text" class="username" placeholder="Introduce tu nombre aquí">
+                    <a href="#" class="cta__login">Entrar</a>
+                </div>
+                <div class="film__container">
+                    <ul class="grid__film">
+                    </ul>
+                    <div class="detail__container">
+                        <p class="detail__film">
+
+                        </p>
+                    </div>
+                    <div class="review__container">
+                        <h2 class="container__title">Reseñas</h2>
+                        <ul class="list__review">
+
+                        </ul>
+                        <a href="#" class="add__review">Añadir reseña</a>
+                    </div>
+                </div>
+            </div>
+            <dialog class="modalView">
+                <p class="detail__review">
+
+                </p>
+            </dialog>
+            <dialog class="modalForm">
+                <from class="formReview" method="dialog">
+                    <label>Opinion general<input type="text" class="o__general"></label>
+                    <label>Opinion sobre las actuaciones<input type="text" class="o__performance"></label>
+                    <label>Opinion sobre la direccion<input type="text" class="o__direction"></label>
+                    <button type="submit" class="bt__review">Añadir</button>
+                </from>
+            </dialog>
+        </section>
+    </header>
+    <script type="module" src="./script.js"></script>
+</body>
+
+</html>
