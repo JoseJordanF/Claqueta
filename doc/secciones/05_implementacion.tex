@@ -546,14 +546,15 @@ Para este pequeño hito se quiere realizar un despliegue de prueba de ambas apli
 permita subir la API en un contenedor\cite{BenefDocker}. Aparentemente, podría haber muchas opciones, pero la mayoría 
 obligan a inscribirse a un plan de pago. Por lo que se ha encontrado la plataforma 
 Railway\footnote{\url{https://docs.railway.app/overview/about-railway}}, la cual ofrece un mes gratuito y tiene soporte 
-para desplegar contenedores o imágenes directamente de Docker. Por lo que ha sido escogida para el despliegue del back-
-end, en cambio, no se ha conseguido desplegar mediante esta plataforma el front-end. Por lo que se ha recurrido a otra 
-opción gratuita, 000Webhost\footnote{\url{https://www.000webhost.com/forum/about}} el cual está impulsado por 
-Hostinguer\cite{WhatIsHostinger}; este ofrece un año gratis de hosting, y teniendo en cuenta que es un despliegue de 
-prueba, entra dentro de nuestro PMV. Una vez descubiertas ambas plataformas, se desplegó primero la API obteniéndose un 
-dominio generado por Railway\footnote{\url{https://api-node-production-493e.up.railway.app}}, por tanto, se cambió el 
-código referente a las peticiones por parte de la aplicación cliente respecto a este nuevo dominio y también se desplegó 
-\footnote{\url{https://claquetaweb.000webhostapp.com/}}. Actualmente ambas están desplegadas.
+para desplegar contenedores o imágenes directamente de Docker, por lo que ha sido escogida para el despliegue de prueba.
+Para llevar a cabo el despliegue se añadió un archivo Dockerfile que indicaba las reglas a seguir para la construcción
+del contenedor, en este caso se construía el JAR de la API para lanzarlo posteriormente y también se lanzaba un servidor 
+nginx que permitirá servir los archivos estáticos y servir como proxy\cite{WhatIsProxyS} para permitir el acceso a la 
+API. Para que nginx\cite{WhatIsNginx} pudiera conseguir esto se añade un archivo de configuración que sitúa la 
+aplicación cliente en la ruta raíz, mientras que sitúa a la API en la ruta \textit{/api}. Permitiendo tanto el acceso a 
+la web como a la API, pero al desplegar el contenedor se produjo un problema, no se reconocían los tipos de archivos con 
+extensiones .css .js o .svg de manera que se resolvió añadiendo un archivo mime.types que realizaba la correspondencia 
+entre extensiones y content-types. Se añadió al servidor y ya funcionaba, en el dominio generado por Railway\footnote{\url{https://claqueta-production.up.railway.app/}}.
 
 \section{Estimación de costes}
 

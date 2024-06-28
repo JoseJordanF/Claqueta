@@ -236,7 +236,7 @@ function reviewDetail(id) {
 
 
 async function postUser(data) {
-    const url = "http://127.0.0.1:8082/users";
+    const url = "https://claqueta-production.up.railway.app/api/users";
     const options = {
         method: "POST",
         headers: {
@@ -260,7 +260,7 @@ async function postUser(data) {
 }
 
 async function postReview(data) {
-    const url = `http://127.0.0.1:8082/films/${currentFilm}/reviews`;
+    const url = `https://claqueta-production.up.railway.app/api/films/${currentFilm}/reviews`;
     const options = {
         method: "POST",
         headers: {
@@ -284,7 +284,7 @@ async function postReview(data) {
 }
 
 async function getReviews() {
-    const url = `http://127.0.0.1:8082/films/${currentFilm}/reviews`;
+    const url = `https://claqueta-production.up.railway.app/api/films/${currentFilm}/reviews`;
     const options = {
         method: "GET",
         headers: {
@@ -307,7 +307,7 @@ async function getReviews() {
 }
 
 async function getFilms() {
-    const url = "http://127.0.0.1:8082/films";
+    const url = "https://claqueta-production.up.railway.app/api/films";
     const options = {
         method: "GET",
         headers: {
@@ -330,7 +330,7 @@ async function getFilms() {
 }
 
 async function getRecommendations() {
-    const url = `http://127.0.0.1:8082/users/${user}`
+    const url = `https://claqueta-production.up.railway.app/api/users/${user}`
     const options = {
         method: "GET",
         headers: {
@@ -353,7 +353,7 @@ async function getRecommendations() {
 }
 
 async function getFilmDetails(id) {
-    const url = `http://127.0.0.1:8082/films/${id}`
+    const url = `https://claqueta-production.up.railway.app/api/films/${id}`
     const options = {
         method: "GET",
         headers: {
