@@ -4,20 +4,20 @@ WORKDIR /home/gradle/src
 COPY . .
 RUN gradle buildFatJar --no-daemon
 
-# Etapa de ejecución de la API
-FROM openjdk:11-jre-slim AS runtime
+# Etapa de ejecución y configuración de Nginx
+FROM nginx:alpine
 WORKDIR /app
+
+# Copiar el archivo JAR desde la etapa de construcción
 COPY --from=build /home/gradle/src/build/libs/*.jar /app/claqueta.jar
 
-# Nginx para servir archivos estáticos y como proxy
-FROM nginx:alpine
-COPY --from=runtime /app/claqueta.jar /app/claqueta.jar
+# Copiar la configuración de Nginx y los archivos estáticos
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY mime.types /etc/nginx/mime.types
-COPY web /usr/share/nginx/html
+COPY cliente-claqueta_tfg /usr/share/nginx/html
 
-# Instalar Java en el contenedor de Nginx
+# Instalar Java en el contenedor
 RUN apk add --no-cache openjdk11-jre
 
-# Ejecuta la API y Nginx
+# Ejecutar la API y Nginx
 CMD ["sh", "-c", "java -jar /app/claqueta.jar & nginx -g 'daemon off;'"]
